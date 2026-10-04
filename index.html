@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.13.1</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.14.0</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -212,7 +212,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.13.1</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.14.0</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
 <div class="editcard">
@@ -901,69 +901,45 @@ function renderAisleOrder(store){
 function moveAisle(store,i,d){let a=shoppingCategoryOrders[store],j=i+d;if(!a||j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];renderAisleOrder(store)}
 
 </script>
-<script>
-/* Jennylicious V0.13.1 — IndexedDB core persistence */
-const JL_DB_NAME='JennyliciousDB', JL_DB_VERSION=1, JL_STORE='core';
-let jlDB=null, jlReady=false, jlSaveTimer=null;
 
-function jlOpen(){
- return new Promise((resolve,reject)=>{
-  if(jlDB)return resolve(jlDB);
-  const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);
-  q.onupgradeneeded=()=>{if(!q.result.objectStoreNames.contains(JL_STORE))q.result.createObjectStore(JL_STORE)};
-  q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};
-  q.onerror=()=>reject(q.error);
- });
-}
-async function jlRead(){
- const db=await jlOpen();
- return new Promise((resolve,reject)=>{
-  const q=db.transaction(JL_STORE,'readonly').objectStore(JL_STORE).get('state');
-  q.onsuccess=()=>resolve(q.result||null);q.onerror=()=>reject(q.error);
- });
-}
+
+<script>
+/* Jennylicious V0.14.0 — structured IndexedDB */
+const JL_DB_NAME='JennyliciousDB',JL_DB_VERSION=2;
+const JL_STORES=['recipes','images','categories','settings','weeklyPlan','shopping','cookHistory','meta'];
+let jlDB=null,jlReady=false,jlSaveTimer=null;
+function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
+function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
+async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
+async function jlPut(s,k,v){const db=await jlOpen();return new Promise((resolve,reject)=>{const tx=db.transaction(s,'readwrite');tx.objectStore(s).put(v,k);tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+async function jlClear(s){const db=await jlOpen();return new Promise((resolve,reject)=>{const tx=db.transaction(s,'readwrite');tx.objectStore(s).clear();tx.oncomplete=resolve;tx.onerror=()=>reject(tx.error)})}
+async function jlAll(s){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).getAll())}
+async function jlLegacy(){const db=await jlOpen();if(!db.objectStoreNames.contains('core'))return null;return jlReq(db.transaction('core','readonly').objectStore('core').get('state'))}
+function jlBlobDataUrl(blob){return new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve(r.result);r.onerror=reject;r.readAsDataURL(blob)})}
+function jlDataBlob(src){try{const a=src.split(','),mime=(a[0].match(/:(.*?);/)||[])[1]||'image/webp',bin=atob(a[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:mime})}catch(e){return null}}
+function jlWebP(src,max=1280,q=.78){return new Promise(resolve=>{if(!src||!src.startsWith('data:image/'))return resolve(null);const im=new Image();im.onload=()=>{let w=im.naturalWidth,h=im.naturalHeight,s=Math.min(1,max/Math.max(w,h));w=Math.max(1,Math.round(w*s));h=Math.max(1,Math.round(h*s));const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);c.toBlob(b=>resolve(b||jlDataBlob(src)),'image/webp',q)};im.onerror=()=>resolve(jlDataBlob(src));im.src=src})}
+async function jlSaveImage(key,src){if(!src||!src.startsWith('data:image/'))return;const blob=await jlWebP(src);if(blob)await jlPut('images',key,{key,blob,updatedAt:new Date().toISOString()})}
+async function jlHydrateImages(){for(const row of await jlAll('images')){if(!row?.key||!row?.blob)continue;const src=await jlBlobDataUrl(row.blob);if(row.key.startsWith('recipe:')){const id=row.key.slice(7),r=R.find(x=>String(x.id)===id);if(r)r.img=src}else IMG[row.key]=src}}
 async function jlWrite(){
  if(!jlReady)return;
- const dynamicImages={};
- Object.keys(IMG).forEach(k=>{if(k.startsWith('custom_')||k.startsWith('catmain_')||k.startsWith('catsub_'))dynamicImages[k]=IMG[k]});
- const state={schemaVersion:1,savedAt:new Date().toISOString(),recipes:R,customMainSubs,customMainImages,customSubImages,dynamicImages,appSettings};
- const db=await jlOpen();
- return new Promise((resolve,reject)=>{
-  const tx=db.transaction(JL_STORE,'readwrite');
-  tx.objectStore(JL_STORE).put(state,'state');
-  tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);
- });
+ await jlClear('recipes');
+ for(const r of R){const c=structuredClone(r),src=c.img;c.img=(src&&src.startsWith('data:image/'))?null:src;await jlPut('recipes',String(c.id),c);if(src&&src.startsWith('data:image/'))await jlSaveImage('recipe:'+c.id,src)}
+ for(const k of Object.keys(IMG)){if((k.startsWith('custom_')||k.startsWith('catmain_')||k.startsWith('catsub_'))&&IMG[k]?.startsWith('data:image/'))await jlSaveImage(k,IMG[k])}
+ await jlPut('categories','customMainSubs',structuredClone(customMainSubs));await jlPut('categories','customMainImages',structuredClone(customMainImages));await jlPut('categories','customSubImages',structuredClone(customSubImages));await jlPut('settings','appSettings',structuredClone(appSettings));await jlPut('meta','schema',{version:2,updatedAt:new Date().toISOString()})
 }
-function jlRestore(s){
- if(!s||!Array.isArray(s.recipes))return false;
- R.splice(0,R.length,...s.recipes);
- customMainSubs=s.customMainSubs||{};
- customMainImages=s.customMainImages||{};
- customSubImages=s.customSubImages||{};
- if(s.dynamicImages)Object.assign(IMG,s.dynamicImages);
- if(s.appSettings)Object.assign(appSettings,s.appSettings);
- return true;
+async function jlRestore(){
+ const s=await jlGet('meta','schema');if(!s||s.version!==2)return false;
+ const rr=await jlAll('recipes');if(!rr.length)return false;R.splice(0,R.length,...rr);
+ customMainSubs=(await jlGet('categories','customMainSubs'))||{};customMainImages=(await jlGet('categories','customMainImages'))||{};customSubImages=(await jlGet('categories','customSubImages'))||{};Object.assign(appSettings,(await jlGet('settings','appSettings'))||{});await jlHydrateImages();return true
 }
-function jlQueueSave(){if(!jlReady)return;clearTimeout(jlSaveTimer);jlSaveTimer=setTimeout(()=>jlWrite().catch(console.error),100)}
-async function jlBootstrap(){
- let restored=false;
- try{restored=jlRestore(await jlRead())}catch(e){console.error('IndexedDB restore failed',e)}
- ensureLasagneVariants();
- jlReady=true;
- init();renderWeek();setTheme(appSettings.theme);
- const ds=document.getElementById('defaultServings');if(ds)ds.value=String(appSettings.defaultServings);
- const sv=document.getElementById('startView');if(sv)sv.value=appSettings.startView;
- if(!restored)await jlWrite();
- if(appSettings.startView==='week')go('week');
+async function jlMigrate(){
+ const old=await jlLegacy();if(!old||!Array.isArray(old.recipes))return false;
+ R.splice(0,R.length,...old.recipes);customMainSubs=old.customMainSubs||{};customMainImages=old.customMainImages||{};customSubImages=old.customSubImages||{};if(old.dynamicImages)Object.assign(IMG,old.dynamicImages);if(old.appSettings)Object.assign(appSettings,old.appSettings);jlReady=true;await jlWrite();return true
 }
-document.addEventListener('click',()=>setTimeout(jlQueueSave,200),true);
-document.addEventListener('change',()=>setTimeout(jlQueueSave,100),true);
-document.addEventListener('input',()=>setTimeout(jlQueueSave,400),true);
-document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')jlWrite().catch(console.error)});
-window.addEventListener('pagehide',()=>jlWrite().catch(console.error));
-jlBootstrap();
+function jlQueue(){if(!jlReady)return;clearTimeout(jlSaveTimer);jlSaveTimer=setTimeout(()=>jlWrite().catch(console.error),300)}
+async function jlBootstrap(){let restored=false;try{restored=await jlRestore();if(!restored)restored=await jlMigrate()}catch(e){console.error('DB restore/migration failed',e)}ensureLasagneVariants();jlReady=true;init();renderWeek();setTheme(appSettings.theme);const ds=document.getElementById('defaultServings');if(ds)ds.value=String(appSettings.defaultServings);const sv=document.getElementById('startView');if(sv)sv.value=appSettings.startView;if(!restored)await jlWrite();if(appSettings.startView==='week')go('week')}
+document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.addEventListener('change',()=>setTimeout(jlQueue,120),true);document.addEventListener('input',()=>setTimeout(jlQueue,500),true);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')jlWrite().catch(console.error)});window.addEventListener('pagehide',()=>jlWrite().catch(console.error));jlBootstrap();
 </script>
-
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
