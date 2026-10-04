@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.13.0</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.13.1</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -212,7 +212,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.13.0</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.13.1</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
 <div class="editcard">
@@ -589,7 +589,7 @@ function saveManualRecipe(){
   r.title=title;r.main=main;r.sub=sub;r.serv=serv;r.mins=mins;r.fav=editFav.checked;r.ingredients=ingredients;r.steps=steps;r.ingredientNames=ingredients.map(x=>x[2].toLowerCase());
   if(editorImageData){let key='custom_'+r.id+'_'+Date.now();IMG[key]=editorImageData;r.img=key}
   customMainSubs[main]=customMainSubs[main]||[];if(!customMainSubs[main].includes(sub))customMainSubs[main].push(sub);
-  let id=r.id;editingRecipeId=null;/* startup handled by bootstrapJennylicious() below */curMain=main;curSub=sub;openRecipe(id);return
+  let id=r.id;editingRecipeId=null;init();renderWeek();setTheme(appSettings.theme);curMain=main;curSub=sub;openRecipe(id);return
  }
  let id=Math.max(0,...R.map(r=>r.id))+1,fallback=MI[main]||'pasta';
  let r={id,title,main,sub,img:fallback,customImg:editorImageData||'',mins,fav:editFav.checked,serv,ingredients,steps,ingredientNames:ingredients.map(x=>x[2].toLowerCase())};
@@ -843,7 +843,7 @@ function openLasagneFamily(){let base=R.find(r=>r.familyId==='lasagne');if(!base
 function selectLasagneVariant(i){let base=R.find(r=>r.familyId==='lasagne'),v=base?.variants?.[i];if(!v)return;base.activeVariant=i;base.activeVariantName=v.name;base.serv=v.serv;base.mins=v.mins;base.ingredients=v.ingredients;base.steps=v.steps;base.ingredientNames=v.ingredients.map(z=>z[2].toLowerCase());modal.classList.remove('show');openRecipe(base.id);setTimeout(()=>renderVariantBanner(base.id),0)}
 function renderVariantBanner(id){let r=R.find(x=>x.id===id);if(!r||r.familyId!=='lasagne'||r.activeVariant==null)return;let detail=document.querySelector('#detail .detail');if(!detail)return;detail.querySelector('.variantbanner')?.remove();let box=document.createElement('div');box.className='variantbanner';box.innerHTML=`<div class="grow"><small>Gewählte Variante</small><b>🍝 ${escHtml(r.activeVariantName||r.variants[r.activeVariant].name)}</b></div><button onclick="openLasagneFamily()">Ändern</button>`;let h=detail.querySelector('h1');if(h)h.insertAdjacentElement('afterend',box);else detail.prepend(box)}
 
-/* ensureLasagneVariants() is called after IndexedDB restore in bootstrap */
+/* ensureLasagneVariants is called by IndexedDB bootstrap */
 
 const renderWeekBase=renderWeek;
 renderWeek=function(){renderWeekBase();let tools=document.createElement('div');tools.className='shopcard v011weektools';tools.innerHTML='<div style="display:flex;gap:7px;flex-wrap:wrap"><button class="shopbtn" onclick="startWeekShopping()">🛒 Tage zum Einkauf</button><button class="shopbtn secondary" onclick="whatToEat()">✨ Was sollen wir essen?</button></div>';weekList.prepend(tools)}
@@ -852,7 +852,7 @@ renderWeek=function(){renderWeekBase();let tools=document.createElement('div');t
 const openRecipeWithVariantBanner=openRecipe;
 openRecipe=function(id){openRecipeWithVariantBanner(id);setTimeout(()=>renderVariantBanner(id),0)}
 
-init();renderWeek();setTheme(appSettings.theme);
+/* initial render is performed by IndexedDB bootstrap */
 
 function openShoppingSettings(store){
  store=store||activeShoppingList||'Kaufland';
@@ -900,7 +900,71 @@ function renderAisleOrder(store){
 }
 function moveAisle(store,i,d){let a=shoppingCategoryOrders[store],j=i+d;if(!a||j<0||j>=a.length)return;[a[i],a[j]]=[a[j],a[i]];renderAisleOrder(store)}
 
-</script><script>
+</script>
+<script>
+/* Jennylicious V0.13.1 — IndexedDB core persistence */
+const JL_DB_NAME='JennyliciousDB', JL_DB_VERSION=1, JL_STORE='core';
+let jlDB=null, jlReady=false, jlSaveTimer=null;
+
+function jlOpen(){
+ return new Promise((resolve,reject)=>{
+  if(jlDB)return resolve(jlDB);
+  const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);
+  q.onupgradeneeded=()=>{if(!q.result.objectStoreNames.contains(JL_STORE))q.result.createObjectStore(JL_STORE)};
+  q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};
+  q.onerror=()=>reject(q.error);
+ });
+}
+async function jlRead(){
+ const db=await jlOpen();
+ return new Promise((resolve,reject)=>{
+  const q=db.transaction(JL_STORE,'readonly').objectStore(JL_STORE).get('state');
+  q.onsuccess=()=>resolve(q.result||null);q.onerror=()=>reject(q.error);
+ });
+}
+async function jlWrite(){
+ if(!jlReady)return;
+ const dynamicImages={};
+ Object.keys(IMG).forEach(k=>{if(k.startsWith('custom_')||k.startsWith('catmain_')||k.startsWith('catsub_'))dynamicImages[k]=IMG[k]});
+ const state={schemaVersion:1,savedAt:new Date().toISOString(),recipes:R,customMainSubs,customMainImages,customSubImages,dynamicImages,appSettings};
+ const db=await jlOpen();
+ return new Promise((resolve,reject)=>{
+  const tx=db.transaction(JL_STORE,'readwrite');
+  tx.objectStore(JL_STORE).put(state,'state');
+  tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);
+ });
+}
+function jlRestore(s){
+ if(!s||!Array.isArray(s.recipes))return false;
+ R.splice(0,R.length,...s.recipes);
+ customMainSubs=s.customMainSubs||{};
+ customMainImages=s.customMainImages||{};
+ customSubImages=s.customSubImages||{};
+ if(s.dynamicImages)Object.assign(IMG,s.dynamicImages);
+ if(s.appSettings)Object.assign(appSettings,s.appSettings);
+ return true;
+}
+function jlQueueSave(){if(!jlReady)return;clearTimeout(jlSaveTimer);jlSaveTimer=setTimeout(()=>jlWrite().catch(console.error),100)}
+async function jlBootstrap(){
+ let restored=false;
+ try{restored=jlRestore(await jlRead())}catch(e){console.error('IndexedDB restore failed',e)}
+ ensureLasagneVariants();
+ jlReady=true;
+ init();renderWeek();setTheme(appSettings.theme);
+ const ds=document.getElementById('defaultServings');if(ds)ds.value=String(appSettings.defaultServings);
+ const sv=document.getElementById('startView');if(sv)sv.value=appSettings.startView;
+ if(!restored)await jlWrite();
+ if(appSettings.startView==='week')go('week');
+}
+document.addEventListener('click',()=>setTimeout(jlQueueSave,200),true);
+document.addEventListener('change',()=>setTimeout(jlQueueSave,100),true);
+document.addEventListener('input',()=>setTimeout(jlQueueSave,400),true);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')jlWrite().catch(console.error)});
+window.addEventListener('pagehide',()=>jlWrite().catch(console.error));
+jlBootstrap();
+</script>
+
+<script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('./service-worker.js')
