@@ -1,35 +1,29 @@
-# Jennylicious PWA V0.12.0
+# Jennylicious PWA V0.13.0 – IndexedDB Test
 
-Erster PWA-Build auf Basis von Jennylicious V0.11.17.
+Erster Persistenz-Build auf Basis der auf iPhone und Android bestätigten PWA V0.12.0.
 
-## Was in diesem Schritt geändert wurde
-- PWA Manifest ergänzt
-- Service Worker für App-Shell/Offline-Start ergänzt
-- iOS/PWA Meta-Tags ergänzt
-- App-Icons ergänzt
-- Version auf V0.12.0 gesetzt
-- Browser-Titel korrigiert
+## In IndexedDB gespeichert
+- Rezepte einschließlich Favoriten und manueller Rezeptbilder
+- selbst angelegte Haupt- und Unterkategorien
+- selbst gewählte Kategoriebilder
+- Grundeinstellungen: Standard-Portionen, Startansicht, Designfarbe
 
-## Bewusst noch NICHT geändert
-- Bestehende UI und Fachlogik
-- Persistenz der App-Daten
-- Umstellung auf IndexedDB
+Beim allerersten Start wird der mitgelieferte Demo-Bestand automatisch als Ausgangsbestand in IndexedDB geschrieben.
 
-Die IndexedDB-Migration folgt nach dem ersten erfolgreichen HTTPS-/iPhone-PWA-Test.
+## Noch bewusst nicht persistent
+- Wochenplan
+- Einkaufslisten / Reminder / Gangreihenfolge
+- Kochhistorie
+- aktive Kochsession / Timer
+- vollständiges Backup/Restore
 
-## Wichtig
-Eine PWA funktioniert nicht korrekt, wenn `index.html` einfach lokal als Datei geöffnet wird.
-Der Ordner muss über HTTPS bereitgestellt werden (oder lokal über localhost für Entwicklung).
+## Test
+1. V0.13.0 über GitHub committen und Pages aktualisieren lassen.
+2. PWA öffnen.
+3. Ein Testrezept manuell anlegen.
+4. Optional Favorit/Theme/Standard-Portionen ändern.
+5. App vollständig schließen.
+6. App erneut vom Home-Bildschirm öffnen.
+7. Prüfen, ob Änderungen erhalten bleiben.
 
-## iPhone-Test nach Deployment
-1. HTTPS-Adresse in Safari öffnen.
-2. Teilen-Schaltfläche öffnen.
-3. „Zum Home-Bildschirm“ wählen.
-4. Jennylicious über das neue Home-Screen-Icon starten.
-5. Flugmodus/Offline-Verhalten anschließend separat testen.
-
-
-## GitHub-Mobile-Upload
-
-Diese Variante ist absichtlich ohne Unterordner aufgebaut.
-Auf Android können alle acht Dateien gemeinsam in das Root-Verzeichnis des GitHub-Repositories hochgeladen werden.
+Wichtig: Browser-/Website-Daten für fabih2109.github.io nicht löschen, denn dabei kann IndexedDB ebenfalls gelöscht werden.
