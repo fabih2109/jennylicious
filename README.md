@@ -1,18 +1,36 @@
-# Jennylicious V0.15.5 – corrected build
+# Jennylicious V0.16.0 – Backup & Restore
 
-This replaces the first V0.15.5 build.
+Base: corrected and user-tested V0.15.5.
 
-Important:
-- No database reset.
-- No IndexedDB schema change.
-- Shopping learning/custom categories remain included.
-- Removed the aggressive service-worker update/reload chain from the first V0.15.5.
-- No automatic `location.reload()` on service-worker controller changes.
-- Service worker uses a versioned registration URL and network-first navigation.
-- Existing local recipe/category/shopping data remain untouched.
+## Backup
+Mehr → Export / Backup → Backup exportieren.
+Creates a versioned JSON file:
+`Jennylicious_Backup_YYYY-MM-DD_HH-MM.json`
 
-Upgrade note for a device still controlled by the old V0.15.3 worker:
-The old worker may continue serving its cached index until it receives the new worker.
-Opening the deployed page once with a cache-busting query such as `?v=155fix` is a safe bootstrap;
-after the corrected worker activates, normal launches should use the current network version.
-Do not clear site data, because that can remove IndexedDB.
+Backup format:
+- format: JennyliciousBackup
+- formatVersion: 1
+- appVersion: 0.16.0
+- IndexedDB database version
+- timestamp
+- all structured Jennylicious IndexedDB stores
+- image Blobs encoded losslessly as Base64 inside the JSON
+
+Included:
+recipes, images, categories, settings, weeklyPlan, shopping,
+cookHistory, meta. This includes custom shopping categories and
+the sparse `articleCategoryOverrides` learned in V0.15.5.
+
+## Restore
+- Select JSON backup.
+- Validate format and required stores before any destructive operation.
+- Show explicit overwrite warning.
+- On confirmation, replace all structured local stores in one IndexedDB transaction.
+- Reload app after successful restore.
+- Invalid files do not modify local data.
+
+## Safety / migration
+- No new production reset.
+- V0.15.2 production baseline marker remains unchanged.
+- No IndexedDB schema bump.
+- Corrected V0.15.5 service-worker strategy retained (no forced controller-change reload).
