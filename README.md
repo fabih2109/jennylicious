@@ -1,24 +1,35 @@
-# Jennylicious PWA V0.15.1 – Cooking Session Persistence
+# Jennylicious PWA V0.15.2 – Clean Production Baseline
 
-Built on the successfully tested V0.15.0.
+IMPORTANT: This version intentionally performs a ONE-TIME HARD RESET of previous Jennylicious test data.
 
-Additional persistence:
-- active cooking recipe
-- selected cooking servings
-- completed cooking steps
-- active kitchen timers
-- timer end timestamps, so remaining time is recalculated after reopening
+On the first successful start of V0.15.2:
+- all structured IndexedDB stores are cleared
+- the legacy `core` store is cleared
+- a `productionBaseline = 0.15.2` marker is written
+- embedded demo recipes are gone
+- embedded demo recipe images are gone
+- default/demo recipe categories are gone
+- the weekly plan starts empty
+- old V0.13 migration is permanently disabled
 
-When Jennylicious reopens during an unfinished cooking session, it returns to cooking mode with the previous progress. Active timers are recreated from their saved end timestamps.
+After that first reset, the marker prevents V0.15.2 from resetting data again.
 
-All V0.15 recipe, image, weekly plan, shopping and cooking-history persistence remains unchanged.
+Most important behavior:
+An empty `recipes` store is now a VALID persisted state. Zero recipes no longer triggers migration or reseeding.
+
+Expected first-start state after deployment:
+- 0 recipes
+- 0 recipe-created main/sub categories
+- empty weekly plan
+- empty shopping lists
+- empty cook history
+- no active cooking session/timer
 
 Test:
-1. Start cooking a recipe.
-2. Complete one or more steps.
-3. Change portions if desired.
-4. Start a short timer.
-5. Fully close Jennylicious while the session is still active.
-6. Reopen it.
-7. Verify cooking mode, completed steps, portions and timer are restored.
-8. Finish cooking and verify the normal cook-history entry still works.
+1. Deploy V0.15.2 and open/reload Jennylicious.
+2. Verify 0 recipes and no old recipe categories.
+3. Create a test main category + subcategory + recipe.
+4. Close and reopen: they must remain.
+5. Delete the recipe and categories so the app returns to 0 recipes.
+6. Close and reopen again.
+7. It MUST remain at 0 recipes. Nothing may reappear.
