@@ -1,35 +1,22 @@
-# Jennylicious PWA V0.15.2 – Clean Production Baseline
+# Jennylicious PWA V0.15.3 – Cross-Platform UI Fix
 
-IMPORTANT: This version intentionally performs a ONE-TIME HARD RESET of previous Jennylicious test data.
+Built directly on the successfully tested V0.15.2 Clean Production Baseline.
 
-On the first successful start of V0.15.2:
-- all structured IndexedDB stores are cleared
-- the legacy `core` store is cleared
-- a `productionBaseline = 0.15.2` marker is written
-- embedded demo recipes are gone
-- embedded demo recipe images are gone
-- default/demo recipe categories are gone
-- the weekly plan starts empty
-- old V0.13 migration is permanently disabled
+Changes:
+- Normalizes button/input/select/textarea typography and inherited text color.
+- Removes native iOS Safari button appearance where it caused blue text/icons.
+- Explicitly keeps `menurow` and recipe/category `tile` text dark on iOS and Android.
+- Anchors inherit Jennylicious component colors rather than Safari's native blue.
+- Bottom navigation keeps its intentional Jennylicious component colors.
 
-After that first reset, the marker prevents V0.15.2 from resetting data again.
+Data behavior:
+- NO database reset was added.
+- NO IndexedDB schema or persistence logic was changed.
+- The one-time V0.15.2 production-baseline marker remains unchanged.
+- Existing local categories, recipes and images remain local and should survive this update.
 
-Most important behavior:
-An empty `recipes` store is now a VALID persisted state. Zero recipes no longer triggers migration or reseeding.
-
-Expected first-start state after deployment:
-- 0 recipes
-- 0 recipe-created main/sub categories
-- empty weekly plan
-- empty shopping lists
-- empty cook history
-- no active cooking session/timer
-
-Test:
-1. Deploy V0.15.2 and open/reload Jennylicious.
-2. Verify 0 recipes and no old recipe categories.
-3. Create a test main category + subcategory + recipe.
-4. Close and reopen: they must remain.
-5. Delete the recipe and categories so the app returns to 0 recipes.
-6. Close and reopen again.
-7. It MUST remain at 0 recipes. Nothing may reappear.
+Test on Android + iPhone:
+1. Open Mehr: menu labels/icons should no longer be iOS blue.
+2. Open Start: category-card title should no longer be iOS blue.
+3. Check bottom navigation: selected item remains purple.
+4. Create/reopen a test category if desired to confirm persistence is unchanged.
