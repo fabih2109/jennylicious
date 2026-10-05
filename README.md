@@ -1,28 +1,18 @@
-# Jennylicious V0.15.5 – Shopping Learning & PWA Updates
+# Jennylicious V0.15.5 – corrected build
 
-Base: V0.15.4. No database reset.
+This replaces the first V0.15.5 build.
 
-## Shopping
-- Add custom shopping categories per shopping list/store.
-- Change category of an item already on the shopping list.
-- Change category of reminder items in Einkaufseinstellungen.
-- Sparse local learning via `articleCategoryOverrides`: only manual corrections are persisted.
-- Example: WC-Reiniger changed once to Haushalt -> future WC-Reiniger uses Haushalt automatically.
-- No visible master article database and no preloaded thousands of products.
-- Priority: learned override -> existing saved category -> automatic guess.
-- Overrides are persisted inside IndexedDB `shopping/state`.
+Important:
+- No database reset.
+- No IndexedDB schema change.
+- Shopping learning/custom categories remain included.
+- Removed the aggressive service-worker update/reload chain from the first V0.15.5.
+- No automatic `location.reload()` on service-worker controller changes.
+- Service worker uses a versioned registration URL and network-first navigation.
+- Existing local recipe/category/shopping data remain untouched.
 
-## PWA update behavior
-- Service worker cache V0.15.5.
-- Navigation is network-first with offline fallback.
-- SW registration uses `updateViaCache: none` and explicitly checks for updates.
-- New workers skip waiting and claim clients.
-- Old cache versions are removed on activation.
-- Local IndexedDB data is not cleared.
-
-## Previous V0.15.4 features retained
-- Alphabetical recipes/main/subcategories.
-- White recipe-count badge.
-- Editable category images.
-- Add/delete shopping lists.
-- Kitchen timer removed.
+Upgrade note for a device still controlled by the old V0.15.3 worker:
+The old worker may continue serving its cached index until it receives the new worker.
+Opening the deployed page once with a cache-busting query such as `?v=155fix` is a safe bootstrap;
+after the corrected worker activates, normal launches should use the current network version.
+Do not clear site data, because that can remove IndexedDB.

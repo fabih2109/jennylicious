@@ -1088,20 +1088,9 @@ document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.add
 </script>
 <script>
 if ('serviceWorker' in navigator) {
-  window.addEventListener('load', async () => {
-    try{
-      const reg=await navigator.serviceWorker.register('./service-worker.js',{updateViaCache:'none'});
-      await reg.update();
-      let refreshing=false;
-      navigator.serviceWorker.addEventListener('controllerchange',()=>{
-        if(refreshing)return;refreshing=true;location.reload();
-      });
-      if(reg.waiting)reg.waiting.postMessage({type:'SKIP_WAITING'});
-      reg.addEventListener('updatefound',()=>{
-        const w=reg.installing;if(!w)return;
-        w.addEventListener('statechange',()=>{if(w.state==='installed'&&navigator.serviceWorker.controller)w.postMessage({type:'SKIP_WAITING'})});
-      });
-    }catch(err){console.warn('Jennylicious Service Worker:',err)}
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js?v=0155fix',{updateViaCache:'none'})
+      .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }
 </script>
