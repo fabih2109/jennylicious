@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.15.0</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.15.1</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -212,7 +212,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.15.0</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.15.1</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
 <div class="editcard">
@@ -350,7 +350,7 @@ function cookPortions(){modalContent.innerHTML=`<h2>Portionen ändern</h2><div c
 function changeCookServ(d){servings=Math.max(1,servings+d);cookChangeServ.textContent=servings;cookServText.textContent=servings+' Portionen';renderCookIngredients()}
 function leaveCook(){go('detail');renderIng()}
 function finishCooking(){modalContent.innerHTML=`<h2>Fertig gekocht ✓</h2><p>${escHtml(cur.title)} wird jetzt in der Kochhistorie gespeichert.</p><textarea id="finishCookNote" class="forminput" style="min-height:95px" placeholder="Optionale Notiz, z. B. nächstes Mal weniger Salz ..."></textarea><button class="action" style="background:var(--jl-accent);color:#fff;text-align:center" onclick="saveFinishedCooking()">Speichern & beenden</button>`;modal.classList.add('show')}
-function saveFinishedCooking(){cookHistory[cur.id]=cookHistory[cur.id]||[];cookHistory[cur.id].push({date:new Date().toISOString(),note:finishCookNote.value.trim()});modal.classList.remove('show');go('detail');renderIng();renderCookHistory()}
+function saveFinishedCooking(){cookHistory[cur.id]=cookHistory[cur.id]||[];cookHistory[cur.id].push({date:new Date().toISOString(),note:finishCookNote.value.trim()});cookDone=[];modal.classList.remove('show');go('detail');renderIng();renderCookHistory()}
 
 
 const appSettings={defaultServings:4,startView:'home',theme:'purple'};
@@ -904,7 +904,7 @@ function moveAisle(store,i,d){let a=shoppingCategoryOrders[store],j=i+d;if(!a||j
 
 
 <script>
-/* Jennylicious V0.15.0 — structured IndexedDB */
+/* Jennylicious V0.15.1 — structured IndexedDB */
 const JL_DB_NAME='JennyliciousDB',JL_DB_VERSION=2;
 const JL_STORES=['recipes','images','categories','settings','weeklyPlan','shopping','cookHistory','meta'];
 let jlDB=null,jlReady=false,jlSaveTimer=null;
@@ -929,6 +929,12 @@ async function jlWrite(){
  await jlPut('weeklyPlan','state',{plan:structuredClone(plan),weekShoppingLedger:structuredClone(weekShoppingLedger)});
  await jlPut('shopping','state',{shoppingLists:structuredClone(shoppingLists),activeShoppingList,recurringItemsByStore:structuredClone(recurringItemsByStore),shoppingCategoryOrders:structuredClone(shoppingCategoryOrders),shoppingStarted});
  await jlPut('cookHistory','state',structuredClone(cookHistory));
+ await jlPut('cookHistory','activeSession',{
+   recipeId:cur&&document.getElementById('cook')?.classList.contains('on')?cur.id:null,
+   servings:servings,
+   cookDone:structuredClone(cookDone),
+   activeTimers:structuredClone(activeTimers)
+ });
  await jlPut('meta','schema',{version:2,updatedAt:new Date().toISOString()})
 }
 async function jlRestore(){
@@ -938,6 +944,10 @@ async function jlRestore(){
  const wp=await jlGet('weeklyPlan','state');if(wp){if(Array.isArray(wp.plan))plan=wp.plan;if(wp.weekShoppingLedger)weekShoppingLedger=wp.weekShoppingLedger}
  const sh=await jlGet('shopping','state');if(sh){if(sh.shoppingLists)shoppingLists=sh.shoppingLists;if(sh.activeShoppingList)activeShoppingList=sh.activeShoppingList;if(sh.recurringItemsByStore)recurringItemsByStore=sh.recurringItemsByStore;if(sh.shoppingCategoryOrders)shoppingCategoryOrders=sh.shoppingCategoryOrders;if(typeof sh.shoppingStarted==='boolean')shoppingStarted=sh.shoppingStarted}
  const ch=await jlGet('cookHistory','state');if(ch&&typeof ch==='object')cookHistory=ch;
+ const cs=await jlGet('cookHistory','activeSession');if(cs){
+   if(cs.recipeId!=null){const rr=R.find(x=>String(x.id)===String(cs.recipeId));if(rr){cur=rr;servings=Number(cs.servings)||rr.serv||4;cookDone=Array.isArray(cs.cookDone)?cs.cookDone:rr.steps.map(()=>false);window.jlResumeCooking=true}}
+   if(cs.activeTimers&&typeof cs.activeTimers==='object')activeTimers=cs.activeTimers;
+ }
  await jlHydrateImages();return true
 }
 async function jlMigrate(){
@@ -945,7 +955,10 @@ async function jlMigrate(){
  R.splice(0,R.length,...old.recipes);customMainSubs=old.customMainSubs||{};customMainImages=old.customMainImages||{};customSubImages=old.customSubImages||{};if(old.dynamicImages)Object.assign(IMG,old.dynamicImages);if(old.appSettings)Object.assign(appSettings,old.appSettings);jlReady=true;await jlWrite();return true
 }
 function jlQueue(){if(!jlReady)return;clearTimeout(jlSaveTimer);jlSaveTimer=setTimeout(()=>jlWrite().catch(console.error),300)}
-async function jlBootstrap(){let restored=false;try{restored=await jlRestore();if(!restored)restored=await jlMigrate()}catch(e){console.error('DB restore/migration failed',e)}ensureLasagneVariants();jlReady=true;init();renderWeek();setTheme(appSettings.theme);const ds=document.getElementById('defaultServings');if(ds)ds.value=String(appSettings.defaultServings);const sv=document.getElementById('startView');if(sv)sv.value=appSettings.startView;if(!restored)await jlWrite();if(appSettings.startView==='week')go('week')}
+async function jlBootstrap(){let restored=false;try{restored=await jlRestore();if(!restored)restored=await jlMigrate()}catch(e){console.error('DB restore/migration failed',e)}ensureLasagneVariants();jlReady=true;init();renderWeek();setTheme(appSettings.theme);const ds=document.getElementById('defaultServings');if(ds)ds.value=String(appSettings.defaultServings);const sv=document.getElementById('startView');if(sv)sv.value=appSettings.startView;if(!restored)await jlWrite();
+ Object.keys(activeTimers).forEach(id=>renderTimer(id));
+ if(window.jlResumeCooking&&cur){cookTitle.textContent=cur.title;cookServText.textContent=servings+' Portionen';renderCookIngredients();renderCookSteps();go('cook');window.jlResumeCooking=false}
+ else if(appSettings.startView==='week')go('week')}
 document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.addEventListener('change',()=>setTimeout(jlQueue,120),true);document.addEventListener('input',()=>setTimeout(jlQueue,500),true);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')jlWrite().catch(console.error)});window.addEventListener('pagehide',()=>jlWrite().catch(console.error));jlBootstrap();
 </script>
 <script>

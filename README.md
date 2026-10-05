@@ -1,29 +1,24 @@
-# Jennylicious PWA V0.15.0 – Full Local Persistence
+# Jennylicious PWA V0.15.1 – Cooking Session Persistence
 
-Built on the successfully tested V0.14.0 structured IndexedDB version.
+Built on the successfully tested V0.15.0.
 
-Now persisted:
-- recipes and separate WebP image blobs
-- custom categories and settings
-- weekly plan (`plan`)
-- weekly shopping ledger
-- shopping lists for Kaufland/Lidl/Aldi
-- active shopping store
-- store-specific recurring/reminder items
-- store-specific aisle/category order
-- shopping started state
-- cooking history and notes
+Additional persistence:
+- active cooking recipe
+- selected cooking servings
+- completed cooking steps
+- active kitchen timers
+- timer end timestamps, so remaining time is recalculated after reopening
 
-The existing V0.14 database schema and recipe/image migration are retained.
+When Jennylicious reopens during an unfinished cooking session, it returns to cooking mode with the previous progress. Active timers are recreated from their saved end timestamps.
 
-Not yet made persistent in this build:
-- transient modal/editor drafts
-- running timer state / cooking-session resume
+All V0.15 recipe, image, weekly plan, shopping and cooking-history persistence remains unchanged.
 
-Recommended test:
-1. Verify the two existing V0.13/V0.14 test recipes remain.
-2. Change several days in the weekly plan.
-3. Add/check shopping items in at least two stores.
-4. Mark one recipe cooked and add a note.
-5. Fully close Jennylicious.
-6. Reopen and verify all three areas.
+Test:
+1. Start cooking a recipe.
+2. Complete one or more steps.
+3. Change portions if desired.
+4. Start a short timer.
+5. Fully close Jennylicious while the session is still active.
+6. Reopen it.
+7. Verify cooking mode, completed steps, portions and timer are restored.
+8. Finish cooking and verify the normal cook-history entry still works.

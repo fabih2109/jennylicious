@@ -1,4 +1,4 @@
-const CACHE_NAME = 'jennylicious-v0.15.0';
+const CACHE_NAME = 'jennylicious-v0.15.1';
 const APP_SHELL = [
   './',
   './index.html',
