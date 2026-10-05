@@ -1,22 +1,21 @@
-# Jennylicious PWA V0.15.3 – Cross-Platform UI Fix
+# Jennylicious V0.15.4 – Usability & Shopping Update
 
-Built directly on the successfully tested V0.15.2 Clean Production Baseline.
+Built on tested V0.15.3. No database reset.
 
 Changes:
-- Normalizes button/input/select/textarea typography and inherited text color.
-- Removes native iOS Safari button appearance where it caused blue text/icons.
-- Explicitly keeps `menurow` and recipe/category `tile` text dark on iOS and Android.
-- Anchors inherit Jennylicious component colors rather than Safari's native blue.
-- Bottom navigation keeps its intentional Jennylicious component colors.
+- Main categories sorted alphabetically (German locale).
+- Subcategories sorted alphabetically.
+- Recipe lists sorted alphabetically by recipe title.
+- Recipe-count badge explicitly white on iOS and Android.
+- Existing main/subcategory images can be replaced using the new image action in the category header.
+- Shopping lists can be added and deleted in Einkaufseinstellungen.
+  - Example: add `dm`.
+  - Aldi can be deleted.
+  - New stores automatically receive an empty reminder list and default aisle/category order.
+  - At least one shopping list must remain.
+- Kitchen timer removed completely from cooking UI and persistence.
 
-Data behavior:
-- NO database reset was added.
-- NO IndexedDB schema or persistence logic was changed.
-- The one-time V0.15.2 production-baseline marker remains unchanged.
-- Existing local categories, recipes and images remain local and should survive this update.
-
-Test on Android + iPhone:
-1. Open Mehr: menu labels/icons should no longer be iOS blue.
-2. Open Start: category-card title should no longer be iOS blue.
-3. Check bottom navigation: selected item remains purple.
-4. Create/reopen a test category if desired to confirm persistence is unchanged.
+Persistence:
+- No reset.
+- V0.15.2 production baseline marker unchanged.
+- Existing recipes/categories/images/shopping data remain.
