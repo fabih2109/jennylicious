@@ -1,21 +1,28 @@
-# Jennylicious V0.15.4 – Usability & Shopping Update
+# Jennylicious V0.15.5 – Shopping Learning & PWA Updates
 
-Built on tested V0.15.3. No database reset.
+Base: V0.15.4. No database reset.
 
-Changes:
-- Main categories sorted alphabetically (German locale).
-- Subcategories sorted alphabetically.
-- Recipe lists sorted alphabetically by recipe title.
-- Recipe-count badge explicitly white on iOS and Android.
-- Existing main/subcategory images can be replaced using the new image action in the category header.
-- Shopping lists can be added and deleted in Einkaufseinstellungen.
-  - Example: add `dm`.
-  - Aldi can be deleted.
-  - New stores automatically receive an empty reminder list and default aisle/category order.
-  - At least one shopping list must remain.
-- Kitchen timer removed completely from cooking UI and persistence.
+## Shopping
+- Add custom shopping categories per shopping list/store.
+- Change category of an item already on the shopping list.
+- Change category of reminder items in Einkaufseinstellungen.
+- Sparse local learning via `articleCategoryOverrides`: only manual corrections are persisted.
+- Example: WC-Reiniger changed once to Haushalt -> future WC-Reiniger uses Haushalt automatically.
+- No visible master article database and no preloaded thousands of products.
+- Priority: learned override -> existing saved category -> automatic guess.
+- Overrides are persisted inside IndexedDB `shopping/state`.
 
-Persistence:
-- No reset.
-- V0.15.2 production baseline marker unchanged.
-- Existing recipes/categories/images/shopping data remain.
+## PWA update behavior
+- Service worker cache V0.15.5.
+- Navigation is network-first with offline fallback.
+- SW registration uses `updateViaCache: none` and explicitly checks for updates.
+- New workers skip waiting and claim clients.
+- Old cache versions are removed on activation.
+- Local IndexedDB data is not cleared.
+
+## Previous V0.15.4 features retained
+- Alphabetical recipes/main/subcategories.
+- White recipe-count badge.
+- Editable category images.
+- Add/delete shopping lists.
+- Kitchen timer removed.
