@@ -35,4 +35,6 @@ the sparse `articleCategoryOverrides` learned in V0.15.5.
 - No IndexedDB schema bump.
 - Corrected V0.15.5 service-worker strategy retained (no forced controller-change reload).
 
-Deployment retry V0.16.0
+
+## V0.16.1
+Backup/Restore compatibility layer: older supported backups may omit stores added by later app versions; missing current stores are initialized empty during restore. Unknown future backup formats remain blocked.

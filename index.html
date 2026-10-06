@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.16.0</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.16.1</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -197,7 +197,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 .cookhistoryitem p{margin:0;white-space:pre-wrap;line-height:1.35}
 </style>
 <style id="jl-cross-platform-ui-v0153">
-/* Jennylicious V0.16.0: deterministic controls on iOS Safari/PWA and Android Chrome/PWA */
+/* Jennylicious V0.16.1: deterministic controls on iOS Safari/PWA and Android Chrome/PWA */
 button,
 input,
 select,
@@ -266,7 +266,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.16.0</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.16.1</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
 <div class="editcard">
@@ -1022,7 +1022,7 @@ function moveAisle(store,i,d){let a=shoppingCategoryOrders[store],j=i+d;if(!a||j
 
 
 <script>
-/* Jennylicious V0.16.0 — structured IndexedDB */
+/* Jennylicious V0.16.1 — structured IndexedDB */
 const JL_DB_NAME='JennyliciousDB',JL_DB_VERSION=2;
 const JL_STORES=['recipes','images','categories','settings','weeklyPlan','shopping','cookHistory','meta'];
 let jlDB=null,jlReady=false,jlSaveTimer=null;
@@ -1058,12 +1058,29 @@ async function jlStoreEntries(store){
    q.onerror=()=>reject(q.error)
  })
 }
+
+const JL_BACKUP_FORMAT_VERSION=1;
+function jlNormalizeBackup(data){
+ if(data?.format!=='JennyliciousBackup'||!Number.isInteger(data?.formatVersion)||!data.stores||typeof data.stores!=='object')throw new Error('invalid-format');
+ if(data.formatVersion<1||data.formatVersion>JL_BACKUP_FORMAT_VERSION)throw new Error('unsupported-format-version');
+ // Forward-compatible restore policy: an older backup may not contain stores
+ // introduced by a newer Jennylicious version. Missing current stores start empty.
+ const stores={};
+ for(const s of JL_STORES){
+   const entries=data.stores[s];
+   if(entries===undefined||entries===null)stores[s]=[];
+   else if(Array.isArray(entries))stores[s]=entries;
+   else throw new Error('invalid-store:'+s);
+ }
+ return {...data,stores};
+}
+
 async function jlExportBackup(){
  try{
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:1,appVersion:'0.16.0',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.16.1',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
@@ -1076,13 +1093,11 @@ async function jlRestoreBackupFile(ev){
  const file=ev.target.files?.[0];if(!file)return;
  try{
    const data=JSON.parse(await file.text());
-   if(data?.format!=='JennyliciousBackup'||data?.formatVersion!==1||!data.stores||typeof data.stores!=='object')throw new Error('invalid-format');
-   const missing=JL_STORES.filter(s=>!Array.isArray(data.stores[s]));
-   if(missing.length)throw new Error('missing-stores:'+missing.join(','));
-   window.jlPendingRestore=data;
+   const normalized=jlNormalizeBackup(data);
+   window.jlPendingRestore=normalized;
    modalContent.innerHTML=`<h2>Backup wiederherstellen?</h2><p class="designintro"><b>${escHtml(file.name)}</b></p><p>Die aktuellen lokalen Jennylicious-Daten auf diesem Gerät werden vollständig durch dieses Backup ersetzt.</p><p class="dialoghint">Backup vom ${escHtml(new Date(data.createdAt).toLocaleString('de-DE'))} · App ${escHtml(data.appVersion||'unbekannt')}</p><button class="action compactaction danger-soft" onclick="jlConfirmRestore()">Ja, Daten ersetzen</button><button class="action compactaction" onclick="window.jlPendingRestore=null;modal.classList.remove('show')">Abbrechen</button>`;
    modal.classList.add('show')
- }catch(e){console.error(e);showInfoDialog('Ungültiges Backup','Die ausgewählte Datei ist kein gültiges Jennylicious-Backup V1. Es wurden keine Daten verändert.')}
+ }catch(e){console.error(e);showInfoDialog('Ungültiges Backup','Die ausgewählte Datei ist kein unterstütztes Jennylicious-Backup. Es wurden keine Daten verändert.')}
 }
 async function jlConfirmRestore(){
  const data=window.jlPendingRestore;if(!data)return;
@@ -1157,7 +1172,7 @@ document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.add
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js?v=0160',{updateViaCache:'none'})
+    navigator.serviceWorker.register('./service-worker.js?v=0161',{updateViaCache:'none'})
       .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }
