@@ -38,3 +38,7 @@ the sparse `articleCategoryOverrides` learned in V0.15.5.
 
 ## V0.16.1
 Backup/Restore compatibility layer: older supported backups may omit stores added by later app versions; missing current stores are initialized empty during restore. Unknown future backup formats remain blocked.
+
+
+## V0.17.0
+Shopping aggregation with source-separated quantities, fast manual input (Enter / “weiter”), +/- manual quantity adjustment, manual-item editing, and shopping-category rename/delete.
