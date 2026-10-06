@@ -34,3 +34,5 @@ the sparse `articleCategoryOverrides` learned in V0.15.5.
 - V0.15.2 production baseline marker remains unchanged.
 - No IndexedDB schema bump.
 - Corrected V0.15.5 service-worker strategy retained (no forced controller-change reload).
+
+Deployment retry V0.16.0
