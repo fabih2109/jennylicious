@@ -1,4 +1,4 @@
-# Jennylicious V0.18.2 – Shopping List Improvements
+# Jennylicious V0.18.3 – Shopping List Improvements
 
 Base: corrected and user-tested V0.15.5.
 
@@ -40,12 +40,12 @@ the sparse `articleCategoryOverrides` learned in V0.15.5.
 Backup/Restore compatibility layer: older supported backups may omit stores added by later app versions; missing current stores are initialized empty during restore. Unknown future backup formats remain blocked.
 
 
-## V0.18.2
+## V0.18.3
 Shopping aggregation with source-separated quantities, fast manual input (Enter / “weiter”), +/- manual quantity adjustment, manual-item editing, and shopping-category rename/delete.
 
-Current app version: V0.18.2
+Current app version: V0.18.3
 
-## V0.18.2 – Flexible recipe classification
+## V0.18.3 – Flexible recipe classification
 - Unterkategorien sind optional.
 - Ein Rezept kann mehreren Unterkategorien derselben Hauptkategorie zugeordnet werden.
 - Rezepte ohne Unterkategorie erscheinen direkt in der Hauptkategorie.
@@ -53,7 +53,7 @@ Current app version: V0.18.2
 - Besonderheiten und alle Unterkategorien werden in der Rezeptsuche berücksichtigt.
 - Bestehende Rezepte mit einfachem `sub` bleiben rückwärtskompatibel.
 
-## V0.18.2 – Recipe Import V1
+## V0.18.3 – Recipe Import V1
 - JennyliciousRecipe formatVersion 1
 - .jenny/ZIP package: recipe.json + optional recipe.webp/png
 - optional 0..n subcategories
@@ -63,13 +63,19 @@ Current app version: V0.18.2
 - no database reset / no schema bump
 
 
-## V0.18.2
+## V0.18.3
 - Rezept-Metadaten-Chips umbrechen sauber über mehrere Zeilen.
 - Tipp und Mealprep sind keine nummerierten Zubereitungsschritte mehr.
 - Tipp und Mealprep sind im Kochmodus optional einklappbar und standardmäßig geschlossen.
 
 
-## V0.18.2
+## V0.18.3
 - Zubereitungsüberschriften fett mit Doppelpunkt.
 - Beschreibung darunter eingerückt.
 - Einheitlich in Rezeptansicht und Kochmodus.
+
+
+## V0.18.3 – Blocker fixes
+- iOS: .jenny file picker no longer restricts unknown custom extension via accept filter. Package validity is checked by the importer.
+- Imported recipe images: recipe.webp/png Blob is persisted directly to IndexedDB images store as recipe:<recipeId>.
+- No IndexedDB schema bump and no production reset change.
