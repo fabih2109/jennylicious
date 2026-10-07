@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.3</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.4</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -202,7 +202,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 .cookhistoryitem p{margin:0;white-space:pre-wrap;line-height:1.35}
 </style>
 <style id="jl-cross-platform-ui-v0153">
-/* Jennylicious V0.18.3: deterministic controls on iOS Safari/PWA and Android Chrome/PWA */
+/* Jennylicious V0.18.4: deterministic controls on iOS Safari/PWA and Android Chrome/PWA */
 button,
 input,
 select,
@@ -561,7 +561,7 @@ async function confirmReviewedRecipe(){
  x.title=rvTitle.value.trim();x.main=rvMain.value.trim();x.subs=rvSubs.value.split(',').map(v=>v.trim()).filter(Boolean);x.subs=[...new Set(x.subs)];x.sub=x.subs[0]||'';x.specials=rvSpecials.value.split(',').map(v=>v.trim()).filter(Boolean);x.specials=[...new Set(x.specials)];x.recipeTip=rvTip.value.trim();x.mealPrep=rvMealPrep.value.trim();x.serv=serv;x.servStatus='confirmed';x.mins=Math.max(1,Number(rvMins.value)||30);
  if(!x.title||!x.main){e.textContent='Rezeptname und Hauptkategorie dürfen nicht leer sein.';e.classList.add('show');return}
  let dup=duplicateCheck(x.title,duplicateOverride);if(dup){renderDuplicateWarning(dup);return}duplicateOverride=false;
- let id=Math.max(0,...R.map(r=>r.id))+1;
+ let usedIds=[...R.map(r=>Number(r.id)||0),...Object.keys(cookHistory||{}).map(v=>Number(v)||0)];let id=Math.max(0,...usedIds)+1;cookHistory[id]=[];
  customMainSubs[x.main]=customMainSubs[x.main]||[];x.subs.forEach(v=>{if(!customMainSubs[x.main].includes(v))customMainSubs[x.main].push(v)});if(!MI[x.main])MI[x.main]='pasta';
  let imgKey=MI[x.main]||'pasta';if(pendingPackageImage){imgKey='import_'+id;IMG[imgKey]=pendingPackageImage}R.push({id,title:x.title,main:x.main,sub:x.sub,subs:x.subs,specials:x.specials,recipeTip:x.recipeTip,mealPrep:x.mealPrep,img:imgKey,mins:x.mins,fav:x.fav,serv:x.serv,ingredients:x.ingredients,steps:x.steps,ingredientNames:x.ingredients.map(i=>i[2].toLowerCase())});
  if(pendingPackageImageBlob){try{await jlPut('images','recipe:'+id,{key:'recipe:'+id,blob:pendingPackageImageBlob,updatedAt:new Date().toISOString()})}catch(err){R.pop();e.textContent='Rezeptbild konnte nicht dauerhaft gespeichert werden: '+err.message;e.classList.add('show');return}}
@@ -1098,7 +1098,7 @@ function jlDropWeekSource(dayIndex,recipeId){let prefix=String(dayIndex)+'|'+Str
 const jlDoAssignV017=doAssign;doAssign=function(i){let old=plan[i];if(old!=null&&cur&&String(old)!==String(cur.id))jlDropWeekSource(i,old);jlDoAssignV017(i)}
 const jlRemoveDayV017=removeDay;removeDay=function(i){let old=plan[i];if(old!=null)jlDropWeekSource(i,old);jlRemoveDayV017(i)}
 const jlSetDayV017=setDay;setDay=function(i,id){let old=plan[i];if(old!=null&&String(old)!==String(id))jlDropWeekSource(i,old);jlSetDayV017(i,id)}
-/* Jennylicious V0.18.3 — stable weekly-plan entries + leftovers */
+/* Jennylicious V0.18.4 — stable weekly-plan entries + leftovers */
 function jlNewPlanEntry(recipeId,mode='cook'){return{id:'wp_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),recipeId:String(recipeId),mode:mode==='leftovers'?'leftovers':'cook'}}
 function jlEnsurePlanMeta(){
  if(!Array.isArray(planMeta))planMeta=[];
@@ -1134,7 +1134,7 @@ function chooseShoppingPortions(){let ix=[...document.querySelectorAll('.weeksho
 
 </script>
 <script>
-/* Jennylicious V0.18.3 — structured IndexedDB */
+/* Jennylicious V0.18.4 — structured IndexedDB */
 const JL_DB_NAME='JennyliciousDB',JL_DB_VERSION=2;
 const JL_STORES=['recipes','images','categories','settings','weeklyPlan','shopping','cookHistory','meta'];
 let jlDB=null,jlReady=false,jlSaveTimer=null;
@@ -1192,7 +1192,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.3',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.4',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
@@ -1232,7 +1232,7 @@ function jlBlobDataUrl(blob){return new Promise((resolve,reject)=>{const r=new F
 function jlDataBlob(src){try{const a=src.split(','),mime=(a[0].match(/:(.*?);/)||[])[1]||'image/webp',bin=atob(a[1]),u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return new Blob([u],{type:mime})}catch(e){return null}}
 function jlWebP(src,max=1280,q=.78){return new Promise(resolve=>{if(!src||!src.startsWith('data:image/'))return resolve(null);const im=new Image();im.onload=()=>{let w=im.naturalWidth,h=im.naturalHeight,s=Math.min(1,max/Math.max(w,h));w=Math.max(1,Math.round(w*s));h=Math.max(1,Math.round(h*s));const c=document.createElement('canvas');c.width=w;c.height=h;c.getContext('2d').drawImage(im,0,0,w,h);c.toBlob(b=>resolve(b||jlDataBlob(src)),'image/webp',q)};im.onerror=()=>resolve(jlDataBlob(src));im.src=src})}
 async function jlSaveImage(key,src){if(!src||!src.startsWith('data:image/'))return;const blob=await jlWebP(src);if(blob)await jlPut('images',key,{key,blob,updatedAt:new Date().toISOString()})}
-async function jlHydrateImages(){for(const row of await jlAll('images')){if(!row?.key||!row?.blob)continue;const src=await jlBlobDataUrl(row.blob);if(row.key.startsWith('recipe:')){const id=row.key.slice(7),r=R.find(x=>String(x.id)===id);if(r)r.img=src}else IMG[row.key]=src}}
+async function jlHydrateImages(){for(const row of await jlAll('images')){if(!row?.key||!row?.blob)continue;const src=await jlBlobDataUrl(row.blob);if(row.key.startsWith('recipe:')){const id=row.key.slice(7),r=R.find(x=>String(x.id)===id);if(r){let imgKey=(r.img&&typeof r.img==='string'&&!r.img.startsWith('data:image/')&&!r.img.startsWith('blob:'))?r.img:'recipe_'+id;r.img=imgKey;IMG[imgKey]=src}}else IMG[row.key]=src}}
 function jlMigrateWeekLedgerV171(){
  jlEnsurePlanMeta();let changed=false,newLedger={...weekShoppingLedger};
  Object.keys(weekShoppingLedger).forEach(k=>{let m=String(k).match(/^(\d+)\|([^|]+)\|(.*)$/);if(!m)return;let i=+m[1];if(i<0||i>6||String(plan[i])!==String(m[2])||!planMeta[i])return;let nk=planMeta[i].id;if(!newLedger[nk])newLedger[nk]=weekShoppingLedger[k];delete newLedger[k];Object.values(shoppingLists).forEach(list=>(list||[]).forEach(item=>{jlEnsureContrib(item).forEach(c=>{if(c.type==='recipe'&&c.id===k)c.id=nk});if(Array.isArray(item.sourceKeys))item.sourceKeys=item.sourceKeys.map(x=>x===k?nk:x)}));changed=true});
@@ -1289,7 +1289,7 @@ document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.add
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js?v=0183',{updateViaCache:'none'})
+    navigator.serviceWorker.register('./service-worker.js?v=0184',{updateViaCache:'none'})
       .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }
