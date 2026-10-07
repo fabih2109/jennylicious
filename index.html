@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.17.2</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.0</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -197,7 +197,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 .cookhistoryitem p{margin:0;white-space:pre-wrap;line-height:1.35}
 </style>
 <style id="jl-cross-platform-ui-v0153">
-/* Jennylicious V0.17.2: deterministic controls on iOS Safari/PWA and Android Chrome/PWA */
+/* Jennylicious V0.18.0: deterministic controls on iOS Safari/PWA and Android Chrome/PWA */
 button,
 input,
 select,
@@ -270,7 +270,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.17.2</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.18.0</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:flex;align-items:center;gap:6px;background:#f5edf7;border-radius:999px;padding:8px 10px;font-size:13px}.jl-subcheck input{accent-color:var(--jl-accent)}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -285,6 +285,8 @@ a {
 <label class="fieldlabel">Unterkategorien <small>(optional, mehrere möglich)</small></label><div id="editSubs" class="jl-multisubs"></div>
 <button class="tinyadd" onclick="newSubCategory()">＋ Neue Unterkategorie</button>
 <label class="fieldlabel">Besonderheiten <small>(optional)</small></label><input id="editSpecial" class="forminput" placeholder="z. B. Thermomix, Ofenmeister, Achtung Alkohol"><small class="jl-help">Mehrere Besonderheiten mit Komma trennen. Sie werden bei der Suche berücksichtigt.</small>
+<label class="fieldlabel">Tipp <small>(optional)</small></label><textarea id="editTip" class="forminput" style="min-height:76px;resize:vertical" placeholder="Tipp zum Rezept"></textarea>
+<label class="fieldlabel">Mealprep <small>(optional)</small></label><textarea id="editMealPrep" class="forminput" style="min-height:90px;resize:vertical" placeholder="Vorbereiten, Aufbewahren, Aufwärmen ..."></textarea>
 <label class="checkline"><input id="editFav" type="checkbox"> Direkt als Favorit markieren</label>
 </div>
 <div class="editsection"><div class="editsectionhead"><h2>Zutaten</h2><button onclick="addIngredientRow()">＋ Zutat</button></div><div id="ingredientEditor"></div></div>
@@ -354,7 +356,7 @@ function renderList(a,e){a=[...a].sort((x,y)=>jlAlpha(x.title,y.title));e.innerH
 function openRecipe(id){
  currentId=id;cur=R.find(r=>r.id===id);
  if(cur?.familyId==='lasagne'&&cur.variants?.length&&cur.activeVariant==null){let v=cur.variants[0];cur.activeVariant=0;cur.activeVariantName=v.name;cur.serv=v.serv;cur.mins=v.mins;cur.ingredients=v.ingredients;cur.steps=v.steps;cur.ingredientNames=v.ingredients.map(z=>z[2].toLowerCase())}
- servings=cur.serv;detailImg.src=I(cur.img);detailTitle.textContent=cur.title;setTimeout(updateDetailFav,0);chips.innerHTML=`<span class="chip">${cur.main}</span>${recipeSubs(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}${recipeSpecials(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}<span class="chip">${cur.mins} Min</span>`;steps.innerHTML=cur.steps.map(s=>`<li>${s}</li>`).join('');renderWeekBadges();renderIng();go('detail');renderCookHistory();setTimeout(()=>renderVariantBanner(cur.id),0)}
+ servings=cur.serv;detailImg.src=I(cur.img);detailTitle.textContent=cur.title;setTimeout(updateDetailFav,0);chips.innerHTML=`<span class="chip">${cur.main}</span>${recipeSubs(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}${recipeSpecials(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}<span class="chip">${cur.mins} Min</span>`;steps.innerHTML=cur.steps.map(s=>`<li>${escHtml(s).replace(/\n/g,'<br>')}</li>`).join('')+(cur.recipeTip?`<li style="margin-top:14px;background:#faf3fb;padding:12px;border-radius:12px"><b>💡 Tipp</b><br>${escHtml(cur.recipeTip)}</li>`:'')+(cur.mealPrep?`<li style="margin-top:10px;background:#f7f3ed;padding:12px;border-radius:12px"><b>🥡 Mealprep</b><br>${escHtml(cur.mealPrep)}</li>`:'');renderWeekBadges();renderIng();go('detail');renderCookHistory();setTimeout(()=>renderVariantBanner(cur.id),0)}
 function renderWeekBadges(){if(!cur)return;let ds=plan.map((id,i)=>id===cur.id?DAYS[i].slice(0,2):null).filter(Boolean);weekBadges.innerHTML=ds.map(d=>`<span class="weekbadge">✓ ${d}</span>`).join('')}
 function renderCookHistory(){
  let box=document.getElementById('cookHistoryBox');if(!box||!cur)return;
@@ -369,7 +371,7 @@ function renderCookHistory(){
 }
 function renderIng(){serv.textContent=servings;let f=servings/cur.serv;ings.innerHTML=cur.ingredients.map(i=>`<li><b>${Math.round(i[0]*f*10)/10} ${i[1]}</b> &nbsp;${i[2]}</li>`).join('')}
 function scale(d){servings=Math.max(1,servings+d);renderIng()}
-function renderSearch(){let s=(q.value||'').trim().toLowerCase();renderList(s?R.filter(r=>(r.title+' '+r.main+' '+recipeSubs(r).join(' ')+' '+recipeSpecials(r).join(' ')+' '+r.ingredientNames.join(' ')).toLowerCase().includes(s)):R,searchList)}
+function renderSearch(){let s=(q.value||'').trim().toLowerCase();renderList(s?R.filter(r=>(r.title+' '+r.main+' '+recipeSubs(r).join(' ')+' '+recipeSpecials(r).join(' ')+' '+(r.recipeTip||'')+' '+(r.mealPrep||'')+' '+r.ingredientNames.join(' ')).toLowerCase().includes(s)):R,searchList)}
 let searchMode='recipe',wantedIngredients=[];
 function setSearchMode(m){searchMode=m;tabRecipe.classList.toggle('active',m==='recipe');tabIngredient.classList.toggle('active',m==='ingredient');recipeSearchBox.style.display=m==='recipe'?'block':'none';ingredientSearchBox.style.display=m==='ingredient'?'block':'none';if(m==='ingredient')renderIngredientSearch()}
 function normIng(x){return x.trim().toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')}
@@ -459,8 +461,18 @@ async function readJennyPackage(ev){
 
 function normalizeJennyRecipe(x){
  if(!x||typeof x!=='object')throw Error('Ein Rezept ist kein gültiges Objekt.');
- let title=String(x.title||x.name||'').trim(),main=String(x.main||x.mainCategory||'').trim(),sub=String(x.sub||x.subCategory||'').trim();
- if(!title)throw Error('Rezeptname fehlt.');if(!main)throw Error('Hauptkategorie fehlt bei „'+title+'“.');if(!sub)throw Error('Unterkategorie fehlt bei „'+title+'“.');
+ if(x.format&&x.format!=='JennyliciousRecipe')throw Error('Unbekanntes Rezeptformat.');
+ if(x.formatVersion&&Number(x.formatVersion)!==1)throw Error('Diese JennyliciousRecipe-Version wird noch nicht unterstützt.');
+ let title=String(x.title||x.name||'').trim();
+ let cat=x.category&&typeof x.category==='object'?x.category:{};
+ let main=String(cat.main??x.main??x.mainCategory??'').trim();
+ let rawSubs=cat.subcategories??x.subcategories??x.subs??x.sub??x.subCategory??[];
+ let subs=(Array.isArray(rawSubs)?rawSubs:[rawSubs]).map(v=>String(v||'').trim()).filter(Boolean);
+ subs=[...new Set(subs)];
+ let rawSpecials=x.specials??x.specialties??x.special??[];
+ let specials=(Array.isArray(rawSpecials)?rawSpecials:String(rawSpecials||'').split(',')).map(v=>String(v||'').trim()).filter(Boolean);
+ specials=[...new Set(specials)];
+ if(!title)throw Error('Rezeptname fehlt.');if(!main)throw Error('Hauptkategorie fehlt bei „'+title+'“.');
  let sv=x.servings,servStatus='unknown',serv=null;
  if(sv&&typeof sv==='object'){servStatus=sv.status==='confirmed'?'confirmed':'unknown';serv=Number(sv.value)}
  else if(Number.isFinite(Number(sv))&&Number(sv)>0){serv=Number(sv);servStatus='confirmed'}
@@ -468,9 +480,10 @@ function normalizeJennyRecipe(x){
  if(servStatus==='confirmed'&&(!Number.isFinite(serv)||serv<=0))throw Error('Bestätigte Portionsgröße bei „'+title+'“ ist ungültig.');
  let mins=Number(x.minutes??x.mins??30);
  let ing=(x.ingredients||[]).map(i=>Array.isArray(i)?[Number(i[0])||0,String(i[1]||''),String(i[2]||'').trim()]:[Number(i.qty??i.amount)||0,String(i.unit||''),String(i.name||i.ingredient||'').trim()]).filter(i=>i[2]);
- let steps=(x.steps||x.instructions||[]).map(v=>typeof v==='string'?v.trim():String(v.text||'').trim()).filter(Boolean);
+ let steps=(x.steps||x.instructions||[]).map(v=>{if(typeof v==='string')return v.trim();let t=String(v.title||'').trim(),z=String(v.text||v.instruction||'').trim();return [t,z].filter(Boolean).join('\n')}).filter(Boolean);
+ let recipeTip=String(x.recipeTip??x.tip??'').trim(),mealPrep=String(x.mealPrep??x.mealprep??'').trim();
  if(!ing.length)throw Error('Keine Zutaten bei „'+title+'“.');if(!steps.length)throw Error('Keine Zubereitungsschritte bei „'+title+'“.');
- return {title,main,sub,serv,servStatus,mins:Math.max(1,mins||30),fav:Boolean(x.favorite??x.fav??false),ingredients:ing,steps};
+ return {title,main,sub:subs[0]||'',subs,specials,recipeTip,mealPrep,serv,servStatus,mins:Math.max(1,mins||30),fav:Boolean(x.favorite??x.fav??false),ingredients:ing,steps};
 }
 function prepareJennyJson(){
  let e=document.getElementById('jsonImportError');
@@ -480,13 +493,18 @@ function prepareJennyJson(){
 function showJsonReview(){
  duplicateOverride=false;
  let x=pendingJsonRecipes[pendingJsonIndex],unknown=x.servStatus!=='confirmed';
+ let subs=(x.subs||[]).join(', '),specials=(x.specials||[]).join(', ');
  modalContent.innerHTML=`<h2>Rezept prüfen</h2>${pendingPackageImage?`<img class="reviewimage" src="${pendingPackageImage}">`:''}<div class="reviewcounter">Rezept ${pendingJsonIndex+1} von ${pendingJsonRecipes.length}</div>
- ${unknown?`<div class="portionwarning"><b>⚠ Portionsgröße unbekannt</b><span>ChatGPT konnte aus der Quelle keine verlässliche Portionszahl bestimmen. Bitte prüfen und manuell eingeben.</span></div>`:`<div class="portionok"><b>✓ Portionsgröße erkannt: ${x.serv}</b><span>Bitte trotzdem kurz mit der Quelle abgleichen.</span></div>`}
+ ${unknown?`<div class="portionwarning"><b>⚠ Portionsgröße unbekannt</b><span>Bitte mit der Quelle prüfen und manuell eingeben.</span></div>`:`<div class="portionok"><b>✓ Portionsgröße erkannt: ${x.serv}</b><span>Bitte trotzdem kurz mit der Quelle abgleichen.</span></div>`}
  <label class="fieldlabel">Rezeptname</label><input id="rvTitle" class="forminput" value="${escAttr(x.title)}">
- <div class="form2"><div><label class="fieldlabel">Hauptkategorie</label><input id="rvMain" class="forminput" value="${escAttr(x.main)}"></div><div><label class="fieldlabel">Unterkategorie</label><input id="rvSub" class="forminput" value="${escAttr(x.sub)}"></div></div>
+ <label class="fieldlabel">Hauptkategorie</label><input id="rvMain" class="forminput" value="${escAttr(x.main)}">
+ <label class="fieldlabel">Unterkategorien <small>(optional, mehrere mit Komma)</small></label><input id="rvSubs" class="forminput" value="${escAttr(subs)}" placeholder="z. B. Aufläufe, Familienessen">
+ <label class="fieldlabel">Besonderheiten <small>(optional)</small></label><input id="rvSpecials" class="forminput" value="${escAttr(specials)}" placeholder="z. B. Thermomix, Ofenmeister, Achtung Alkohol">
  <div class="form2"><div><label class="fieldlabel">Portionen *</label><input id="rvServ" class="forminput ${unknown?'needsreview':''}" type="number" min="1" value="${unknown?'':x.serv}" placeholder="Bitte eingeben"></div><div><label class="fieldlabel">Zeit (Min.)</label><input id="rvMins" class="forminput" type="number" min="1" value="${x.mins}"></div></div>
  <div class="reviewbox"><b>Zutaten · ${x.ingredients.length}</b>${x.ingredients.map(i=>`<div>${i[0]||''} ${escHtml(i[1])} ${escHtml(i[2])}</div>`).join('')}</div>
- <div class="reviewbox"><b>Zubereitung · ${x.steps.length} Schritte</b>${x.steps.map((v,i)=>`<div><strong>${i+1}.</strong> ${escHtml(v)}</div>`).join('')}</div>
+ <div class="reviewbox"><b>Zubereitung · ${x.steps.length} Schritte</b>${x.steps.map((v,i)=>`<div><strong>${i+1}.</strong> ${escHtml(v).replace(/\n/g,' · ')}</div>`).join('')}</div>
+ <label class="fieldlabel">Tipp <small>(optional)</small></label><textarea id="rvTip" class="forminput" style="min-height:72px;resize:vertical">${escHtml(x.recipeTip||'')}</textarea>
+ <label class="fieldlabel">Mealprep <small>(optional)</small></label><textarea id="rvMealPrep" class="forminput" style="min-height:88px;resize:vertical">${escHtml(x.mealPrep||'')}</textarea>
  <div id="jsonImportError" class="editerror"></div>
  <button class="action" style="background:var(--jl-accent);color:#fff;text-align:center" onclick="confirmReviewedRecipe()">✓ Geprüft & speichern</button>
  <button class="action" onclick="modal.classList.remove('show')">Import abbrechen</button>`;
@@ -524,12 +542,12 @@ function renderDuplicateWarning(d){
 function confirmReviewedRecipe(){
  let x=pendingJsonRecipes[pendingJsonIndex],serv=Number(rvServ.value),e=document.getElementById('jsonImportError');
  if(!Number.isFinite(serv)||serv<=0){e.textContent='Bitte die Portionsgröße prüfen und als Zahl größer 0 eingeben.';e.classList.add('show');rvServ.focus();return}
- x.title=rvTitle.value.trim();x.main=rvMain.value.trim();x.sub=rvSub.value.trim();x.serv=serv;x.servStatus='confirmed';x.mins=Math.max(1,Number(rvMins.value)||30);
- if(!x.title||!x.main||!x.sub){e.textContent='Name sowie Haupt- und Unterkategorie dürfen nicht leer sein.';e.classList.add('show');return}
+ x.title=rvTitle.value.trim();x.main=rvMain.value.trim();x.subs=rvSubs.value.split(',').map(v=>v.trim()).filter(Boolean);x.subs=[...new Set(x.subs)];x.sub=x.subs[0]||'';x.specials=rvSpecials.value.split(',').map(v=>v.trim()).filter(Boolean);x.specials=[...new Set(x.specials)];x.recipeTip=rvTip.value.trim();x.mealPrep=rvMealPrep.value.trim();x.serv=serv;x.servStatus='confirmed';x.mins=Math.max(1,Number(rvMins.value)||30);
+ if(!x.title||!x.main){e.textContent='Rezeptname und Hauptkategorie dürfen nicht leer sein.';e.classList.add('show');return}
  let dup=duplicateCheck(x.title,duplicateOverride);if(dup){renderDuplicateWarning(dup);return}duplicateOverride=false;
  let id=Math.max(0,...R.map(r=>r.id))+1;
- customMainSubs[x.main]=customMainSubs[x.main]||[];if(!customMainSubs[x.main].includes(x.sub))customMainSubs[x.main].push(x.sub);if(!MI[x.main])MI[x.main]='pasta';
- let imgKey=MI[x.main]||'pasta';if(pendingPackageImage){imgKey='import_'+id;IMG[imgKey]=pendingPackageImage}R.push({id,title:x.title,main:x.main,sub:x.sub,img:imgKey,mins:x.mins,fav:x.fav,serv:x.serv,ingredients:x.ingredients,steps:x.steps,ingredientNames:x.ingredients.map(i=>i[2].toLowerCase())});
+ customMainSubs[x.main]=customMainSubs[x.main]||[];x.subs.forEach(v=>{if(!customMainSubs[x.main].includes(v))customMainSubs[x.main].push(v)});if(!MI[x.main])MI[x.main]='pasta';
+ let imgKey=MI[x.main]||'pasta';if(pendingPackageImage){imgKey='import_'+id;IMG[imgKey]=pendingPackageImage}R.push({id,title:x.title,main:x.main,sub:x.sub,subs:x.subs,specials:x.specials,recipeTip:x.recipeTip,mealPrep:x.mealPrep,img:imgKey,mins:x.mins,fav:x.fav,serv:x.serv,ingredients:x.ingredients,steps:x.steps,ingredientNames:x.ingredients.map(i=>i[2].toLowerCase())});
  init();renderWeek();pendingJsonIndex++;
  if(pendingJsonIndex<pendingJsonRecipes.length)showJsonReview();else{modal.classList.remove('show');openRecipe(id)}
 }
@@ -637,13 +655,13 @@ function openManualEditor(){plusSheet.classList.remove('show');editingRecipeId=n
 function openRecipeEditor(id){
  let r=R.find(x=>x.id===id);if(!r)return;editingRecipeId=id;editorImageData='';
  setEditorMode(true);fillEditorCategories(r.main,recipeSubs(r));
- editTitle.value=r.title;editServ.value=r.serv;editMins.value=r.mins;editSpecial.value=recipeSpecials(r).join(', ');editFav.checked=!!r.fav;editError.classList.remove('show');
+ editTitle.value=r.title;editServ.value=r.serv;editMins.value=r.mins;editSpecial.value=recipeSpecials(r).join(', ');editTip.value=r.recipeTip||'';editMealPrep.value=r.mealPrep||'';editFav.checked=!!r.fav;editError.classList.remove('show');
  editPreview.src=I(r.img);editPreview.style.display='block';imagePlaceholder.style.display='none';
  ingredientEditor.innerHTML='';r.ingredients.forEach(i=>addIngredientRow({qty:i[0],unit:i[1],name:i[2]}));
  stepEditor.innerHTML='';r.steps.forEach(x=>addStepRow(x));go('editor')
 }
 function resetEditor(){
- editorImageData='';editPreview.style.display='none';imagePlaceholder.style.display='block';editTitle.value='';editServ.value=appSettings.defaultServings;editMins.value=30;editSpecial.value='';editFav.checked=false;editError.classList.remove('show');fillEditorCategories('',[]);ingredientEditor.innerHTML='';stepEditor.innerHTML='';addIngredientRow();addIngredientRow();addIngredientRow();addStepRow();addStepRow()
+ editorImageData='';editPreview.style.display='none';imagePlaceholder.style.display='block';editTitle.value='';editServ.value=appSettings.defaultServings;editMins.value=30;editSpecial.value='';editTip.value='';editMealPrep.value='';editFav.checked=false;editError.classList.remove('show');fillEditorCategories('',[]);ingredientEditor.innerHTML='';stepEditor.innerHTML='';addIngredientRow();addIngredientRow();addIngredientRow();addStepRow();addStepRow()
 }
 function refreshEditorSubs(selected=[]){
  if(typeof selected==='string')selected=selected?[selected]:[];let m=editMain.value;let subs=[...new Set([...R.filter(r=>r.main===m).flatMap(recipeSubs),...(customMainSubs[m]||[])])].filter(Boolean).sort(jlAlpha);
@@ -657,19 +675,19 @@ function renumberSteps(){[...stepEditor.querySelectorAll('.stepnum')].forEach((x
 function previewRecipeImage(e){let f=e.target.files?.[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{editorImageData=rd.result;editPreview.src=editorImageData;editPreview.style.display='block';imagePlaceholder.style.display='none'};rd.readAsDataURL(f);e.target.value=''}
 function cancelEditor(){if(editingRecipeId){let id=editingRecipeId;editingRecipeId=null;openRecipe(id)}else go('home')}
 function saveManualRecipe(){
- let title=editTitle.value.trim(),main=editMain.value,subs=selectedEditorSubs(),sub=subs[0]||'',specials=editSpecial.value.split(',').map(x=>x.trim()).filter(Boolean),serv=Math.max(1,+editServ.value||4),mins=Math.max(1,+editMins.value||30);
+ let title=editTitle.value.trim(),main=editMain.value,subs=selectedEditorSubs(),sub=subs[0]||'',specials=editSpecial.value.split(',').map(x=>x.trim()).filter(Boolean),recipeTip=editTip.value.trim(),mealPrep=editMealPrep.value.trim(),serv=Math.max(1,+editServ.value||4),mins=Math.max(1,+editMins.value||30);
  let ingredients=[...ingredientEditor.querySelectorAll('.ingredientedit')].map(x=>[parseFloat(x.querySelector('.iqty').value)||0,x.querySelector('.iunit').value,x.querySelector('.iname').value.trim()]).filter(x=>x[2]);
  let steps=[...stepEditor.querySelectorAll('textarea')].map(x=>x.value.trim()).filter(Boolean);
  if(!title||!main||!ingredients.length||!steps.length){editError.textContent='Bitte mindestens Rezeptname, Hauptkategorie, eine Zutat und einen Zubereitungsschritt ausfüllen.';editError.classList.add('show');return}
  if(editingRecipeId){
   let r=R.find(x=>x.id===editingRecipeId);if(!r)return;
-  r.title=title;r.main=main;r.sub=sub;r.subs=subs;r.specials=specials;r.serv=serv;r.mins=mins;r.fav=editFav.checked;r.ingredients=ingredients;r.steps=steps;r.ingredientNames=ingredients.map(x=>x[2].toLowerCase());
+  r.title=title;r.main=main;r.sub=sub;r.subs=subs;r.specials=specials;r.recipeTip=recipeTip;r.mealPrep=mealPrep;r.serv=serv;r.mins=mins;r.fav=editFav.checked;r.ingredients=ingredients;r.steps=steps;r.ingredientNames=ingredients.map(x=>x[2].toLowerCase());
   if(editorImageData){let key='custom_'+r.id+'_'+Date.now();IMG[key]=editorImageData;r.img=key}
   customMainSubs[main]=customMainSubs[main]||[];subs.forEach(x=>{if(!customMainSubs[main].includes(x))customMainSubs[main].push(x)});
   let id=r.id;editingRecipeId=null;init();renderWeek();setTheme(appSettings.theme);curMain=main;curSub=sub;openRecipe(id);return
  }
  let id=Math.max(0,...R.map(r=>r.id))+1,fallback=MI[main]||'pasta';
- let r={id,title,main,sub,subs,specials,img:fallback,customImg:editorImageData||'',mins,fav:editFav.checked,serv,ingredients,steps,ingredientNames:ingredients.map(x=>x[2].toLowerCase())};
+ let r={id,title,main,sub,subs,specials,recipeTip,mealPrep,img:fallback,customImg:editorImageData||'',mins,fav:editFav.checked,serv,ingredients,steps,ingredientNames:ingredients.map(x=>x[2].toLowerCase())};
  R.push(r);customMainSubs[main]=customMainSubs[main]||[];subs.forEach(x=>{if(!customMainSubs[main].includes(x))customMainSubs[main].push(x)});if(!MI[main])MI[main]=fallback;
  if(r.customImg){let key='custom_'+id;IMG[key]=r.customImg;r.img=key}
  init();renderWeek();setTheme(appSettings.theme);curMain=main;curSub=sub;openRecipe(id)
@@ -1033,7 +1051,7 @@ function moveAisle(store,i,d){let a=shoppingCategoryOrders[store],j=i+d;if(!a||j
 
 
 <script id="jl-v017-shopping-js">
-/* V0.17.2 shopping aggregation: visible totals, source-separated contributions */
+/* V0.18.0 shopping aggregation: visible totals, source-separated contributions */
 function jlUnit(u){u=String(u||'').trim().toLowerCase().replace(/\.$/,'');const m={'stück':'Stk.','stueck':'Stk.','stk':'Stk.','x':'Stk.','gramm':'g','gr':'g','g':'g','kilogramm':'kg','kilo':'kg','kg':'kg','liter':'l','l':'l','milliliter':'ml','ml':'ml','esslöffel':'EL','essloeffel':'EL','el':'EL','teelöffel':'TL','teeloeffel':'TL','tl':'TL'};return m[u]||String(u||'').trim()}
 function jlNameKey(n){return String(n||'').toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9äöüß]+/g,' ').trim().replace(/\s+/g,' ')}
 function jlLev(a,b){a=jlNameKey(a);b=jlNameKey(b);let d=Array.from({length:a.length+1},(_,i)=>[i]);for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]}
@@ -1063,7 +1081,7 @@ function jlDropWeekSource(dayIndex,recipeId){let prefix=String(dayIndex)+'|'+Str
 const jlDoAssignV017=doAssign;doAssign=function(i){let old=plan[i];if(old!=null&&cur&&String(old)!==String(cur.id))jlDropWeekSource(i,old);jlDoAssignV017(i)}
 const jlRemoveDayV017=removeDay;removeDay=function(i){let old=plan[i];if(old!=null)jlDropWeekSource(i,old);jlRemoveDayV017(i)}
 const jlSetDayV017=setDay;setDay=function(i,id){let old=plan[i];if(old!=null&&String(old)!==String(id))jlDropWeekSource(i,old);jlSetDayV017(i,id)}
-/* Jennylicious V0.17.2 — stable weekly-plan entries + leftovers */
+/* Jennylicious V0.18.0 — stable weekly-plan entries + leftovers */
 function jlNewPlanEntry(recipeId,mode='cook'){return{id:'wp_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),recipeId:String(recipeId),mode:mode==='leftovers'?'leftovers':'cook'}}
 function jlEnsurePlanMeta(){
  if(!Array.isArray(planMeta))planMeta=[];
@@ -1099,7 +1117,7 @@ function chooseShoppingPortions(){let ix=[...document.querySelectorAll('.weeksho
 
 </script>
 <script>
-/* Jennylicious V0.17.2 — structured IndexedDB */
+/* Jennylicious V0.18.0 — structured IndexedDB */
 const JL_DB_NAME='JennyliciousDB',JL_DB_VERSION=2;
 const JL_STORES=['recipes','images','categories','settings','weeklyPlan','shopping','cookHistory','meta'];
 let jlDB=null,jlReady=false,jlSaveTimer=null;
@@ -1157,7 +1175,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.17.2',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.0',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
@@ -1254,7 +1272,7 @@ document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.add
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js?v=0172',{updateViaCache:'none'})
+    navigator.serviceWorker.register('./service-worker.js?v=0180',{updateViaCache:'none'})
       .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }
