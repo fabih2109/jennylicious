@@ -1,10 +1,10 @@
-# Jennylicious PWA V0.18.7 – Recipe Readability & Import Categories
+# Jennylicious PWA V0.18.8 – Recipe Readability & Import Categories
 
-Current app version: V0.18.7
+Current app version: V0.18.8
 
 Base: V0.18.4 Image & History Fix.
 
-## V0.18.7 – Recipe Readability & Import Categories
+## V0.18.8 – Recipe Readability & Import Categories
 - Tip and Mealprep are collapsible in the normal recipe detail view.
 - Internal paragraphs, line breaks and blank lines in preparation steps, Tip and Mealprep are preserved through import, editing and saving and rendered with preserved whitespace.
 - Import subcategories use checkboxes: import suggestions are shown first; existing subcategories are shown separately.
@@ -81,3 +81,10 @@ Base: V0.18.4 Image & History Fix.
 - No new production reset.
 - V0.15.2 production baseline marker remains unchanged.
 - No IndexedDB schema bump.
+
+
+## V0.18.8
+- Regression behoben: globale Formular-Controls erhalten keine Import-Layoutabstände mehr.
+- Import-Unterkategorien sind wieder echte sichtbare Checkboxen mit rot/grüner Kennzeichnung.
+- Unterkategorien im manuellen Rezepteditor sind wieder echte anklickbare Checkboxen.
+- Absatz-/Leerzeilen-Erhalt bleibt ausschließlich auf Rezept-Langtexte beschränkt.

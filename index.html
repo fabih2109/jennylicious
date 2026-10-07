@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.7</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.8</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -206,11 +206,21 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 button,
 input,
 select,
-.importSubGroups{display:grid;gap:10px;margin:6px 0 12px}.importSubGroup{display:grid;gap:6px}.importSubTitle{font-size:11px;font-weight:900;color:#725d7b;text-transform:uppercase;letter-spacing:.04em}.importSubChecks{display:flex;flex-wrap:wrap;gap:7px}.importSubCheck{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:750;border:1px solid}.importSubCheck input{accent-color:var(--p);margin:0}.importSubCheck.existing{background:#eef8ef;border-color:#9bc9a1;color:#356d3e}.importSubCheck.new{background:#fff0f1;border-color:#e7a5ad;color:#a13d4c}.importSubHint{font-size:11px;color:#817486;line-height:1.35}
 textarea {
   font: inherit;
   color: inherit;
 }
+
+/* Import-Unterkategorien: bewusst isoliert von globalen Formular-Controls. */
+.importSubGroups{display:grid;gap:10px;margin:6px 0 12px}
+.importSubGroup{display:grid;gap:6px}
+.importSubTitle{font-size:11px;font-weight:900;color:#725d7b;text-transform:uppercase;letter-spacing:.04em}
+.importSubChecks{display:flex;flex-wrap:wrap;gap:7px}
+.importSubCheck{display:inline-flex;align-items:center;gap:7px;border-radius:14px;padding:9px 11px;font-size:12px;font-weight:750;border:1px solid;cursor:pointer}
+.importSubCheck input,.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}
+.importSubCheck.existing{background:#eef8ef;border-color:#9bc9a1;color:#356d3e}
+.importSubCheck.new{background:#fff0f1;border-color:#e7a5ad;color:#a13d4c}
+.importSubHint{font-size:11px;color:#817486;line-height:1.35}
 
 button {
   -webkit-appearance: none;
@@ -277,8 +287,8 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.18.7</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
-<style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:flex;align-items:center;gap:6px;background:#f5edf7;border-radius:999px;padding:8px 10px;font-size:13px}.jl-subcheck input{accent-color:var(--jl-accent)}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.18.8</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
 <div class="editcard">
@@ -1206,7 +1216,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.7',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.8',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
