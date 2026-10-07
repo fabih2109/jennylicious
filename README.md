@@ -1,8 +1,14 @@
-# Jennylicious V0.18.4 – Image & History Fix
+# Jennylicious V0.18.5 – Import Cleanup Fixes
 
-Current app version: V0.18.4
+Current app version: V0.18.5
 
-Base: V0.18.3 Blocker Fixes.
+Base: V0.18.4 Image & History Fix.
+
+## V0.18.5 – Import Cleanup Fixes
+- Recipe images are never used as automatic fallback images for main or subcategories. New categories stay image-free until a category image is explicitly assigned.
+- Imported ingredients without a numeric amount no longer render as `0 n. B.`; `n. B.` is displayed as `nach Belieben`.
+- Shopping category inference covers common vegetables, poultry and pantry spices more reliably while learned manual overrides retain priority.
+- No IndexedDB schema bump and no production reset change.
 
 ## V0.18.4 – Image & History Fix
 - Imported recipe images are restored through the existing `IMG[...]` image-key architecture after app restart.
