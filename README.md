@@ -1,8 +1,14 @@
-# Jennylicious V0.18.5 – Import Cleanup Fixes
+# Jennylicious PWA V0.18.6 – Shopping UI Cleanup
 
-Current app version: V0.18.5
+Current app version: V0.18.6
 
 Base: V0.18.4 Image & History Fix.
+
+## V0.18.6 – Shopping mode UI cleanup
+
+- In active shopping mode, per-item category chips are hidden because the category is already shown as the group heading.
+- Outside active shopping mode, category chips remain available so assignments can still be corrected and learned.
+- No database reset or schema change.
 
 ## V0.18.5 – Import Cleanup Fixes
 - Recipe images are never used as automatic fallback images for main or subcategories. New categories stay image-free until a category image is explicitly assigned.
