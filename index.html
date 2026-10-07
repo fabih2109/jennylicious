@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.6</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.7</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -31,12 +31,12 @@
 .ingredientToggle{width:100%;border:1px solid #d9c4e4;background:#fbf6fc;color:#603376;border-radius:14px;padding:12px;text-align:left;font-weight:800}
 .cookIngredients{display:none;background:#fff;border-radius:0 0 15px 15px;padding:0 13px 8px}.cookIngredients.open{display:block}.cookIngredients div{padding:8px 0;border-bottom:1px solid #eee;font-size:13px}
 .cookprogress{margin:20px 2px 12px}.cookprogress>div:first-child{display:flex;justify-content:space-between;font:800 18px Georgia,serif}.progressbar{height:7px;background:#eadff0;border-radius:99px;margin-top:8px;overflow:hidden}.progressbar i{display:block;height:100%;width:0;background:#6c3a91;border-radius:99px;transition:.2s}
-.cookSteps{display:grid;gap:10px}.cookstep{width:100%;border:0;border-radius:18px;padding:15px;text-align:left;display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:start;transition:.2s}.cookstep .num{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;font-weight:900}.cookstep p{margin:2px 0 0;font-size:15px;line-height:1.35}.steptitle{display:block;font-weight:900;margin-bottom:3px}.stepbody{display:block;padding-left:14px;line-height:1.42}
+.cookSteps{display:grid;gap:10px}.cookstep{width:100%;border:0;border-radius:18px;padding:15px;text-align:left;display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:start;transition:.2s}.cookstep .num{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;font-weight:900}.cookstep p{margin:2px 0 0;font-size:15px;line-height:1.35}.steptitle{display:block;font-weight:900;margin-bottom:3px}.stepbody{display:block;padding-left:14px;line-height:1.42;white-space:pre-wrap}
 #steps .steptitle{font-weight:800}#steps .stepbody{padding-left:16px}
 .cookstep .steptitle{font-weight:900}.cookstep .stepbody{padding-left:14px}.cookstep.future{background:#eee3f5;color:#533568}.cookstep.future .num{background:#d8c1e7;color:#62377c}.cookstep.current{background:#fff1bf;color:#4b3914;box-shadow:0 5px 15px #d4a82e22;border:1px solid #efd36b}.cookstep.current .num{background:#e7b631;color:#fff}.cookstep.done{background:#ededed;color:#989398}.cookstep.done .num{background:#c9c7c9;color:#fff}.cookstep.done p{text-decoration:line-through}
 .finishbtn{width:100%;border:0;border-radius:15px;background:#6c3a91;color:#fff;padding:14px;margin:18px 0 5px;font-weight:900}
-.recipeextras{display:grid;gap:8px;margin:10px 0 2px}.recipeextra{padding:12px 13px;border-radius:14px;font-size:13px;line-height:1.45}.recipeextra b{display:block;margin-bottom:4px;font-size:14px}.recipeextra.tip{background:#faf3fb}.recipeextra.meal{background:#f7f3ed}
-.cookExtras{display:grid;gap:8px;margin:10px 0 14px}.cookExtraToggle{width:100%;border:1px solid #dbc9e5;background:#fff9ff;color:#67358a;border-radius:14px;padding:12px 14px;font-weight:800;text-align:left}.cookExtraBody{display:none;margin-top:-3px;padding:13px 14px;border-radius:14px;font-size:14px;line-height:1.45}.cookExtraBody.open{display:block}.cookExtraBody.tip{background:#faf3fb}.cookExtraBody.meal{background:#f7f3ed}
+.recipeextras{display:grid;gap:8px;margin:10px 0 2px}.detailExtraToggle{width:100%;border:1px solid #dbc9e5;background:#fff9ff;color:#67358a;border-radius:14px;padding:12px 14px;font-weight:800;text-align:left}.detailExtraBody{display:none;margin-top:-3px;padding:13px 14px;border-radius:14px;font-size:13px;line-height:1.45;white-space:pre-wrap}.detailExtraBody.open{display:block}.detailExtraBody.tip{background:#faf3fb}.detailExtraBody.meal{background:#f7f3ed}
+.cookExtras{display:grid;gap:8px;margin:10px 0 14px}.cookExtraToggle{width:100%;border:1px solid #dbc9e5;background:#fff9ff;color:#67358a;border-radius:14px;padding:12px 14px;font-weight:800;text-align:left}.cookExtraBody{display:none;margin-top:-3px;padding:13px 14px;border-radius:14px;font-size:14px;line-height:1.45;white-space:pre-wrap}.cookExtraBody.open{display:block}.cookExtraBody.tip{background:#faf3fb}.cookExtraBody.meal{background:#f7f3ed}
 
 
 .searchtabs{display:grid;grid-template-columns:1fr 1fr;background:#eadff0;border-radius:14px;padding:4px;margin-bottom:12px}.searchtab{border:0;border-radius:11px;background:transparent;padding:10px;font-weight:800;color:#765d80}.searchtab.active{background:#fff;color:#67358a;box-shadow:0 3px 9px #51385b12}
@@ -206,6 +206,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 button,
 input,
 select,
+.importSubGroups{display:grid;gap:10px;margin:6px 0 12px}.importSubGroup{display:grid;gap:6px}.importSubTitle{font-size:11px;font-weight:900;color:#725d7b;text-transform:uppercase;letter-spacing:.04em}.importSubChecks{display:flex;flex-wrap:wrap;gap:7px}.importSubCheck{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:750;border:1px solid}.importSubCheck input{accent-color:var(--p);margin:0}.importSubCheck.existing{background:#eef8ef;border-color:#9bc9a1;color:#356d3e}.importSubCheck.new{background:#fff0f1;border-color:#e7a5ad;color:#a13d4c}.importSubHint{font-size:11px;color:#817486;line-height:1.35}
 textarea {
   font: inherit;
   color: inherit;
@@ -276,7 +277,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.18.6</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.18.7</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:flex;align-items:center;gap:6px;background:#f5edf7;border-radius:999px;padding:8px 10px;font-size:13px}.jl-subcheck input{accent-color:var(--jl-accent)}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -364,10 +365,11 @@ function openRecipe(id){
  currentId=id;cur=R.find(r=>r.id===id);
  if(cur?.familyId==='lasagne'&&cur.variants?.length&&cur.activeVariant==null){let v=cur.variants[0];cur.activeVariant=0;cur.activeVariantName=v.name;cur.serv=v.serv;cur.mins=v.mins;cur.ingredients=v.ingredients;cur.steps=v.steps;cur.ingredientNames=v.ingredients.map(z=>z[2].toLowerCase())}
  servings=cur.serv;detailImg.src=I(cur.img);detailTitle.textContent=cur.title;setTimeout(updateDetailFav,0);chips.innerHTML=`<span class="chip">${cur.main}</span>${recipeSubs(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}${recipeSpecials(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}<span class="chip">${cur.mins} Min</span>`;steps.innerHTML=cur.steps.map(s=>`<li>${formatRecipeStep(s)}</li>`).join('');renderDetailExtras();renderWeekBadges();renderIng();go('detail');renderCookHistory();setTimeout(()=>renderVariantBanner(cur.id),0)}
-function renderDetailExtras(){let box=document.getElementById('detailExtras');if(!box||!cur)return;box.innerHTML=(cur.recipeTip?`<div class="recipeextra tip"><b>💡 Tipp</b>${escHtml(cur.recipeTip)}</div>`:'')+(cur.mealPrep?`<div class="recipeextra meal"><b>🥡 Mealprep</b>${escHtml(cur.mealPrep)}</div>`:'');box.style.display=box.innerHTML?'grid':'none'}
+function renderDetailExtras(){let box=document.getElementById('detailExtras');if(!box||!cur)return;let a=[];if(cur.recipeTip)a.push(`<div><button class="detailExtraToggle" onclick="toggleDetailExtra('detailTipBody',this)">⌄ 💡 Tipp anzeigen</button><div id="detailTipBody" class="detailExtraBody tip">${escHtml(cur.recipeTip)}</div></div>`);if(cur.mealPrep)a.push(`<div><button class="detailExtraToggle" onclick="toggleDetailExtra('detailMealBody',this)">⌄ 🥡 Mealprep anzeigen</button><div id="detailMealBody" class="detailExtraBody meal">${escHtml(cur.mealPrep)}</div></div>`);box.innerHTML=a.join('');box.style.display=a.length?'grid':'none'}
+function toggleDetailExtra(id,btn){let b=document.getElementById(id);if(!b)return;let open=b.classList.toggle('open');btn.textContent=(open?'⌃ ':'⌄ ')+(id==='detailTipBody'?'💡 Tipp ':'🥡 Mealprep ')+(open?'ausblenden':'anzeigen')}
 function renderWeekBadges(){if(!cur)return;let ds=plan.map((id,i)=>id===cur.id?DAYS[i].slice(0,2):null).filter(Boolean);weekBadges.innerHTML=ds.map(d=>`<span class="weekbadge">✓ ${d}</span>`).join('')}
 function formatRecipeStep(st){
- let raw=String(st??''),parts=raw.split(/\n+/),title=(parts.shift()||'').trim(),body=parts.join(' ').trim();
+ let raw=normalizeMultiline(st),pos=raw.indexOf('\n'),title=pos>=0?raw.slice(0,pos).trim():raw.trim(),body=pos>=0?raw.slice(pos+1):'';
  if(!body)return `<span class="stepbody">${escHtml(title)}</span>`;
  return `<b class="steptitle">${escHtml(title)}:</b><span class="stepbody">${escHtml(body)}</span>`;
 }
@@ -477,6 +479,7 @@ async function readJennyPackage(ev){
  }catch(err){alert('Import nicht möglich: '+err.message)}
 }
 
+function normalizeMultiline(v){return String(v??'').replace(/\r\n?/g,'\n').replace(/^[ \t]*\n+|\n+[ \t]*$/g,'')}
 function normalizeJennyRecipe(x){
  if(!x||typeof x!=='object')throw Error('Ein Rezept ist kein gültiges Objekt.');
  if(x.format&&x.format!=='JennyliciousRecipe')throw Error('Unbekanntes Rezeptformat.');
@@ -498,8 +501,8 @@ function normalizeJennyRecipe(x){
  if(servStatus==='confirmed'&&(!Number.isFinite(serv)||serv<=0))throw Error('Bestätigte Portionsgröße bei „'+title+'“ ist ungültig.');
  let mins=Number(x.minutes??x.mins??30);
  let ing=(x.ingredients||[]).map(i=>{let raw=Array.isArray(i)?i[0]:(i.qty??i.amount),num=(raw===null||raw===undefined||raw==='')?null:Number(raw);return [Number.isFinite(num)?num:null,String(Array.isArray(i)?(i[1]||''):(i.unit||'')),String(Array.isArray(i)?(i[2]||''):(i.name||i.ingredient||'')).trim()]}).filter(i=>i[2]);
- let steps=(x.steps||x.instructions||[]).map(v=>{if(typeof v==='string')return v.trim();let t=String(v.title||'').trim(),z=String(v.text||v.instruction||'').trim();return [t,z].filter(Boolean).join('\n')}).filter(Boolean);
- let recipeTip=String(x.recipeTip??x.tip??'').trim(),mealPrep=String(x.mealPrep??x.mealprep??'').trim();
+ let steps=(x.steps||x.instructions||[]).map(v=>{if(typeof v==='string')return normalizeMultiline(v);let t=String(v.title||'').trim(),z=normalizeMultiline(v.text||v.instruction||'');return [t,z].filter(Boolean).join('\n')}).filter(Boolean);
+ let recipeTip=normalizeMultiline(x.recipeTip??x.tip??''),mealPrep=normalizeMultiline(x.mealPrep??x.mealprep??'');
  if(!ing.length)throw Error('Keine Zutaten bei „'+title+'“.');if(!steps.length)throw Error('Keine Zubereitungsschritte bei „'+title+'“.');
  return {title,main,sub:subs[0]||'',subs,specials,recipeTip,mealPrep,serv,servStatus,mins:Math.max(1,mins||30),fav:Boolean(x.favorite??x.fav??false),ingredients:ing,steps};
 }
@@ -508,24 +511,33 @@ function prepareJennyJson(){
  try{let d=JSON.parse(jsonImportText.value),arr=Array.isArray(d)?d:(Array.isArray(d.recipes)?d.recipes:[d]);if(!arr.length)throw Error('Keine Rezepte gefunden.');pendingJsonRecipes=arr.map(normalizeJennyRecipe);pendingJsonIndex=0;showJsonReview()}
  catch(err){e.textContent='Import nicht möglich: '+err.message;e.style.background='#fae8eb';e.style.color='#9d3349';e.classList.add('show')}
 }
+function existingImportSubs(main){return [...new Set([...R.filter(r=>r.main===main).flatMap(recipeSubs),...(customMainSubs[main]||[])])].filter(Boolean).sort(jlAlpha)}
+function sameCat(a,b){return String(a).localeCompare(String(b),'de',{sensitivity:'base'})===0}
+function renderImportSubs(selected){
+ let box=document.getElementById('rvSubsBox');if(!box)return;let x=pendingJsonRecipes[pendingJsonIndex],main=document.getElementById('rvMain')?.value.trim()||x.main,proposed=x.importProposedSubs||x.subs||[],existing=existingImportSubs(main),current=selected||[...box.querySelectorAll('input:checked')].map(i=>i.value);
+ let top=proposed.map(n=>{let found=existing.find(e=>sameCat(e,n)),v=found||n,isExisting=!!found,checked=current.some(c=>sameCat(c,v));return `<label class="importSubCheck ${isExisting?'existing':'new'}"><input type="checkbox" value="${escAttr(v)}" ${checked?'checked':''}> ${escHtml(v)}</label>`}).join('');
+ let rest=existing.filter(e=>!proposed.some(p=>sameCat(p,e))).map(v=>`<label class="importSubCheck existing"><input type="checkbox" value="${escAttr(v)}" ${current.some(c=>sameCat(c,v))?'checked':''}> ${escHtml(v)}</label>`).join('');
+ box.innerHTML=`<div class="importSubGroups"><div class="importSubGroup"><div class="importSubTitle">Aus dem Import vorgeschlagen</div><div class="importSubChecks">${top||'<span class="importSubHint">Keine Unterkategorie vorgeschlagen.</span>'}</div><div class="importSubHint">Rot = neu vorgeschlagen · Grün = bereits in Jennylicious vorhanden</div></div><div class="importSubGroup"><div class="importSubTitle">Bereits vorhandene Unterkategorien</div><div class="importSubChecks">${rest||'<span class="importSubHint">Keine weiteren Unterkategorien in dieser Hauptkategorie.</span>'}</div></div></div>`;
+}
+function importSelectedSubs(){let box=document.getElementById('rvSubsBox');return box?[...box.querySelectorAll('input:checked')].map(i=>i.value):[]}
 function showJsonReview(){
  duplicateOverride=false;
  let x=pendingJsonRecipes[pendingJsonIndex],unknown=x.servStatus!=='confirmed';
- let subs=(x.subs||[]).join(', '),specials=(x.specials||[]).join(', ');
+ if(!x.importProposedSubs)x.importProposedSubs=[...(x.subs||[])];let specials=(x.specials||[]).join(', ');
  modalContent.innerHTML=`<h2>Rezept prüfen</h2>${pendingPackageImage?`<img class="reviewimage" src="${pendingPackageImage}">`:''}<div class="reviewcounter">Rezept ${pendingJsonIndex+1} von ${pendingJsonRecipes.length}</div>
  ${unknown?`<div class="portionwarning"><b>⚠ Portionsgröße unbekannt</b><span>Bitte mit der Quelle prüfen und manuell eingeben.</span></div>`:`<div class="portionok"><b>✓ Portionsgröße erkannt: ${x.serv}</b><span>Bitte trotzdem kurz mit der Quelle abgleichen.</span></div>`}
  <label class="fieldlabel">Rezeptname</label><input id="rvTitle" class="forminput" value="${escAttr(x.title)}">
- <label class="fieldlabel">Hauptkategorie</label><input id="rvMain" class="forminput" value="${escAttr(x.main)}">
- <label class="fieldlabel">Unterkategorien <small>(optional, mehrere mit Komma)</small></label><input id="rvSubs" class="forminput" value="${escAttr(subs)}" placeholder="z. B. Aufläufe, Familienessen">
+ <label class="fieldlabel">Hauptkategorie</label><input id="rvMain" class="forminput" value="${escAttr(x.main)}" oninput="renderImportSubs()">
+ <label class="fieldlabel">Unterkategorien <small>(optional)</small></label><div id="rvSubsBox"></div>
  <label class="fieldlabel">Besonderheiten <small>(optional)</small></label><input id="rvSpecials" class="forminput" value="${escAttr(specials)}" placeholder="z. B. Thermomix, Ofenmeister, Achtung Alkohol">
  <div class="form2"><div><label class="fieldlabel">Portionen *</label><input id="rvServ" class="forminput ${unknown?'needsreview':''}" type="number" min="1" value="${unknown?'':x.serv}" placeholder="Bitte eingeben"></div><div><label class="fieldlabel">Zeit (Min.)</label><input id="rvMins" class="forminput" type="number" min="1" value="${x.mins}"></div></div>
  <div class="reviewbox"><b>Zutaten · ${x.ingredients.length}</b>${x.ingredients.map(i=>`<div>${escHtml(ingredientQtyText(i))}${ingredientQtyText(i)?' ':''}${escHtml(i[2])}</div>`).join('')}</div>
- <div class="reviewbox"><b>Zubereitung · ${x.steps.length} Schritte</b>${x.steps.map((v,i)=>`<div><strong>${i+1}.</strong> ${escHtml(v).replace(/\n/g,' · ')}</div>`).join('')}</div>
+ <div class="reviewbox"><b>Zubereitung · ${x.steps.length} Schritte</b>${x.steps.map((v,i)=>`<div style="white-space:pre-wrap"><strong>${i+1}.</strong> ${escHtml(v)}</div>`).join('')}</div>
  <label class="fieldlabel">Tipp <small>(optional)</small></label><textarea id="rvTip" class="forminput" style="min-height:72px;resize:vertical">${escHtml(x.recipeTip||'')}</textarea>
  <label class="fieldlabel">Mealprep <small>(optional)</small></label><textarea id="rvMealPrep" class="forminput" style="min-height:88px;resize:vertical">${escHtml(x.mealPrep||'')}</textarea>
  <div id="jsonImportError" class="editerror"></div>
  <button class="action" style="background:var(--jl-accent);color:#fff;text-align:center" onclick="confirmReviewedRecipe()">✓ Geprüft & speichern</button>
- <button class="action" onclick="modal.classList.remove('show')">Import abbrechen</button>`;
+ <button class="action" onclick="modal.classList.remove('show')">Import abbrechen</button>`;renderImportSubs([...(x.subs||[])]);
 }
 function escHtml(v){return String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function escAttr(v){return escHtml(v).replace(/'/g,'&#39;')}
@@ -560,7 +572,7 @@ function renderDuplicateWarning(d){
 async function confirmReviewedRecipe(){
  let x=pendingJsonRecipes[pendingJsonIndex],serv=Number(rvServ.value),e=document.getElementById('jsonImportError');
  if(!Number.isFinite(serv)||serv<=0){e.textContent='Bitte die Portionsgröße prüfen und als Zahl größer 0 eingeben.';e.classList.add('show');rvServ.focus();return}
- x.title=rvTitle.value.trim();x.main=rvMain.value.trim();x.subs=rvSubs.value.split(',').map(v=>v.trim()).filter(Boolean);x.subs=[...new Set(x.subs)];x.sub=x.subs[0]||'';x.specials=rvSpecials.value.split(',').map(v=>v.trim()).filter(Boolean);x.specials=[...new Set(x.specials)];x.recipeTip=rvTip.value.trim();x.mealPrep=rvMealPrep.value.trim();x.serv=serv;x.servStatus='confirmed';x.mins=Math.max(1,Number(rvMins.value)||30);
+ x.title=rvTitle.value.trim();x.main=rvMain.value.trim();x.subs=importSelectedSubs();x.subs=[...new Set(x.subs)];x.sub=x.subs[0]||'';x.specials=rvSpecials.value.split(',').map(v=>v.trim()).filter(Boolean);x.specials=[...new Set(x.specials)];x.recipeTip=normalizeMultiline(rvTip.value);x.mealPrep=normalizeMultiline(rvMealPrep.value);x.serv=serv;x.servStatus='confirmed';x.mins=Math.max(1,Number(rvMins.value)||30);
  if(!x.title||!x.main){e.textContent='Rezeptname und Hauptkategorie dürfen nicht leer sein.';e.classList.add('show');return}
  let dup=duplicateCheck(x.title,duplicateOverride);if(dup){renderDuplicateWarning(dup);return}duplicateOverride=false;
  let usedIds=[...R.map(r=>Number(r.id)||0),...Object.keys(cookHistory||{}).map(v=>Number(v)||0)];let id=Math.max(0,...usedIds)+1;cookHistory[id]=[];
@@ -694,9 +706,9 @@ function renumberSteps(){[...stepEditor.querySelectorAll('.stepnum')].forEach((x
 function previewRecipeImage(e){let f=e.target.files?.[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{editorImageData=rd.result;editPreview.src=editorImageData;editPreview.style.display='block';imagePlaceholder.style.display='none'};rd.readAsDataURL(f);e.target.value=''}
 function cancelEditor(){if(editingRecipeId){let id=editingRecipeId;editingRecipeId=null;openRecipe(id)}else go('home')}
 function saveManualRecipe(){
- let title=editTitle.value.trim(),main=editMain.value,subs=selectedEditorSubs(),sub=subs[0]||'',specials=editSpecial.value.split(',').map(x=>x.trim()).filter(Boolean),recipeTip=editTip.value.trim(),mealPrep=editMealPrep.value.trim(),serv=Math.max(1,+editServ.value||4),mins=Math.max(1,+editMins.value||30);
+ let title=editTitle.value.trim(),main=editMain.value,subs=selectedEditorSubs(),sub=subs[0]||'',specials=editSpecial.value.split(',').map(x=>x.trim()).filter(Boolean),recipeTip=normalizeMultiline(editTip.value),mealPrep=normalizeMultiline(editMealPrep.value),serv=Math.max(1,+editServ.value||4),mins=Math.max(1,+editMins.value||30);
  let ingredients=[...ingredientEditor.querySelectorAll('.ingredientedit')].map(x=>[parseFloat(x.querySelector('.iqty').value)||0,x.querySelector('.iunit').value,x.querySelector('.iname').value.trim()]).filter(x=>x[2]);
- let steps=[...stepEditor.querySelectorAll('textarea')].map(x=>x.value.trim()).filter(Boolean);
+ let steps=[...stepEditor.querySelectorAll('textarea')].map(x=>normalizeMultiline(x.value)).filter(Boolean);
  if(!title||!main||!ingredients.length||!steps.length){editError.textContent='Bitte mindestens Rezeptname, Hauptkategorie, eine Zutat und einen Zubereitungsschritt ausfüllen.';editError.classList.add('show');return}
  if(editingRecipeId){
   let r=R.find(x=>x.id===editingRecipeId);if(!r)return;
@@ -1194,7 +1206,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.6',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.7',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;

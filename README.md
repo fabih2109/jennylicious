@@ -1,11 +1,19 @@
-# Jennylicious PWA V0.18.6 – Shopping UI Cleanup
+# Jennylicious PWA V0.18.7 – Recipe Readability & Import Categories
 
-Current app version: V0.18.6
+Current app version: V0.18.7
 
 Base: V0.18.4 Image & History Fix.
 
-## V0.18.6 – Shopping mode UI cleanup
+## V0.18.7 – Recipe Readability & Import Categories
+- Tip and Mealprep are collapsible in the normal recipe detail view.
+- Internal paragraphs, line breaks and blank lines in preparation steps, Tip and Mealprep are preserved through import, editing and saving and rendered with preserved whitespace.
+- Import subcategories use checkboxes: import suggestions are shown first; existing subcategories are shown separately.
+- Existing subcategories are marked green; genuinely new import suggestions are marked red. Suggested categories that already exist are shown once and marked green.
+- Only checked subcategories are assigned. New subcategories are created only when the recipe is finally saved; unchecked suggestions create no empty categories.
+- Changing the main category refreshes the existing-subcategory choices without creating categories.
+- No database reset or schema change.
 
+## V0.18.6 – Shopping mode UI cleanup
 - In active shopping mode, per-item category chips are hidden because the category is already shown as the group heading.
 - Outside active shopping mode, category chips remain available so assignments can still be corrected and learned.
 - No database reset or schema change.
