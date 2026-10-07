@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.1</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.18.2</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -31,7 +31,9 @@
 .ingredientToggle{width:100%;border:1px solid #d9c4e4;background:#fbf6fc;color:#603376;border-radius:14px;padding:12px;text-align:left;font-weight:800}
 .cookIngredients{display:none;background:#fff;border-radius:0 0 15px 15px;padding:0 13px 8px}.cookIngredients.open{display:block}.cookIngredients div{padding:8px 0;border-bottom:1px solid #eee;font-size:13px}
 .cookprogress{margin:20px 2px 12px}.cookprogress>div:first-child{display:flex;justify-content:space-between;font:800 18px Georgia,serif}.progressbar{height:7px;background:#eadff0;border-radius:99px;margin-top:8px;overflow:hidden}.progressbar i{display:block;height:100%;width:0;background:#6c3a91;border-radius:99px;transition:.2s}
-.cookSteps{display:grid;gap:10px}.cookstep{width:100%;border:0;border-radius:18px;padding:15px;text-align:left;display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:start;transition:.2s}.cookstep .num{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;font-weight:900}.cookstep p{margin:2px 0 0;font-size:15px;line-height:1.35}.cookstep.future{background:#eee3f5;color:#533568}.cookstep.future .num{background:#d8c1e7;color:#62377c}.cookstep.current{background:#fff1bf;color:#4b3914;box-shadow:0 5px 15px #d4a82e22;border:1px solid #efd36b}.cookstep.current .num{background:#e7b631;color:#fff}.cookstep.done{background:#ededed;color:#989398}.cookstep.done .num{background:#c9c7c9;color:#fff}.cookstep.done p{text-decoration:line-through}
+.cookSteps{display:grid;gap:10px}.cookstep{width:100%;border:0;border-radius:18px;padding:15px;text-align:left;display:grid;grid-template-columns:38px 1fr;gap:10px;align-items:start;transition:.2s}.cookstep .num{width:31px;height:31px;border-radius:50%;display:grid;place-items:center;font-weight:900}.cookstep p{margin:2px 0 0;font-size:15px;line-height:1.35}.steptitle{display:block;font-weight:900;margin-bottom:3px}.stepbody{display:block;padding-left:14px;line-height:1.42}
+#steps .steptitle{font-weight:800}#steps .stepbody{padding-left:16px}
+.cookstep .steptitle{font-weight:900}.cookstep .stepbody{padding-left:14px}.cookstep.future{background:#eee3f5;color:#533568}.cookstep.future .num{background:#d8c1e7;color:#62377c}.cookstep.current{background:#fff1bf;color:#4b3914;box-shadow:0 5px 15px #d4a82e22;border:1px solid #efd36b}.cookstep.current .num{background:#e7b631;color:#fff}.cookstep.done{background:#ededed;color:#989398}.cookstep.done .num{background:#c9c7c9;color:#fff}.cookstep.done p{text-decoration:line-through}
 .finishbtn{width:100%;border:0;border-radius:15px;background:#6c3a91;color:#fff;padding:14px;margin:18px 0 5px;font-weight:900}
 .recipeextras{display:grid;gap:8px;margin:10px 0 2px}.recipeextra{padding:12px 13px;border-radius:14px;font-size:13px;line-height:1.45}.recipeextra b{display:block;margin-bottom:4px;font-size:14px}.recipeextra.tip{background:#faf3fb}.recipeextra.meal{background:#f7f3ed}
 .cookExtras{display:grid;gap:8px;margin:10px 0 14px}.cookExtraToggle{width:100%;border:1px solid #dbc9e5;background:#fff9ff;color:#67358a;border-radius:14px;padding:12px 14px;font-weight:800;text-align:left}.cookExtraBody{display:none;margin-top:-3px;padding:13px 14px;border-radius:14px;font-size:14px;line-height:1.45}.cookExtraBody.open{display:block}.cookExtraBody.tip{background:#faf3fb}.cookExtraBody.meal{background:#f7f3ed}
@@ -200,7 +202,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 .cookhistoryitem p{margin:0;white-space:pre-wrap;line-height:1.35}
 </style>
 <style id="jl-cross-platform-ui-v0153">
-/* Jennylicious V0.18.1: deterministic controls on iOS Safari/PWA and Android Chrome/PWA */
+/* Jennylicious V0.18.2: deterministic controls on iOS Safari/PWA and Android Chrome/PWA */
 button,
 input,
 select,
@@ -274,7 +276,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.18.1</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.18.2</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:flex;align-items:center;gap:6px;background:#f5edf7;border-radius:999px;padding:8px 10px;font-size:13px}.jl-subcheck input{accent-color:var(--jl-accent)}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -360,9 +362,14 @@ function renderList(a,e){a=[...a].sort((x,y)=>jlAlpha(x.title,y.title));e.innerH
 function openRecipe(id){
  currentId=id;cur=R.find(r=>r.id===id);
  if(cur?.familyId==='lasagne'&&cur.variants?.length&&cur.activeVariant==null){let v=cur.variants[0];cur.activeVariant=0;cur.activeVariantName=v.name;cur.serv=v.serv;cur.mins=v.mins;cur.ingredients=v.ingredients;cur.steps=v.steps;cur.ingredientNames=v.ingredients.map(z=>z[2].toLowerCase())}
- servings=cur.serv;detailImg.src=I(cur.img);detailTitle.textContent=cur.title;setTimeout(updateDetailFav,0);chips.innerHTML=`<span class="chip">${cur.main}</span>${recipeSubs(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}${recipeSpecials(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}<span class="chip">${cur.mins} Min</span>`;steps.innerHTML=cur.steps.map(s=>`<li>${escHtml(s).replace(/\n/g,'<br>')}</li>`).join('');renderDetailExtras();renderWeekBadges();renderIng();go('detail');renderCookHistory();setTimeout(()=>renderVariantBanner(cur.id),0)}
+ servings=cur.serv;detailImg.src=I(cur.img);detailTitle.textContent=cur.title;setTimeout(updateDetailFav,0);chips.innerHTML=`<span class="chip">${cur.main}</span>${recipeSubs(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}${recipeSpecials(cur).map(x=>`<span class="chip">${escHtml(x)}</span>`).join('')}<span class="chip">${cur.mins} Min</span>`;steps.innerHTML=cur.steps.map(s=>`<li>${formatRecipeStep(s)}</li>`).join('');renderDetailExtras();renderWeekBadges();renderIng();go('detail');renderCookHistory();setTimeout(()=>renderVariantBanner(cur.id),0)}
 function renderDetailExtras(){let box=document.getElementById('detailExtras');if(!box||!cur)return;box.innerHTML=(cur.recipeTip?`<div class="recipeextra tip"><b>💡 Tipp</b>${escHtml(cur.recipeTip)}</div>`:'')+(cur.mealPrep?`<div class="recipeextra meal"><b>🥡 Mealprep</b>${escHtml(cur.mealPrep)}</div>`:'');box.style.display=box.innerHTML?'grid':'none'}
 function renderWeekBadges(){if(!cur)return;let ds=plan.map((id,i)=>id===cur.id?DAYS[i].slice(0,2):null).filter(Boolean);weekBadges.innerHTML=ds.map(d=>`<span class="weekbadge">✓ ${d}</span>`).join('')}
+function formatRecipeStep(st){
+ let raw=String(st??''),parts=raw.split(/\n+/),title=(parts.shift()||'').trim(),body=parts.join(' ').trim();
+ if(!body)return `<span class="stepbody">${escHtml(title)}</span>`;
+ return `<b class="steptitle">${escHtml(title)}:</b><span class="stepbody">${escHtml(body)}</span>`;
+}
 function renderCookHistory(){
  let box=document.getElementById('cookHistoryBox');if(!box||!cur)return;
  let a=cookHistory[cur.id]||[];
@@ -420,7 +427,7 @@ function renderCookIngredients(){let f=servings/cur.serv;cookIngredients.innerHT
 function toggleCookIngredients(){cookIngredients.classList.toggle('open');ingredientToggle.textContent=cookIngredients.classList.contains('open')?'⌃ Zutaten ausblenden':'⌄ Zutaten anzeigen'}
 function renderCookExtras(){let box=document.getElementById('cookExtras');if(!box||!cur)return;let a=[];if(cur.recipeTip)a.push(`<div><button class="cookExtraToggle" onclick="toggleCookExtra('cookTipBody',this)">⌄ 💡 Tipp anzeigen</button><div id="cookTipBody" class="cookExtraBody tip">${escHtml(cur.recipeTip)}</div></div>`);if(cur.mealPrep)a.push(`<div><button class="cookExtraToggle" onclick="toggleCookExtra('cookMealBody',this)">⌄ 🥡 Mealprep anzeigen</button><div id="cookMealBody" class="cookExtraBody meal">${escHtml(cur.mealPrep)}</div></div>`);box.innerHTML=a.join('');box.style.display=a.length?'grid':'none'}
 function toggleCookExtra(id,btn){let el=document.getElementById(id);if(!el)return;let open=el.classList.toggle('open');let label=id==='cookTipBody'?'💡 Tipp':'🥡 Mealprep';btn.textContent=(open?'⌃ ':'⌄ ')+label+(open?' ausblenden':' anzeigen')}
-function renderCookSteps(){let next=cookDone.findIndex(x=>!x);let done=cookDone.filter(Boolean).length;cookProgressText.textContent=done+' / '+cookDone.length;cookProgressBar.style.width=(done/cookDone.length*100)+'%';cookSteps.innerHTML=cur.steps.map((st,i)=>{let cl=cookDone[i]?'done':i===next?'current':'future';return `<button class="cookstep ${cl}" onclick="toggleCookStep(${i})"><span class="num">${cookDone[i]?'✓':i+1}</span><p>${st}</p></button>`}).join('')}
+function renderCookSteps(){let next=cookDone.findIndex(x=>!x);let done=cookDone.filter(Boolean).length;cookProgressText.textContent=done+' / '+cookDone.length;cookProgressBar.style.width=(done/cookDone.length*100)+'%';cookSteps.innerHTML=cur.steps.map((st,i)=>{let cl=cookDone[i]?'done':i===next?'current':'future';return `<button class="cookstep ${cl}" onclick="toggleCookStep(${i})"><span class="num">${cookDone[i]?'✓':i+1}</span><p>${formatRecipeStep(st)}</p></button>`}).join('')}
 function toggleCookStep(i){cookDone[i]=!cookDone[i];renderCookSteps()}
 function cookPortions(){modalContent.innerHTML=`<h2>Portionen ändern</h2><div class="portion"><b>Portionen</b><div class="step"><button onclick="changeCookServ(-1)">−</button><b id="cookChangeServ">${servings}</b><button onclick="changeCookServ(1)">+</button></div></div><button class="action" onclick="modal.classList.remove('show')">Fertig</button>`;modal.classList.add('show')}
 function changeCookServ(d){servings=Math.max(1,servings+d);cookChangeServ.textContent=servings;cookServText.textContent=servings+' Portionen';renderCookIngredients()}
@@ -1058,7 +1065,7 @@ function moveAisle(store,i,d){let a=shoppingCategoryOrders[store],j=i+d;if(!a||j
 
 
 <script id="jl-v017-shopping-js">
-/* V0.18.1 shopping aggregation: visible totals, source-separated contributions */
+/* V0.18.2 shopping aggregation: visible totals, source-separated contributions */
 function jlUnit(u){u=String(u||'').trim().toLowerCase().replace(/\.$/,'');const m={'stück':'Stk.','stueck':'Stk.','stk':'Stk.','x':'Stk.','gramm':'g','gr':'g','g':'g','kilogramm':'kg','kilo':'kg','kg':'kg','liter':'l','l':'l','milliliter':'ml','ml':'ml','esslöffel':'EL','essloeffel':'EL','el':'EL','teelöffel':'TL','teeloeffel':'TL','tl':'TL'};return m[u]||String(u||'').trim()}
 function jlNameKey(n){return String(n||'').toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9äöüß]+/g,' ').trim().replace(/\s+/g,' ')}
 function jlLev(a,b){a=jlNameKey(a);b=jlNameKey(b);let d=Array.from({length:a.length+1},(_,i)=>[i]);for(let j=0;j<=b.length;j++)d[0][j]=j;for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)d[i][j]=Math.min(d[i-1][j]+1,d[i][j-1]+1,d[i-1][j-1]+(a[i-1]===b[j-1]?0:1));return d[a.length][b.length]}
@@ -1088,7 +1095,7 @@ function jlDropWeekSource(dayIndex,recipeId){let prefix=String(dayIndex)+'|'+Str
 const jlDoAssignV017=doAssign;doAssign=function(i){let old=plan[i];if(old!=null&&cur&&String(old)!==String(cur.id))jlDropWeekSource(i,old);jlDoAssignV017(i)}
 const jlRemoveDayV017=removeDay;removeDay=function(i){let old=plan[i];if(old!=null)jlDropWeekSource(i,old);jlRemoveDayV017(i)}
 const jlSetDayV017=setDay;setDay=function(i,id){let old=plan[i];if(old!=null&&String(old)!==String(id))jlDropWeekSource(i,old);jlSetDayV017(i,id)}
-/* Jennylicious V0.18.1 — stable weekly-plan entries + leftovers */
+/* Jennylicious V0.18.2 — stable weekly-plan entries + leftovers */
 function jlNewPlanEntry(recipeId,mode='cook'){return{id:'wp_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,8),recipeId:String(recipeId),mode:mode==='leftovers'?'leftovers':'cook'}}
 function jlEnsurePlanMeta(){
  if(!Array.isArray(planMeta))planMeta=[];
@@ -1124,7 +1131,7 @@ function chooseShoppingPortions(){let ix=[...document.querySelectorAll('.weeksho
 
 </script>
 <script>
-/* Jennylicious V0.18.1 — structured IndexedDB */
+/* Jennylicious V0.18.2 — structured IndexedDB */
 const JL_DB_NAME='JennyliciousDB',JL_DB_VERSION=2;
 const JL_STORES=['recipes','images','categories','settings','weeklyPlan','shopping','cookHistory','meta'];
 let jlDB=null,jlReady=false,jlSaveTimer=null;
@@ -1182,7 +1189,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.1',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.18.2',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
@@ -1279,7 +1286,7 @@ document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.add
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js?v=0181',{updateViaCache:'none'})
+    navigator.serviceWorker.register('./service-worker.js?v=0182',{updateViaCache:'none'})
       .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }
