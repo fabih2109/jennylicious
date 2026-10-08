@@ -1,17 +1,28 @@
-## V0.19.4.corr2 – iOS recipe grid hotfix
+## V0.19.5 – iOS Save Performance
+
+- Rezeptkachel-Fix aus V0.19.4.corr2 bleibt unverändert.
+- Bereits geladene Kategorie-/manuelle Rezeptbilder werden bei normalen Saves nicht mehr erneut nach WebP konvertiert und in IndexedDB geschrieben. Nur tatsächlich geänderte Bilder werden persistiert.
+- Entwurfsfelder im manuellen Rezepteditor und Import lösen keine nutzlosen Voll-Autosaves mehr aus.
+- Explizites Rezept-Speichern/-Löschen unterdrückt kurzzeitig redundante Autosaves.
+- Manueller Rezepteditor zeigt nun ebenfalls sofort „Wird gespeichert …“ und blockiert Mehrfachklicks.
+- Löschen zeigt „Wird gelöscht …“.
+- Data-Safety, Last-Known-Good und tägliche lokale Rezept-Snapshots bleiben aktiv.
+- Keine Datenbankmigration, kein Reset.
+
+## V0.19.5 – iOS recipe grid hotfix
 
 - Direct recipes in main categories now use the recipe grid container.
 - Recipe cards have a minimum height for Safari/iOS.
 - No changes to IndexedDB, backups or recipe persistence.
 
-# Jennylicious PWA V0.19.4.corr2 – Recipe Image Grid
+# Jennylicious PWA V0.19.5 – Recipe Image Grid
 
-Current app version: V0.19.4.corr2
+Current app version: V0.19.5
 
 Base: V0.18.4 Image & History Fix.
 
 
-## V0.19.4.corr2 – Recipe Image Grid
+## V0.19.5 – Recipe Image Grid
 
 - Zweispaltige Rezept-Bildkacheln in Kategorie-, Such-, Favoriten- und Gesamtrezeptlisten.
 - Bild füllt Kachel; Titel und Zeit auf dunklem Verlauf; Favoritenbutton separat.
@@ -119,7 +130,7 @@ Base: V0.18.4 Image & History Fix.
 - Absatz-/Leerzeilen-Erhalt bleibt ausschließlich auf Rezept-Langtexte beschränkt.
 
 
-V0.19.4.corr2: Kompaktere Rezeptkacheln; Import-Speichervorgang gegen Mehrfachklicks geschützt, Speichern-Status sofort sichtbar. Keine Datenbankmigration.
+V0.19.5: Kompaktere Rezeptkacheln; Import-Speichervorgang gegen Mehrfachklicks geschützt, Speichern-Status sofort sichtbar. Keine Datenbankmigration.
 
 
 Korrektur: kontrollierte Wortumbrüche bei zusammengesetzten Rezeptnamen; iOS-Speicherstatus vor dem Datenbankzugriff sichtbar. Keine DB-Migration.

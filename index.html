@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.4.corr2</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.5</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -192,7 +192,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 .mini-add-row{display:grid;grid-template-columns:1fr auto 38px;gap:5px;margin-top:9px}
 .mini-add-row .forminput{min-width:0;padding:7px!important;font-size:12px!important}
 
-/* V0.19.4.corr2: Bildkacheln ausschließlich in Rezeptlisten; andere .row/.list bleiben unverändert. */
+/* V0.19.5: Bildkacheln ausschließlich in Rezeptlisten; andere .row/.list bleiben unverändert. */
 .jl-recipe-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px!important;align-items:stretch;width:100%;justify-content:stretch;justify-items:stretch}
 .jl-recipe-grid>.jl-recipe-card{position:relative;width:100%;min-width:0;min-height:0;justify-self:stretch;aspect-ratio:1 / 1.02;overflow:hidden;border-radius:15px;background:#eee2f0;box-shadow:0 4px 13px #43264a15}
 .jl-recipe-open{display:block;position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;border-radius:0;background:transparent;text-align:left;color:white;overflow:hidden;cursor:pointer}
@@ -205,7 +205,7 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 .jl-recipe-fav{position:absolute;top:8px;right:8px;z-index:2;width:31px;height:31px;display:grid;place-items:center;border:0;border-radius:50%;background:#fffdf0e8;color:#a24580;font-size:21px;cursor:pointer}
 .jl-recipe-empty{grid-column:1/-1}
 
-/* V0.19.4.corr2: iPhone width and German word wrapping. Limit changes to recipe grids. */
+/* V0.19.5: iPhone width and German word wrapping. Limit changes to recipe grids. */
 #recipeList.jl-recipe-grid,#mainDirectRecipes .jl-recipe-grid,#favList.jl-recipe-grid,#searchResults.jl-recipe-grid,#myRecipesList.jl-recipe-grid{width:calc(100% + 20px);margin-left:-10px;max-width:none;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px!important}
 .jl-recipe-grid>.jl-recipe-card{min-width:0;aspect-ratio:1 / 1.03}
 .jl-recipe-caption{padding-right:0;left:10px;right:10px;bottom:11px}
@@ -308,7 +308,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.4.corr2</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.5</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -609,7 +609,7 @@ async function confirmReviewedRecipe(){
  x.title=rvTitle.value.trim();x.main=rvMain.value.trim();x.subs=importSelectedSubs();x.subs=[...new Set(x.subs)];x.sub=x.subs[0]||'';x.specials=rvSpecials.value.split(',').map(v=>v.trim()).filter(Boolean);x.specials=[...new Set(x.specials)];x.recipeTip=normalizeMultiline(rvTip.value);x.mealPrep=normalizeMultiline(rvMealPrep.value);x.serv=serv;x.servStatus='confirmed';x.mins=Math.max(1,Number(rvMins.value)||30);
  if(!x.title||!x.main){e.textContent='Rezeptname und Hauptkategorie dürfen nicht leer sein.';e.classList.add('show');return}
  let dup=duplicateCheck(x.title,duplicateOverride);if(dup){renderDuplicateWarning(dup);return}duplicateOverride=false;
- jlImportSaveBusy=true;
+ jlImportSaveBusy=true;jlSuppressAutosave(5000);
  const saveBtn=document.getElementById('jlImportSaveBtn');
  if(saveBtn){saveBtn.disabled=true;saveBtn.textContent='⏳ Wird gespeichert …';saveBtn.setAttribute('aria-busy','true')}
  if(e){e.textContent='⏳ Wird gespeichert … Bitte warten und die App geöffnet lassen.';e.classList.add('show');e.style.display='block'}
@@ -627,11 +627,12 @@ async function confirmReviewedRecipe(){
 
 function askDeleteRecipe(id){
  let r=R.find(x=>x.id===id);if(!r)return;
- modalContent.innerHTML=`<div class="deleteconfirm"><h2>Rezept löschen?</h2><p><b>${escHtml(r.title)}</b> wird aus Jennylicious gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.</p><button class="action delete-danger" onclick="deleteRecipe(${id})">🗑 Rezept endgültig löschen</button><button class="action" onclick="modal.classList.remove('show')">Abbrechen</button></div>`;modal.classList.add('show')
+ modalContent.innerHTML=`<div class="deleteconfirm"><h2>Rezept löschen?</h2><p><b>${escHtml(r.title)}</b> wird aus Jennylicious gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.</p><button id="jlDeleteRecipeBtn" class="action delete-danger" onclick="deleteRecipe(${id})">🗑 Rezept endgültig löschen</button><button class="action" onclick="modal.classList.remove('show')">Abbrechen</button></div>`;modal.classList.add('show')
 }
 async function deleteRecipe(id){
  let idx=R.findIndex(x=>x.id===id);if(idx<0)return;let r=R[idx],next=R.filter(x=>String(x.id)!==String(id));
  if(!jlDataLoadHealthy){showInfoDialog('Speichern gesperrt','Die lokalen Daten wurden in dieser Sitzung nicht sicher geladen. Das Rezept wurde nicht gelöscht. Bitte die App neu öffnen.');return}
+ jlSuppressAutosave(5000);const delBtn=document.getElementById('jlDeleteRecipeBtn');if(delBtn){delBtn.disabled=true;delBtn.textContent='⏳ Wird gelöscht …'}await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  try{
    await jlSerializeWrite(async()=>{
      await jlAddRecipeRecoveryCheckpoint(R,'before-explicit-delete');
@@ -641,7 +642,7 @@ async function deleteRecipe(id){
      for(let i=0;i<plan.length;i++){if(String(plan[i])===String(id)){jlDropPlanEntrySource(i);plan[i]=null;planMeta[i]=null}}
    });
    modal.classList.remove('show');init();renderWeek();go('home');jlQueue()
- }catch(e){console.error(e);showInfoDialog('Löschen fehlgeschlagen','Das Rezept konnte nicht sicher aus der lokalen Datenbank gelöscht werden. Der vorhandene Rezeptbestand wurde nicht verändert.')}
+ }catch(e){console.error(e);if(delBtn){delBtn.disabled=false;delBtn.textContent='🗑 Rezept endgültig löschen'}showInfoDialog('Löschen fehlgeschlagen','Das Rezept konnte nicht sicher aus der lokalen Datenbank gelöscht werden. Der vorhandene Rezeptbestand wurde nicht verändert.')}
 }
 function categoryUsage(main,sub){
  let recipes=R.filter(r=>r.main===main&&(!sub||recipeHasSub(r,sub)));
@@ -717,9 +718,9 @@ function editCategoryImage(main,sub){
 }
 
 function previewCategoryImage(e){let f=e.target.files?.[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{catImageData=rd.result;
- if(editingCategoryImageMain){let k=(editingCategoryImageSub?'catsub_':'catmain_')+Date.now();IMG[k]=catImageData;if(editingCategoryImageSub)customSubImages[editingCategoryImageMain+'||'+editingCategoryImageSub]=k;else customMainImages[editingCategoryImageMain]=k;let m=editingCategoryImageMain,s=editingCategoryImageSub;editingCategoryImageMain='';editingCategoryImageSub='';init();if(s)openSub(s);else openMain(m);jlQueue();return}
+ if(editingCategoryImageMain){let k=(editingCategoryImageSub?'catsub_':'catmain_')+Date.now();IMG[k]=catImageData;jlMarkImageDirty(k);if(editingCategoryImageSub)customSubImages[editingCategoryImageMain+'||'+editingCategoryImageSub]=k;else customMainImages[editingCategoryImageMain]=k;let m=editingCategoryImageMain,s=editingCategoryImageSub;editingCategoryImageMain='';editingCategoryImageSub='';init();if(s)openSub(s);else openMain(m);jlQueue();return}
  catPreview.src=catImageData;catPreview.style.display='block';catPlaceholder.style.display='none'};rd.readAsDataURL(f);e.target.value=''}
-function saveCategory(){let n=catName.value.trim();if(!n)return alert('Bitte einen Namen eingeben.');if(catCreatorType==='main'){customMainSubs[n]=customMainSubs[n]||[];if(catImageData){let k='catmain_'+Date.now();IMG[k]=catImageData;customMainImages[n]=k}}else{let p=catParent.value;customMainSubs[p]=customMainSubs[p]||[];if(!customMainSubs[p].includes(n))customMainSubs[p].push(n);if(catImageData){let k='catsub_'+Date.now();IMG[k]=catImageData;customSubImages[p+'||'+n]=k}}modal.classList.remove('show');init()}
+function saveCategory(){let n=catName.value.trim();if(!n)return alert('Bitte einen Namen eingeben.');if(catCreatorType==='main'){customMainSubs[n]=customMainSubs[n]||[];if(catImageData){let k='catmain_'+Date.now();IMG[k]=catImageData;jlMarkImageDirty(k);customMainImages[n]=k}}else{let p=catParent.value;customMainSubs[p]=customMainSubs[p]||[];if(!customMainSubs[p].includes(n))customMainSubs[p].push(n);if(catImageData){let k='catsub_'+Date.now();IMG[k]=catImageData;jlMarkImageDirty(k);customSubImages[p+'||'+n]=k}}modal.classList.remove('show');init();jlQueue()}
 
 let editingRecipeId=null;
 function setEditorMode(editing){
@@ -756,24 +757,28 @@ function addStepRow(txt=''){let d=document.createElement('div');d.className='ste
 function renumberSteps(){[...stepEditor.querySelectorAll('.stepnum')].forEach((x,i)=>x.textContent=i+1)}
 function previewRecipeImage(e){let f=e.target.files?.[0];if(!f)return;let rd=new FileReader();rd.onload=()=>{editorImageData=rd.result;editPreview.src=editorImageData;editPreview.style.display='block';imagePlaceholder.style.display='none'};rd.readAsDataURL(f);e.target.value=''}
 function cancelEditor(){if(editingRecipeId){let id=editingRecipeId;editingRecipeId=null;openRecipe(id)}else go('home')}
+let jlManualRecipeSaveBusy=false;
+function jlResetManualSaveUi(){jlManualRecipeSaveBusy=false;const b=document.getElementById('editorSaveBtn');if(b){b.disabled=false;b.textContent='✓ Rezept speichern';b.removeAttribute('aria-busy')}}
 async function saveManualRecipe(){
+ if(jlManualRecipeSaveBusy)return;
  let title=editTitle.value.trim(),main=editMain.value,subs=selectedEditorSubs(),sub=subs[0]||'',specials=editSpecial.value.split(',').map(x=>x.trim()).filter(Boolean),recipeTip=normalizeMultiline(editTip.value),mealPrep=normalizeMultiline(editMealPrep.value),serv=Math.max(1,+editServ.value||4),mins=Math.max(1,+editMins.value||30);
  let ingredients=[...ingredientEditor.querySelectorAll('.ingredientedit')].map(x=>[parseFloat(x.querySelector('.iqty').value)||0,x.querySelector('.iunit').value,x.querySelector('.iname').value.trim()]).filter(x=>x[2]);
  let steps=[...stepEditor.querySelectorAll('textarea')].map(x=>normalizeMultiline(x.value)).filter(Boolean);
  if(!title||!main||!ingredients.length||!steps.length){editError.textContent='Bitte mindestens Rezeptname, Hauptkategorie, eine Zutat und einen Zubereitungsschritt ausfüllen.';editError.classList.add('show');return}
+ jlManualRecipeSaveBusy=true;jlSuppressAutosave(5000);const manualSaveBtn=document.getElementById('editorSaveBtn');if(manualSaveBtn){manualSaveBtn.disabled=true;manualSaveBtn.textContent='⏳ Wird gespeichert …';manualSaveBtn.setAttribute('aria-busy','true')}editError.textContent='⏳ Wird gespeichert … Bitte warten und die App geöffnet lassen.';editError.classList.add('show');await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  if(editingRecipeId){
-  let r=R.find(x=>x.id===editingRecipeId);if(!r)return;
+  let r=R.find(x=>x.id===editingRecipeId);if(!r){jlResetManualSaveUi();return;}
   r.title=title;r.main=main;r.sub=sub;r.subs=subs;r.specials=specials;r.recipeTip=recipeTip;r.mealPrep=mealPrep;r.serv=serv;r.mins=mins;r.fav=editFav.checked;r.ingredients=ingredients;r.steps=steps;r.ingredientNames=ingredients.map(x=>x[2].toLowerCase());
-  if(editorImageData){let key='custom_'+r.id+'_'+Date.now();IMG[key]=editorImageData;r.img=key}
+  if(editorImageData){let key='custom_'+r.id+'_'+Date.now();IMG[key]=editorImageData;jlMarkImageDirty(key);r.img=key}
   customMainSubs[main]=customMainSubs[main]||[];subs.forEach(x=>{if(!customMainSubs[main].includes(x))customMainSubs[main].push(x)});
-  let id=r.id;try{const saved=await jlWrite();if(!saved)throw new Error('recipe-save-blocked')}catch(err){editError.textContent='Änderungen konnten nicht sicher gespeichert werden. Bitte die App nicht schließen und erneut speichern.';editError.classList.add('show');console.error(err);return}editingRecipeId=null;init();renderWeek();setTheme(appSettings.theme);curMain=main;curSub=sub;openRecipe(id);return
+  let id=r.id;try{const saved=await jlWrite();if(!saved)throw new Error('recipe-save-blocked')}catch(err){editError.textContent='Änderungen konnten nicht sicher gespeichert werden. Bitte die App nicht schließen und erneut speichern.';editError.classList.add('show');console.error(err);jlResetManualSaveUi();return}editingRecipeId=null;jlResetManualSaveUi();init();renderWeek();setTheme(appSettings.theme);curMain=main;curSub=sub;openRecipe(id);return
  }
  let id=Math.max(0,...R.map(r=>r.id))+1,fallback=MI[main]||'pasta';
  let r={id,title,main,sub,subs,specials,recipeTip,mealPrep,img:fallback,customImg:editorImageData||'',mins,fav:editFav.checked,serv,ingredients,steps,ingredientNames:ingredients.map(x=>x[2].toLowerCase())};
  R.push(r);customMainSubs[main]=customMainSubs[main]||[];subs.forEach(x=>{if(!customMainSubs[main].includes(x))customMainSubs[main].push(x)});
- if(r.customImg){let key='custom_'+id;IMG[key]=r.customImg;r.img=key}
- try{const saved=await jlWrite();if(!saved)throw new Error('recipe-save-blocked')}catch(err){R.pop();editError.textContent='Rezept konnte nicht sicher gespeichert werden. Es wurde nicht als gespeichert bestätigt.';editError.classList.add('show');console.error(err);return}
- init();renderWeek();setTheme(appSettings.theme);curMain=main;curSub=sub;openRecipe(id)
+ if(r.customImg){let key='custom_'+id;IMG[key]=r.customImg;jlMarkImageDirty(key);r.img=key}
+ try{const saved=await jlWrite();if(!saved)throw new Error('recipe-save-blocked')}catch(err){R.pop();editError.textContent='Rezept konnte nicht sicher gespeichert werden. Es wurde nicht als gespeichert bestätigt.';editError.classList.add('show');console.error(err);jlResetManualSaveUi();return}
+ jlResetManualSaveUi();init();renderWeek();setTheme(appSettings.theme);curMain=main;curSub=sub;openRecipe(id)
 }
 
 let cookHistory={},shoppingLists={Kaufland:[],Lidl:[],Aldi:[]},activeShoppingList='Kaufland',shoppingSelection=[],shoppingDraft=[];
@@ -1204,7 +1209,11 @@ function chooseShoppingPortions(){let ix=[...document.querySelectorAll('.weeksho
 const JL_DB_NAME='JennyliciousDB',JL_DB_VERSION=2;
 const JL_STORES=['recipes','images','categories','settings','weeklyPlan','shopping','cookHistory','meta'];
 let jlDB=null,jlReady=false,jlSaveTimer=null,jlDataLoadHealthy=false,jlWriteChain=Promise.resolve(),jlSafetyWarningShown=false;
-const JL_APP_VERSION='0.19.4.corr2';
+const jlDirtyImageKeys=new Set();
+let jlAutosaveSuppressedUntil=0;
+function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
+function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
+const JL_APP_VERSION='0.19.5';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1259,7 +1268,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.4.corr2',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.5',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
@@ -1389,10 +1398,10 @@ async function jlCommitRecipeSet(recipes,reason='autosave',{allowReduction=false
 }
 async function jlWriteNow(){
  if(!jlReady||!jlDataLoadHealthy)return false;
- // Persist referenced image payloads first. If an image write fails, recipe metadata is not
- // advanced to a state that references an image which was never stored.
+ // Persist only image payloads that actually changed in this session. Hydrated images are
+ // display copies and must not be recompressed/re-written on every unrelated save.
  for(const r of R){const src=r.img;if(src&&typeof src==='string'&&src.startsWith('data:image/'))await jlSaveImage('recipe:'+r.id,src)}
- for(const k of Object.keys(IMG)){if((k.startsWith('custom_')||k.startsWith('catmain_')||k.startsWith('catsub_'))&&IMG[k]?.startsWith('data:image/'))await jlSaveImage(k,IMG[k])}
+ for(const k of [...jlDirtyImageKeys]){const src=IMG[k];if(src&&typeof src==='string'&&src.startsWith('data:image/'))await jlSaveImage(k,src);jlDirtyImageKeys.delete(k)}
  const recipeCommit=await jlCommitRecipeSet(R,'autosave');
  // Never delete recipe records during a normal save. If the in-memory recipe set is
  // unexpectedly incomplete, Data Safety blocks only that part while preserving DB recipes.
@@ -1433,13 +1442,13 @@ async function jlRestore(){
  await jlHydrateImages();return true
 }
 async function jlMigrate(){return false}
-function jlQueue(){if(!jlReady||!jlDataLoadHealthy)return;clearTimeout(jlSaveTimer);jlSaveTimer=setTimeout(()=>jlWrite().catch(e=>console.error('Autosave failed',e)),300)}
+function jlQueue(){if(!jlReady||!jlDataLoadHealthy||Date.now()<jlAutosaveSuppressedUntil)return;clearTimeout(jlSaveTimer);jlSaveTimer=setTimeout(()=>{if(Date.now()<jlAutosaveSuppressedUntil)return;jlWrite().catch(e=>console.error('Autosave failed',e))},300)}
 async function jlFlush(){clearTimeout(jlSaveTimer);jlSaveTimer=null;if(!jlReady||!jlDataLoadHealthy)return false;return jlWrite()}
 async function jlEnsureProductionBaselineMarker(){
- // V0.15.2 used a destructive one-time reset. From V0.19.4.corr2 onward the marker is
+ // V0.15.2 used a destructive one-time reset. From V0.19.5 onward the marker is
  // informational only: a missing marker must NEVER be interpreted as permission to delete data.
  const mark=await jlGet('meta','productionBaseline');if(mark?.version==='0.15.2')return;
- await jlPut('meta','productionBaseline',{version:'0.15.2',createdAt:new Date().toISOString(),nonDestructiveSince:'0.19.4.corr2'})
+ await jlPut('meta','productionBaseline',{version:'0.15.2',createdAt:new Date().toISOString(),nonDestructiveSince:'0.19.5'})
 }
 async function jlBootstrap(){
  try{
@@ -1457,7 +1466,8 @@ async function jlBootstrap(){
  if(window.jlResumeCooking&&cur){cookTitle.textContent=cur.title;cookServText.textContent=servings+' Portionen';renderCookIngredients();renderCookSteps();go('cook');window.jlResumeCooking=false}
  else if(appSettings.startView==='week')go('week')
 }
-document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.addEventListener('change',()=>setTimeout(jlQueue,120),true);document.addEventListener('input',()=>setTimeout(jlQueue,500),true);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')jlFlush().catch(e=>console.error('Background flush failed',e))});window.addEventListener('pagehide',()=>{jlFlush().catch(e=>console.error('Pagehide flush failed',e))});jlBootstrap();
+function jlIsDraftInputTarget(t){return !!(t&&(t.closest?.('#editor')||String(t.id||'').startsWith('rv')||String(t.id||'').startsWith('jsonImport')))}
+document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.addEventListener('change',e=>{if(!jlIsDraftInputTarget(e.target))setTimeout(jlQueue,120)},true);document.addEventListener('input',e=>{if(!jlIsDraftInputTarget(e.target))setTimeout(jlQueue,500)},true);document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')jlFlush().catch(e=>console.error('Background flush failed',e))});window.addEventListener('pagehide',()=>{jlFlush().catch(e=>console.error('Pagehide flush failed',e))});jlBootstrap();
 </script>
 <script>
 if ('serviceWorker' in navigator) {
