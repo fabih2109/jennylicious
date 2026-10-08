@@ -1,8 +1,23 @@
-# Jennylicious PWA V0.18.8 – Recipe Readability & Import Categories
+# Jennylicious PWA V0.19.0 – Data Safety
 
-Current app version: V0.18.8
+Current app version: V0.19.0
 
 Base: V0.18.4 Image & History Fix.
+
+
+## V0.19.0 – Data Safety
+- Normal saves no longer clear and rebuild the complete `recipes` store. Existing recipe records are only upserted.
+- A normal autosave is not allowed to reduce the last known recipe-ID set. Unexpected empty or partial in-memory recipe lists are blocked from overwriting the stored recipe inventory.
+- Recipe deletion is the only normal path allowed to reduce the recipe set and is persisted explicitly in a dedicated transaction.
+- Recipe writes are serialized to prevent overlapping autosaves from racing each other.
+- Startup restore is completed before writes are enabled. If restore fails, automatic writes stay disabled for that session instead of writing defaults over local data.
+- The old V0.15.2 production-baseline marker remains, but its reset routine is now permanently non-destructive. A missing marker never clears user data.
+- `visibilitychange` and `pagehide` only flush through the same guarded save path; they can no longer clear the recipe store.
+- A `lastKnownGoodRecipes` snapshot and recipe safety state are maintained in the existing `meta` store. Missing expected recipes are automatically reconstructed from the last known good snapshot when possible.
+- Up to 7 daily recipe snapshots are retained locally. A daily snapshot is created on the first successful open/save after 17:00 local device time.
+- `Mehr → Export / Backup → Lokale Rezept-Sicherungen` allows explicit restoration of a stored recipe snapshot. Categories and image files are not deleted by this recipe-only recovery.
+- Full external `JennyliciousBackup` export remains the recommended independent backup.
+- IndexedDB remains version 2; no schema bump and no destructive migration.
 
 ## V0.18.8 – Recipe Readability & Import Categories
 - Tip and Mealprep are collapsible in the normal recipe detail view.
@@ -78,9 +93,11 @@ Base: V0.18.4 Image & History Fix.
 - Unknown future backup formats remain blocked.
 
 ## Safety
-- No new production reset.
-- V0.15.2 production baseline marker remains unchanged.
-- No IndexedDB schema bump.
+- IndexedDB remains version 2.
+- The V0.15.2 production baseline marker is retained for compatibility but is non-destructive from V0.19.0 onward.
+- No automatic code path may clear the recipe store during ordinary startup, autosave, app minimization or page hide.
+- External full backups remain strongly recommended because internal snapshots live in the same browser storage.
+
 
 
 ## V0.18.8
