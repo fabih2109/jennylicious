@@ -1,3 +1,13 @@
+## V0.19.7 – Optionale Rezeptslots im Wochenplan
+
+- Montag bis Sonntag bleiben unverändert.
+- Unter dem Wochenplan können beliebig viele zusätzliche Rezeptslots angelegt werden.
+- Zusatzslots besitzen stabile Plan-Entry-IDs und können geändert, als Resteverwertung markiert oder entfernt werden.
+- Beim Zuordnen aus einem Rezept werden belegte Zusatzslots nicht als Ziel angeboten; stattdessen gibt es immer „Weiteres Rezept“.
+- Zusatzrezepte werden in die Einkaufsauswahl einbezogen; Resteverwertung erzeugt weiterhin keine zusätzlichen Zutaten.
+- Vorhandene Wochenpläne aus älteren Versionen bleiben kompatibel; `planExtras` startet dann leer.
+- Performance-, Data-Safety- und Importlogik aus V0.19.6 bleiben unverändert.
+
 ## V0.19.6 – Import Hauptkategorie
 
 - Hauptkategorie im .jenny/JSON-Import als eindeutige Radio-Auswahl statt Freitext.
