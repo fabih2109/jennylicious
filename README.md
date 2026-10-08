@@ -1,17 +1,17 @@
-## V0.19.3 – iOS recipe grid hotfix
+## V0.19.4.corr – iOS recipe grid hotfix
 
 - Direct recipes in main categories now use the recipe grid container.
 - Recipe cards have a minimum height for Safari/iOS.
 - No changes to IndexedDB, backups or recipe persistence.
 
-# Jennylicious PWA V0.19.3 – Recipe Image Grid
+# Jennylicious PWA V0.19.4.corr – Recipe Image Grid
 
-Current app version: V0.19.3
+Current app version: V0.19.4.corr
 
 Base: V0.18.4 Image & History Fix.
 
 
-## V0.19.3 – Recipe Image Grid
+## V0.19.4.corr – Recipe Image Grid
 
 - Zweispaltige Rezept-Bildkacheln in Kategorie-, Such-, Favoriten- und Gesamtrezeptlisten.
 - Bild füllt Kachel; Titel und Zeit auf dunklem Verlauf; Favoritenbutton separat.
@@ -119,4 +119,7 @@ Base: V0.18.4 Image & History Fix.
 - Absatz-/Leerzeilen-Erhalt bleibt ausschließlich auf Rezept-Langtexte beschränkt.
 
 
-V0.19.3: Kompaktere Rezeptkacheln; Import-Speichervorgang gegen Mehrfachklicks geschützt, Speichern-Status sofort sichtbar. Keine Datenbankmigration.
+V0.19.4.corr: Kompaktere Rezeptkacheln; Import-Speichervorgang gegen Mehrfachklicks geschützt, Speichern-Status sofort sichtbar. Keine Datenbankmigration.
+
+
+Korrektur: kontrollierte Wortumbrüche bei zusammengesetzten Rezeptnamen; iOS-Speicherstatus vor dem Datenbankzugriff sichtbar. Keine DB-Migration.
