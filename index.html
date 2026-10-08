@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.1</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.2</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -192,9 +192,9 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 .mini-add-row{display:grid;grid-template-columns:1fr auto 38px;gap:5px;margin-top:9px}
 .mini-add-row .forminput{min-width:0;padding:7px!important;font-size:12px!important}
 
-/* V0.19.1: Bildkacheln ausschließlich in Rezeptlisten; andere .row/.list bleiben unverändert. */
+/* V0.19.2: Bildkacheln ausschließlich in Rezeptlisten; andere .row/.list bleiben unverändert. */
 .jl-recipe-grid{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px!important;align-items:stretch}
-.jl-recipe-grid>.jl-recipe-card{position:relative;min-width:0;aspect-ratio:1 / 1.04;overflow:hidden;border-radius:15px;background:#eee2f0;box-shadow:0 4px 13px #43264a15}
+.jl-recipe-grid>.jl-recipe-card{position:relative;min-width:0;aspect-ratio:1 / 1.04;min-height:150px;overflow:hidden;border-radius:15px;background:#eee2f0;box-shadow:0 4px 13px #43264a15}
 .jl-recipe-open{display:block;position:absolute;inset:0;width:100%;height:100%;padding:0;border:0;border-radius:0;background:transparent;text-align:left;color:white;overflow:hidden;cursor:pointer}
 .jl-recipe-open>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .jl-recipe-placeholder{position:absolute;inset:0;display:grid;place-items:center;color:#9c76ae;font-size:52px;background:linear-gradient(145deg,#f7e9f5,#e9d9ed)}
@@ -300,7 +300,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.1</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.2</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -374,7 +374,7 @@ function recipeSpecials(r){return Array.isArray(r.specials)?r.specials.filter(Bo
 function recipeHasSub(r,s){return recipeSubs(r).includes(s)}
 function init(){let ms=[...new Set([...R.map(r=>r.main),...Object.keys(customMainSubs)])].sort(jlAlpha);mainGrid.innerHTML=ms.map(m=>{let a=R.filter(r=>r.main===m);let im=customMainImages[m]||MI[m]||'';return tile(m,im,a.length,`openMain('${m}')`)}).join('')}
 function openMain(m){
- setTimeout(()=>addCategoryDeleteControl(m,''),40);curMain=m;let a=R.filter(r=>r.main===m);mainTitle.textContent=m;setCategoryHeaderImage(mainImg,customMainImages[m]||MI[m]||'');let subs=[...new Set([...a.flatMap(recipeSubs),...(customMainSubs[m]||[])])].filter(Boolean).sort(jlAlpha);subGrid.innerHTML=subs.map(sub=>{let x=a.filter(r=>recipeHasSub(r,sub)),key=m+'||'+sub,im=customSubImages[key]||'';return tile(sub,im,x.length,`openSub('${sub}')`)}).join('')||'<div class="note" style="grid-column:1/-1">Keine Unterkategorien angelegt.</div>';let direct=a.filter(r=>recipeSubs(r).length===0);mainDirectRecipes.innerHTML=direct.length?`<div class="jl-direct-title">Direkt in ${escHtml(m)}</div><div class="list">${direct.map(row).join('')}</div>`:'';go('category')}
+ setTimeout(()=>addCategoryDeleteControl(m,''),40);curMain=m;let a=R.filter(r=>r.main===m);mainTitle.textContent=m;setCategoryHeaderImage(mainImg,customMainImages[m]||MI[m]||'');let subs=[...new Set([...a.flatMap(recipeSubs),...(customMainSubs[m]||[])])].filter(Boolean).sort(jlAlpha);subGrid.innerHTML=subs.map(sub=>{let x=a.filter(r=>recipeHasSub(r,sub)),key=m+'||'+sub,im=customSubImages[key]||'';return tile(sub,im,x.length,`openSub('${sub}')`)}).join('')||'<div class="note" style="grid-column:1/-1">Keine Unterkategorien angelegt.</div>';let direct=a.filter(r=>recipeSubs(r).length===0);mainDirectRecipes.innerHTML=direct.length?`<div class="jl-direct-title">Direkt in ${escHtml(m)}</div><div class="jl-recipe-grid">${direct.map(row).join('')}</div>`:'';go('category')}
 function openSub(s){
  setTimeout(()=>addCategoryDeleteControl(curMain,s),40);curSub=s;let a=R.filter(r=>r.main===curMain&&recipeHasSub(r,s)),key=curMain+'||'+s;subTitle.textContent=s;parentTitle.textContent=curMain;setCategoryHeaderImage(subImg,customSubImages[key]||'');renderList(a,recipeList);go('recipes')}
 function row(r){let src=I(r.img),cats=recipeSubs(r).join(' · ');return `<article class="jl-recipe-card"><button type="button" class="jl-recipe-open" onclick="openRecipe(${r.id})" aria-label="${escAttr(r.title)} öffnen">${src?`<img loading="lazy" src="${src}" alt="">`:`<span class="jl-recipe-placeholder">♡</span>`}<span class="jl-recipe-shade"></span><span class="jl-recipe-caption"><strong>${escHtml(r.title)}</strong><small>${r.mins} Min${cats?' · '+escHtml(cats):''}</small></span></button><button type="button" class="jl-recipe-fav" onclick="toggleFav(event,${r.id})" aria-label="Favorit umschalten">${r.fav?'♥':'♡'}</button></article>`}
@@ -1186,7 +1186,7 @@ function chooseShoppingPortions(){let ix=[...document.querySelectorAll('.weeksho
 const JL_DB_NAME='JennyliciousDB',JL_DB_VERSION=2;
 const JL_STORES=['recipes','images','categories','settings','weeklyPlan','shopping','cookHistory','meta'];
 let jlDB=null,jlReady=false,jlSaveTimer=null,jlDataLoadHealthy=false,jlWriteChain=Promise.resolve(),jlSafetyWarningShown=false;
-const JL_APP_VERSION='0.19.1';
+const JL_APP_VERSION='0.19.2';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1241,7 +1241,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.1',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.2',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
@@ -1418,10 +1418,10 @@ async function jlMigrate(){return false}
 function jlQueue(){if(!jlReady||!jlDataLoadHealthy)return;clearTimeout(jlSaveTimer);jlSaveTimer=setTimeout(()=>jlWrite().catch(e=>console.error('Autosave failed',e)),300)}
 async function jlFlush(){clearTimeout(jlSaveTimer);jlSaveTimer=null;if(!jlReady||!jlDataLoadHealthy)return false;return jlWrite()}
 async function jlEnsureProductionBaselineMarker(){
- // V0.15.2 used a destructive one-time reset. From V0.19.1 onward the marker is
+ // V0.15.2 used a destructive one-time reset. From V0.19.2 onward the marker is
  // informational only: a missing marker must NEVER be interpreted as permission to delete data.
  const mark=await jlGet('meta','productionBaseline');if(mark?.version==='0.15.2')return;
- await jlPut('meta','productionBaseline',{version:'0.15.2',createdAt:new Date().toISOString(),nonDestructiveSince:'0.19.1'})
+ await jlPut('meta','productionBaseline',{version:'0.15.2',createdAt:new Date().toISOString(),nonDestructiveSince:'0.19.2'})
 }
 async function jlBootstrap(){
  try{
