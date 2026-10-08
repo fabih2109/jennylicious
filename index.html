@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.5</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.6</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -242,6 +242,15 @@ textarea {
 .importSubCheck.existing{background:#eef8ef;border-color:#9bc9a1;color:#356d3e}
 .importSubCheck.new{background:#fff0f1;border-color:#e7a5ad;color:#a13d4c}
 .importSubHint{font-size:11px;color:#817486;line-height:1.35}
+.importMainGroups{display:grid;gap:10px;margin:6px 0 12px}
+.importMainGroup{display:grid;gap:6px}
+.importMainTitle{font-size:11px;font-weight:900;color:#725d7b;text-transform:uppercase;letter-spacing:.04em}
+.importMainChecks{display:flex;flex-wrap:wrap;gap:7px}
+.importMainCheck{display:inline-flex;align-items:center;gap:7px;border-radius:14px;padding:9px 11px;font-size:12px;font-weight:750;border:1px solid;cursor:pointer}
+.importMainCheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}
+.importMainCheck.existing{background:#eef8ef;border-color:#9bc9a1;color:#356d3e}
+.importMainCheck.new{background:#fff0f1;border-color:#e7a5ad;color:#a13d4c}
+.importMainHint{font-size:11px;color:#817486;line-height:1.35}
 
 button {
   -webkit-appearance: none;
@@ -308,7 +317,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.5</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.6</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -543,10 +552,19 @@ function prepareJennyJson(){
  try{let d=JSON.parse(jsonImportText.value),arr=Array.isArray(d)?d:(Array.isArray(d.recipes)?d.recipes:[d]);if(!arr.length)throw Error('Keine Rezepte gefunden.');pendingJsonRecipes=arr.map(normalizeJennyRecipe);pendingJsonIndex=0;showJsonReview()}
  catch(err){e.textContent='Import nicht möglich: '+err.message;e.style.background='#fae8eb';e.style.color='#9d3349';e.classList.add('show')}
 }
-function existingImportSubs(main){return [...new Set([...R.filter(r=>r.main===main).flatMap(recipeSubs),...(customMainSubs[main]||[])])].filter(Boolean).sort(jlAlpha)}
+function existingImportMains(){return [...new Set([...R.map(r=>r.main),...Object.keys(customMainSubs)])].filter(Boolean).sort(jlAlpha)}
 function sameCat(a,b){return String(a).localeCompare(String(b),'de',{sensitivity:'base'})===0}
+function importSelectedMain(){let box=document.getElementById('rvMainBox');let checked=box?.querySelector('input[name=rvMainChoice]:checked');return checked?checked.value:''}
+function renderImportMain(selected){
+ let box=document.getElementById('rvMainBox');if(!box)return;let x=pendingJsonRecipes[pendingJsonIndex],proposed=x.importProposedMain||x.main,existing=existingImportMains(),found=existing.find(e=>sameCat(e,proposed)),suggested=found||proposed,current=selected||importSelectedMain()||suggested;
+ let top=`<label class="importMainCheck ${found?'existing':'new'}"><input type="radio" name="rvMainChoice" value="${escAttr(suggested)}" ${sameCat(current,suggested)?'checked':''} onchange="selectImportMain()"> ${escHtml(suggested)}</label>`;
+ let rest=existing.filter(e=>!sameCat(e,suggested)).map(v=>`<label class="importMainCheck existing"><input type="radio" name="rvMainChoice" value="${escAttr(v)}" ${sameCat(current,v)?'checked':''} onchange="selectImportMain()"> ${escHtml(v)}</label>`).join('');
+ box.innerHTML=`<div class="importMainGroups"><div class="importMainGroup"><div class="importMainTitle">Aus dem Import vorgeschlagen</div><div class="importMainChecks">${top}</div><div class="importMainHint">${found?'Grün = bereits in Jennylicious vorhanden.':'Rot = neue Kategorie. Sie wird erst beim Speichern angelegt. Bitte lieber eine bestehende Kategorie wählen, wenn sie inhaltlich bereits passt.'}</div></div><div class="importMainGroup"><div class="importMainTitle">Bereits vorhandene Hauptkategorien</div><div class="importMainChecks">${rest||'<span class="importMainHint">Keine weiteren Hauptkategorien vorhanden.</span>'}</div></div></div>`;
+}
+function selectImportMain(){let x=pendingJsonRecipes[pendingJsonIndex];renderImportSubs([...(x.importProposedSubs||x.subs||[])])}
+function existingImportSubs(main){return [...new Set([...R.filter(r=>sameCat(r.main,main)).flatMap(recipeSubs),...(customMainSubs[main]||[])])].filter(Boolean).sort(jlAlpha)}
 function renderImportSubs(selected){
- let box=document.getElementById('rvSubsBox');if(!box)return;let x=pendingJsonRecipes[pendingJsonIndex],main=document.getElementById('rvMain')?.value.trim()||x.main,proposed=x.importProposedSubs||x.subs||[],existing=existingImportSubs(main),current=selected||[...box.querySelectorAll('input:checked')].map(i=>i.value);
+ let box=document.getElementById('rvSubsBox');if(!box)return;let x=pendingJsonRecipes[pendingJsonIndex],main=importSelectedMain()||x.main,proposed=x.importProposedSubs||x.subs||[],existing=existingImportSubs(main),current=selected||[...box.querySelectorAll('input:checked')].map(i=>i.value);
  let top=proposed.map(n=>{let found=existing.find(e=>sameCat(e,n)),v=found||n,isExisting=!!found,checked=current.some(c=>sameCat(c,v));return `<label class="importSubCheck ${isExisting?'existing':'new'}"><input type="checkbox" value="${escAttr(v)}" ${checked?'checked':''}> ${escHtml(v)}</label>`}).join('');
  let rest=existing.filter(e=>!proposed.some(p=>sameCat(p,e))).map(v=>`<label class="importSubCheck existing"><input type="checkbox" value="${escAttr(v)}" ${current.some(c=>sameCat(c,v))?'checked':''}> ${escHtml(v)}</label>`).join('');
  box.innerHTML=`<div class="importSubGroups"><div class="importSubGroup"><div class="importSubTitle">Aus dem Import vorgeschlagen</div><div class="importSubChecks">${top||'<span class="importSubHint">Keine Unterkategorie vorgeschlagen.</span>'}</div><div class="importSubHint">Rot = neu vorgeschlagen · Grün = bereits in Jennylicious vorhanden</div></div><div class="importSubGroup"><div class="importSubTitle">Bereits vorhandene Unterkategorien</div><div class="importSubChecks">${rest||'<span class="importSubHint">Keine weiteren Unterkategorien in dieser Hauptkategorie.</span>'}</div></div></div>`;
@@ -555,11 +573,11 @@ function importSelectedSubs(){let box=document.getElementById('rvSubsBox');retur
 function showJsonReview(){
  duplicateOverride=false;
  let x=pendingJsonRecipes[pendingJsonIndex],unknown=x.servStatus!=='confirmed';
- if(!x.importProposedSubs)x.importProposedSubs=[...(x.subs||[])];let specials=(x.specials||[]).join(', ');
+ if(!x.importProposedMain)x.importProposedMain=x.main;if(!x.importProposedSubs)x.importProposedSubs=[...(x.subs||[])];let specials=(x.specials||[]).join(', ');
  modalContent.innerHTML=`<h2>Rezept prüfen</h2>${pendingPackageImage?`<img class="reviewimage" src="${pendingPackageImage}">`:''}<div class="reviewcounter">Rezept ${pendingJsonIndex+1} von ${pendingJsonRecipes.length}</div>
  ${unknown?`<div class="portionwarning"><b>⚠ Portionsgröße unbekannt</b><span>Bitte mit der Quelle prüfen und manuell eingeben.</span></div>`:`<div class="portionok"><b>✓ Portionsgröße erkannt: ${x.serv}</b><span>Bitte trotzdem kurz mit der Quelle abgleichen.</span></div>`}
  <label class="fieldlabel">Rezeptname</label><input id="rvTitle" class="forminput" value="${escAttr(x.title)}">
- <label class="fieldlabel">Hauptkategorie</label><input id="rvMain" class="forminput" value="${escAttr(x.main)}" oninput="renderImportSubs()">
+ <label class="fieldlabel">Hauptkategorie</label><div id="rvMainBox"></div>
  <label class="fieldlabel">Unterkategorien <small>(optional)</small></label><div id="rvSubsBox"></div>
  <label class="fieldlabel">Besonderheiten <small>(optional)</small></label><input id="rvSpecials" class="forminput" value="${escAttr(specials)}" placeholder="z. B. Thermomix, Ofenmeister, Achtung Alkohol">
  <div class="form2"><div><label class="fieldlabel">Portionen *</label><input id="rvServ" class="forminput ${unknown?'needsreview':''}" type="number" min="1" value="${unknown?'':x.serv}" placeholder="Bitte eingeben"></div><div><label class="fieldlabel">Zeit (Min.)</label><input id="rvMins" class="forminput" type="number" min="1" value="${x.mins}"></div></div>
@@ -569,7 +587,7 @@ function showJsonReview(){
  <label class="fieldlabel">Mealprep <small>(optional)</small></label><textarea id="rvMealPrep" class="forminput" style="min-height:88px;resize:vertical">${escHtml(x.mealPrep||'')}</textarea>
  <div id="jsonImportError" class="editerror"></div>
  <button class="action" style="background:var(--jl-accent);color:#fff;text-align:center" id="jlImportSaveBtn" onclick="confirmReviewedRecipe()">✓ Geprüft & speichern</button>
- <button class="action" onclick="if(!jlImportSaveBusy)modal.classList.remove('show')">Import abbrechen</button>`;renderImportSubs([...(x.subs||[])]);
+ <button class="action" onclick="if(!jlImportSaveBusy)modal.classList.remove('show')">Import abbrechen</button>`;renderImportMain(x.main);renderImportSubs([...(x.subs||[])]);
 }
 function escHtml(v){return String(v).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function escAttr(v){return escHtml(v).replace(/'/g,'&#39;')}
@@ -606,7 +624,7 @@ async function confirmReviewedRecipe(){
  if(jlImportSaveBusy)return;
  let x=pendingJsonRecipes[pendingJsonIndex],serv=Number(rvServ.value),e=document.getElementById('jsonImportError');
  if(!Number.isFinite(serv)||serv<=0){e.textContent='Bitte die Portionsgröße prüfen und als Zahl größer 0 eingeben.';e.classList.add('show');rvServ.focus();return}
- x.title=rvTitle.value.trim();x.main=rvMain.value.trim();x.subs=importSelectedSubs();x.subs=[...new Set(x.subs)];x.sub=x.subs[0]||'';x.specials=rvSpecials.value.split(',').map(v=>v.trim()).filter(Boolean);x.specials=[...new Set(x.specials)];x.recipeTip=normalizeMultiline(rvTip.value);x.mealPrep=normalizeMultiline(rvMealPrep.value);x.serv=serv;x.servStatus='confirmed';x.mins=Math.max(1,Number(rvMins.value)||30);
+ x.title=rvTitle.value.trim();x.main=importSelectedMain().trim();x.subs=importSelectedSubs();x.subs=[...new Set(x.subs)];x.sub=x.subs[0]||'';x.specials=rvSpecials.value.split(',').map(v=>v.trim()).filter(Boolean);x.specials=[...new Set(x.specials)];x.recipeTip=normalizeMultiline(rvTip.value);x.mealPrep=normalizeMultiline(rvMealPrep.value);x.serv=serv;x.servStatus='confirmed';x.mins=Math.max(1,Number(rvMins.value)||30);
  if(!x.title||!x.main){e.textContent='Rezeptname und Hauptkategorie dürfen nicht leer sein.';e.classList.add('show');return}
  let dup=duplicateCheck(x.title,duplicateOverride);if(dup){renderDuplicateWarning(dup);return}duplicateOverride=false;
  jlImportSaveBusy=true;jlSuppressAutosave(5000);
@@ -1213,7 +1231,7 @@ const jlDirtyImageKeys=new Set();
 let jlAutosaveSuppressedUntil=0;
 function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
 function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
-const JL_APP_VERSION='0.19.5';
+const JL_APP_VERSION='0.19.6';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1268,7 +1286,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.5',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.6',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;

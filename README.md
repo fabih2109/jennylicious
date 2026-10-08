@@ -1,3 +1,13 @@
+## V0.19.6 – Import Hauptkategorie
+
+- Hauptkategorie im .jenny/JSON-Import als eindeutige Radio-Auswahl statt Freitext.
+- Importvorschlag oben: grün, wenn bereits vorhanden; rot, wenn neu.
+- Bestehende Hauptkategorien werden darunter ohne Duplikat angeboten.
+- Genau eine Hauptkategorie ist auswählbar.
+- Eine neue Hauptkategorie wird erst beim finalen Speichern angelegt.
+- Beim Wechsel der Hauptkategorie werden die verfügbaren Unterkategorien sofort aktualisiert.
+- Performance- und Data-Safety-Änderungen aus V0.19.5 bleiben unverändert.
+
 ## V0.19.5 – iOS Save Performance
 
 - Rezeptkachel-Fix aus V0.19.4.corr2 bleibt unverändert.
