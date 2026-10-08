@@ -1,9 +1,15 @@
-# Jennylicious PWA V0.19.0 – Data Safety
+# Jennylicious PWA V0.19.1 – Recipe Image Grid
 
-Current app version: V0.19.0
+Current app version: V0.19.1
 
 Base: V0.18.4 Image & History Fix.
 
+
+## V0.19.1 – Recipe Image Grid
+
+- Zweispaltige Rezept-Bildkacheln in Kategorie-, Such-, Favoriten- und Gesamtrezeptlisten.
+- Bild füllt Kachel; Titel und Zeit auf dunklem Verlauf; Favoritenbutton separat.
+- Keine Änderungen an IndexedDB, Rezeptdaten oder Datensicherheitslogik.
 
 ## V0.19.0 – Data Safety
 - Normal saves no longer clear and rebuild the complete `recipes` store. Existing recipe records are only upserted.
