@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.7</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.8</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -326,7 +326,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.7</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.8</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -1242,7 +1242,7 @@ const jlDirtyImageKeys=new Set();
 let jlAutosaveSuppressedUntil=0;
 function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
 function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
-const JL_APP_VERSION='0.19.7';
+const JL_APP_VERSION='0.19.8';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1297,7 +1297,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.7',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.8',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
@@ -1496,7 +1496,7 @@ async function jlBootstrap(){
  else if(appSettings.startView==='week')go('week')
 }
 
-/* Jennylicious V0.19.7 — optional weekly-plan recipe slots */
+/* Jennylicious V0.19.8 — optional weekly-plan recipe slots */
 function jlEnsurePlanExtras(){
  if(!Array.isArray(planExtras))planExtras=[];
  planExtras=planExtras.filter(x=>x&&x.recipeId!=null).map(x=>({
@@ -1612,5 +1612,127 @@ if ('serviceWorker' in navigator) {
       .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }
+</script>
+
+<style id="jl-v0198-shopping-ui">
+/* V0.19.8 – kompaktere Einkaufsliste + lokale Ladenmarken */
+.jl-store-id{display:inline-flex;align-items:center;gap:9px;min-width:0}
+.jl-store-id .jl-store-name{font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.jl-store-logo{width:38px;height:38px;flex:0 0 38px;display:inline-grid;place-items:center;overflow:hidden;font-family:Arial,sans-serif;font-weight:900;line-height:1}
+.jl-store-logo.small{width:28px;height:28px;flex-basis:28px;font-size:10px}
+.jl-logo-kaufland{background:#e30613;color:#fff;border-radius:5px;border:3px solid #fff;box-shadow:0 0 0 1px #e30613 inset;font-size:22px}
+.jl-logo-kaufland::before{content:'K';font-weight:950;transform:skew(-5deg)}
+.jl-logo-lidl{background:#0050aa;border-radius:4px;position:relative}
+.jl-logo-lidl::before{content:'LIDL';width:29px;height:29px;border-radius:50%;background:#fff000;border:2px solid #e60a14;color:#0050aa;display:grid;place-items:center;font-size:8px;font-weight:950;letter-spacing:-1px}
+.jl-logo-aldi{background:#003f88;border-radius:4px;color:#fff;position:relative;font-size:9px;letter-spacing:.5px}
+.jl-logo-aldi::before{content:'A';position:absolute;top:3px;font-size:19px;font-weight:950;color:#fff;border-left:4px solid #ff7b00;border-right:4px solid #00a6d9;padding:0 3px;height:20px;line-height:20px}
+.jl-logo-aldi::after{content:'ALDI';position:absolute;bottom:4px;font-size:7px;letter-spacing:.6px}
+.jl-logo-dm{background:#fff;border-radius:5px;border:1px solid #ddd;color:#183f8c;font-size:15px;font-weight:900;font-style:italic;position:relative}
+.jl-logo-dm::before{content:'dm';transform:translateY(-2px)}
+.jl-logo-dm::after{content:'';position:absolute;left:5px;right:5px;bottom:7px;height:3px;background:linear-gradient(90deg,#e31e24 0 45%,#f3cf16 46% 100%);transform:skewY(-10deg)}
+.jl-store-settings-row{display:flex;align-items:center;gap:10px}
+.jl-store-settings-row .forminput{flex:1;min-width:0}
+.jl-store-list-name{display:flex;align-items:center;gap:9px;min-width:0}
+.jl-store-quick{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0 2px}
+.jl-store-quick button{border:1px solid #e4d5e9;background:#fff;border-radius:12px;padding:6px 9px;display:flex;align-items:center;gap:6px;color:#392d3e;font-weight:750}
+
+/* Vor dem Einkauf: Kategorie nur noch als Abschnitt, nicht pro Artikel. */
+.jl-item-mainline{display:flex;align-items:flex-start;gap:6px;width:100%}
+.jl-item-mainline b{flex:1;min-width:0}
+.jl-item-edit{border:0;background:#f3e7f6;color:var(--jl-accent);border-radius:999px;width:29px;height:29px;flex:0 0 29px;display:grid;place-items:center;font-size:15px;font-weight:900;padding:0}
+#shopping .jl-cat-chip{display:none!important}
+
+/* Aktiver Einkaufsmodus: alte große Überschrift ausblenden, kompakte Ladenkopfzeile anzeigen. */
+#shopping.shopping-active>.topline{display:none}
+#shopping.shopping-active{padding-top:max(14px,env(safe-area-inset-top))!important}
+.jl-active-shop-head{display:grid;grid-template-columns:48px 1fr 48px;align-items:center;margin:0 2px 8px;min-height:48px}
+.jl-active-shop-head .back{position:static;margin:0;width:44px;height:44px}
+.jl-active-shop-title{justify-self:center;max-width:230px;display:flex;align-items:center;justify-content:center;gap:9px;font-size:24px;font-weight:900;font-family:Georgia,serif;min-width:0}
+.jl-active-shop-title .jl-store-logo{width:34px;height:34px;flex-basis:34px}
+.jl-active-shop-title .jl-store-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#shopping.shopping-active .shop-top{display:none}
+#shopping.shopping-active .shopsection:first-of-type{margin-top:2px}
+</style>
+
+<script id="jl-v0198-shopping-ui-js">
+/* V0.19.8 – lokale Markenliste ohne neue DB-Struktur */
+const JL_STANDARD_STORES=[
+ {key:'kaufland',label:'Kaufland',aliases:['kaufland'],cls:'jl-logo-kaufland'},
+ {key:'lidl',label:'Lidl',aliases:['lidl'],cls:'jl-logo-lidl'},
+ {key:'aldi',label:'Aldi',aliases:['aldi','aldi süd','aldi sued','aldi-süd','aldi sued'],cls:'jl-logo-aldi'},
+ {key:'dm',label:'dm',aliases:['dm','dm drogerie','dm-drogerie','dm drogeriemarkt','dm drogerie markt'],cls:'jl-logo-dm'}
+];
+function jlStoreNorm(n){return String(n||'').toLocaleLowerCase('de').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/\s+/g,' ')}
+function jlStoreBrand(name){let n=jlStoreNorm(name);return JL_STANDARD_STORES.find(b=>b.aliases.some(a=>jlStoreNorm(a)===n))||null}
+function jlStoreMark(name,small=false){let b=jlStoreBrand(name);return b?`<span class="jl-store-logo ${small?'small ':''}${b.cls}" aria-hidden="true"></span>`:''}
+function jlStoreIdentity(name,small=false){return `<span class="jl-store-id">${jlStoreMark(name,small)}<span class="jl-store-name">${escHtml(name)}</span></span>`}
+function jlActiveStoreHeader(){return `<div class="jl-active-shop-head"><button class="back" onclick="endShopping();go('home')">‹</button><div class="jl-active-shop-title">${jlStoreMark(activeShoppingList)}<span class="jl-store-name">${escHtml(activeShoppingList)}</span></div><span></span></div>`}
+
+/* Shopping-Renderer: im Einkaufsmodus kompakter Kopf, davor weiterhin Listenwahl. */
+renderShopping=function(){
+ let sec=document.getElementById('shopping');
+ sec?.classList.toggle('shopping-compact',true);
+ sec?.classList.toggle('shopping-active',!!shoppingStarted);
+ let list=shoppingLists[activeShoppingList]||[],active=list.filter(x=>!x.done),done=list.filter(x=>x.done),names=Object.keys(shoppingLists).sort(jlAlpha);
+ shoppingBody.innerHTML=`${shoppingStarted?jlActiveStoreHeader():''}<div class="shop-top">
+   <div class="jl-store-settings-row">${jlStoreMark(activeShoppingList)}<select class="shop-list-select" onchange="switchShoppingList(this.value)">${names.map(n=>`<option ${n===activeShoppingList?'selected':''}>${escHtml(n)}</option>`).join('')}</select></div>
+   ${shoppingStarted?'':`<button class="shop-mini" onclick="startWeekShopping()">+ Wochenplan</button>`}
+ </div>
+ ${shoppingStarted?'':`<div class="shop-addline"><input id="manualShopItem" class="forminput" placeholder="Artikel hinzufügen"><button class="shop-mini" onclick="addManualShop()">+</button></div>`}
+ ${currentCategoryOrder().map(c=>{let items=active.filter(x=>x.category===c);return items.length?`<div class="shopsection">${escHtml(c)}</div><div class="shop-flat">${items.map(shopItemHtml).join('')}</div>`:''}).join('')}
+ ${!shoppingStarted&&(active.length||done.length)?`<div class="shop-actions">${active.length?`<button class="shop-mini primary" onclick="finalizeShoppingList()">✓ Einkaufsliste abschließen</button>`:''}${done.length?`<button class="shop-mini" onclick="clearBoughtItems()">Gekaufte löschen</button>`:''}</div>`:''}
+ ${done.length?`<div class="shopsection donehead">Abgeschlossen</div><div class="shop-flat doneflat">${done.map(shopItemHtml).join('')}</div>`:''}
+ ${shoppingStarted?`<button class="shop-mini shopend" onclick="endShopping()">Einkauf beenden</button>`:''}`;
+ if(!shoppingStarted)setTimeout(jlBindManualEnter,0);
+}
+
+/* Kategorie-Dropdown verschwindet. Ein Stift öffnet die Bearbeitung. Bei manuellen Artikeln kann dort auch der Name/Menge geändert werden. */
+shopItemHtml=function(x){
+ jlRecalcItem(x);let mq=jlManualQty(x),canEditName=mq>0;
+ return `<div class="shoprow ultra ${x.done?'doneitem':''}"><input type="checkbox" ${x.done?'checked':''} onchange="toggleShopItem(${x.id},this.checked)"><span class="grow"><span class="jl-item-mainline">${!shoppingStarted?`<span class="jl-qtyline">${`<button class="jl-qtybtn" onclick="adjustManualShop(${x.id},-1)">−</button><button class="jl-qtybtn" onclick="adjustManualShop(${x.id},1)">+</button>`}</span>`:''}<b>${x.qty?fmtQty(x.qty)+' '+escHtml(x.unit)+' ':''}${escHtml(x.name)}</b>${!shoppingStarted?`<button class="jl-item-edit" onclick="editShoppingItem(${x.id})" aria-label="Artikel bearbeiten">✎</button>`:''}</span>${(!shoppingStarted&&x.sources?.length)?`<small class="jl-source-detail">${escHtml(jlSourceText(x))}</small>`:''}</span></div>`
+}
+
+function editShoppingItem(id){
+ let x=(shoppingLists[activeShoppingList]||[]).find(q=>q.id===id);if(!x)return;
+ let mq=jlManualQty(x),cats=currentCategoryOrder(),cur=x.category||guessShopCategory(x.name),m=mq>0?jlEnsureContrib(x).find(z=>z.type==='manual'):null;
+ modalContent.innerHTML=`<h2>Artikel bearbeiten</h2>${m?`<label class="formlabel">Name / Menge</label><input id="jlEditManualCombined" class="forminput" value="${escHtml(fmtQty(m.qty)+' '+(m.unit||'Stk.')+' '+x.name)}">`:`<p class="designintro"><b>${escHtml(x.name)}</b></p>`}<label class="formlabel">Einkaufskategorie</label><select id="jlEditItemCategory" class="forminput">${cats.map(c=>`<option ${c===cur?'selected':''}>${escHtml(c)}</option>`).join('')}</select><button class="action" style="background:var(--jl-accent);color:#fff;text-align:center" onclick="saveShoppingItemEdit(${id})">✓ Speichern</button><button class="action" onclick="modal.classList.remove('show')">Abbrechen</button>`;
+ modal.classList.add('show')
+}
+function saveShoppingItemEdit(id){
+ let list=shoppingLists[activeShoppingList]||[],x=list.find(q=>q.id===id),cat=document.getElementById('jlEditItemCategory')?.value;if(!x||!cat)return;
+ let raw=document.getElementById('jlEditManualCombined')?.value?.trim();
+ if(raw){
+   let parsed=jlParseManual(raw),oldName=x.name,c=jlEnsureContrib(x),m=c.find(z=>z.type==='manual');
+   if(m){x.contributions=c.filter(z=>z!==m);jlRecalcItem(x);if(x.qty<=0.0001)list.splice(list.indexOf(x),1)}
+   parsed.category=cat;learnArticleCategory(parsed.name,cat);addMergedShoppingItem(parsed);
+ }else{
+   x.category=cat;learnArticleCategory(x.name,cat);
+ }
+ let keyName=raw?jlParseManual(raw).name:x.name;
+ Object.values(shoppingLists).forEach(ls=>(ls||[]).forEach(y=>{if(articleCategoryKey(y.name)===articleCategoryKey(keyName))y.category=cat}));
+ Object.values(recurringItemsByStore).forEach(ls=>(ls||[]).forEach(y=>{if(articleCategoryKey(y.name)===articleCategoryKey(keyName))y.category=cat}));
+ modal.classList.remove('show');renderShopping();jlQueue()
+}
+
+/* Einkaufseinstellungen mit Marken-Vorschlägen; freie Namen bleiben möglich. */
+openShoppingSettings=function(store){
+ store=store||activeShoppingList||'Kaufland';
+ genericTitle.textContent='Einkaufseinstellungen';
+ genericBody.innerHTML=`<div class="settingscard compactsettings">
+   <div class="settingrow"><div><b>Einkaufsladen</b><small>Einstellungen gelten nur für diesen Laden</small></div></div>
+   <div class="jl-store-settings-row">${jlStoreMark(store)}<select id="shoppingSettingsStore" class="forminput compactselect" onchange="openShoppingSettings(this.value)">${Object.keys(shoppingLists).sort(jlAlpha).map(n=>`<option value="${escHtml(n)}" ${n===store?'selected':''}>${escHtml(n)}</option>`).join('')}</select></div>
+ </div>
+ <div class="settingscard compactsettings">
+   <h3>Einkaufslisten verwalten</h3>
+   <div class="mini-add-row"><input id="newShoppingListName" class="forminput" list="jlStandardStoreNames" placeholder="Ladenname, z. B. dm"><datalist id="jlStandardStoreNames">${JL_STANDARD_STORES.map(b=>`<option value="${b.label}"></option>`).join('')}</datalist><button class="tinyadd" onclick="addShoppingList()">+</button></div>
+   <div class="jl-store-quick">${JL_STANDARD_STORES.map(b=>`<button onclick="jlQuickAddStore('${b.label}')">${jlStoreMark(b.label,true)}${b.label}</button>`).join('')}</div>
+   <div class="mini-settings-list" style="margin-top:10px">${Object.keys(shoppingLists).sort(jlAlpha).map(n=>`<div class="reminder-mini"><span class="jl-store-list-name">${jlStoreMark(n,true)}<b>${escHtml(n)}</b></span><button onclick="askDeleteShoppingList('${n.replace(/'/g,"\\'")}')" aria-label="Einkaufsliste löschen">×</button></div>`).join('')}</div>
+ </div>
+ <div class="settingscard compactsettings"><h3>🔔 Reminder-Artikel · ${escHtml(store)}</h3><p class="designintro">Kategorie wird automatisch erkannt; falls nicht eindeutig: Sonstiges.</p><div id="storeReminderList" class="mini-settings-list"></div><div class="mini-add-row"><input id="newReminderName" class="forminput" placeholder="Neuer Reminder-Artikel"><button class="tinyadd" onclick="addStoreReminder('${store.replace(/'/g,"\\'")}')">+</button></div></div>
+ <div class="settingscard compactsettings"><h3>Einkaufskategorien · ${escHtml(store)}</h3><p class="designintro">Eigene Kategorien ergänzen. Sie erscheinen bei der Bearbeitung eines Artikels.</p><div class="mini-add-row"><input id="newShoppingCategory" class="forminput" placeholder="z. B. Baby"><button class="tinyadd" onclick="addShoppingCategory('${store.replace(/'/g,"\\'")}')">+</button></div></div>
+ <div class="settingscard compactsettings"><h3>↕ Gangreihenfolge · ${escHtml(store)}</h3><p class="designintro">Oben = zuerst im Laden. Mit ↑/↓ an eure typische Laufrichtung anpassen.</p><div id="aisleOrder"></div></div>`;
+ go('generic');renderStoreReminders(store);renderAisleOrder(store)
+}
+function jlQuickAddStore(name){let el=document.getElementById('newShoppingListName');if(el){el.value=name;addShoppingList()}}
 </script>
 </body></html>
