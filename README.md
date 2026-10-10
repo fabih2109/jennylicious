@@ -1,19 +1,16 @@
-## V0.19.8.corr – Einkaufsliste: Ladenmarken & kompakte Bearbeitung
+## V0.19.9 – Einheitenlose Zutaten & Gewürze
 
-Basis: V0.19.7. Keine Datenbankmigration, kein Reset.
+Basis: V0.19.8.corr. Keine Datenbankmigration, kein Reset.
 
 Neu:
-- lokale, offline-fähige visuelle Marken für Kaufland, Lidl, Aldi und dm; freie Ladennamen bleiben normale Textlisten
-- Standardläden können beim Anlegen schnell ausgewählt oder frei eingetippt werden
-- während des aktiven Einkaufs verschwindet die große JENNYLICIOUS/Einkauf-Kopfzeile; oben stehen nur Zurück sowie Ladenmarke/-name zentriert
-- permanente Kategorie-Dropdowns pro Artikel entfernt; die Kategorie ist bereits über den Abschnitt sichtbar
-- ein Stift pro Artikel öffnet die Bearbeitung der Einkaufskategorie; bei manuellen Artikeln können dort zusätzlich Name/Menge geändert werden
-- Wochenplan-/Extra-Logik aus V0.19.7 sowie Performance/Data-Safety bleiben unverändert
+- Im Zutateneditor ist eine leere Einheit ausdrücklich auswählbar; neue Zutaten starten ohne erzwungene Einheit.
+- Leere Mengen werden intern als fehlende Menge (`null`) statt als künstliche `0` gespeichert.
+- Importierte, nicht standardmäßige Einheiten (z. B. `Zehen`) bleiben beim Bearbeiten erhalten und werden nicht still auf `g` zurückgesetzt.
+- Neue feste Einkaufskategorie `Gewürze`, standardmäßig vor `Vorrat`.
+- Breite Gewürzerkennung u. a. für Salz, Pfeffer, Chili, Curry, Kurkuma, Zimt, Kreuzkümmel, Kardamom, Muskat, Senfkörner, Oregano, Thymian, Rosmarin, Basilikum, Lorbeer, Gewürzmischungen usw.
+- Eindeutig frische Kräuter (`frisch`, `Bund`, `Topf`) bleiben bei Obst & Gemüse.
+- Bereits vorhandene automatisch als `Vorrat`/`Sonstiges` einsortierte Gewürze werden schonend nach `Gewürze` verschoben; manuelle Kategoriezuweisungen bleiben erhalten.
+- Performance/Data-Safety, Einkaufslisten-UI und Wochenplanlogik aus V0.19.8.corr bleiben unverändert.
 
-
-### Korrekturen in 0.19.8.corr
-- Einkaufslisten-Auswahl zeigt lokale Ladenmarker; Abbrechen ist optisch getrennt.
-- + Wochenplan steht in einer eigenen oberen Zeile; Ladenname erhält die volle Breite.
-- Plus/Minus bei Rezeptartikeln ohne Einheit verwendet dieselbe Einheit statt künstlich „Stk.“.
-- Knoblauchzehen und Zehen Knoblauch werden als derselbe Einkaufsartikel mit Einheit „Zehen“ normalisiert.
-- Bestehende, bereits getrennte Knoblauch-Einträge werden beim Rendern sicher zusammengeführt.
+Regel-Update:
+- Flexible Mengenangaben wie `Pfeffer nach Belieben` werden im Jennylicious-JSON künftig als `amount: null`, `unit: ""`, `name: "Pfeffer"` exportiert. Der Hinweis zum Abschmecken kann in der Zubereitung erhalten bleiben.
