@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.8</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.8.corr</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -326,7 +326,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.8</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.8.corr</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -1242,7 +1242,7 @@ const jlDirtyImageKeys=new Set();
 let jlAutosaveSuppressedUntil=0;
 function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
 function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
-const JL_APP_VERSION='0.19.8';
+const JL_APP_VERSION='0.19.8.corr';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1297,7 +1297,7 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.8',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.8.corr',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
@@ -1496,7 +1496,7 @@ async function jlBootstrap(){
  else if(appSettings.startView==='week')go('week')
 }
 
-/* Jennylicious V0.19.8 — optional weekly-plan recipe slots */
+/* Jennylicious V0.19.8.corr — optional weekly-plan recipe slots */
 function jlEnsurePlanExtras(){
  if(!Array.isArray(planExtras))planExtras=[];
  planExtras=planExtras.filter(x=>x&&x.recipeId!=null).map(x=>({
@@ -1615,7 +1615,7 @@ if ('serviceWorker' in navigator) {
 </script>
 
 <style id="jl-v0198-shopping-ui">
-/* V0.19.8 – kompaktere Einkaufsliste + lokale Ladenmarken */
+/* V0.19.8.corr – kompaktere Einkaufsliste + lokale Ladenmarken */
 .jl-store-id{display:inline-flex;align-items:center;gap:9px;min-width:0}
 .jl-store-id .jl-store-name{font-weight:850;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .jl-store-logo{width:38px;height:38px;flex:0 0 38px;display:inline-grid;place-items:center;overflow:hidden;font-family:Arial,sans-serif;font-weight:900;line-height:1}
@@ -1655,7 +1655,7 @@ if ('serviceWorker' in navigator) {
 </style>
 
 <script id="jl-v0198-shopping-ui-js">
-/* V0.19.8 – lokale Markenliste ohne neue DB-Struktur */
+/* V0.19.8.corr – lokale Markenliste ohne neue DB-Struktur */
 const JL_STANDARD_STORES=[
  {key:'kaufland',label:'Kaufland',aliases:['kaufland'],cls:'jl-logo-kaufland'},
  {key:'lidl',label:'Lidl',aliases:['lidl'],cls:'jl-logo-lidl'},
@@ -1735,4 +1735,114 @@ openShoppingSettings=function(store){
 }
 function jlQuickAddStore(name){let el=document.getElementById('newShoppingListName');if(el){el.value=name;addShoppingList()}}
 </script>
+
+<style id="jl-v0198corr-shopping-fixes">
+/* V0.19.8.corr – Popup, Kopfzeile und Mengenrobustheit */
+.jl-store-choice{display:flex!important;align-items:center!important;gap:12px!important;text-align:left!important;font-weight:800!important}
+.jl-store-choice .jl-store-logo{width:34px;height:34px;flex-basis:34px}
+.jl-cancel-action{background:#fff!important;color:#8b788d!important;border:1px solid #e1d7e3!important;font-weight:750!important}
+.jl-cancel-action:active{background:#f6f1f6!important}
+#shopping:not(.shopping-active) .shop-top.jl-shop-top-pre{display:grid!important;grid-template-columns:1fr!important;gap:4px!important;margin-bottom:6px!important}
+.jl-week-row{display:flex;justify-content:flex-end;align-items:center;min-height:34px}
+.jl-week-row .shop-mini{margin:0!important}
+.jl-pre-store{width:100%;justify-content:center;min-width:0}
+.jl-pre-store .shop-list-select{flex:1;min-width:0;width:auto;max-width:360px;font-size:23px;font-weight:850;font-family:Georgia,serif;text-align:center;text-align-last:center}
+.jl-pre-store .jl-store-logo{width:40px;height:40px;flex-basis:40px}
+</style>
+<script id="jl-v0198corr-shopping-fixes-js">
+/* V0.19.8.corr – Ladenpopup, entkoppelte Kopfzeile und robuste zählbare Mengen */
+const jlCorrBaseUnit=jlUnit;
+jlUnit=function(u){
+ const raw=String(u||'').trim().toLocaleLowerCase('de').replace(/\.$/,'');
+ if(raw==='zehe'||raw==='zehen')return 'Zehen';
+ return jlCorrBaseUnit(u);
+};
+function jlCorrCountable(name,unit){
+ let n=String(name||'').trim(),u=jlUnit(unit),k=jlNameKey(n).replace(/\s+/g,'');
+ if((k==='knoblauchzehe'||k==='knoblauchzehen')&&(!u||u==='Stk.'))return{name:'Knoblauch',unit:'Zehen'};
+ if(jlNameKey(n)==='knoblauch'&&u==='Zehen')return{name:'Knoblauch',unit:'Zehen'};
+ return{name:n,unit:u};
+}
+function jlCorrNormalizeItem(x){
+ if(!x)return x;
+ let beforeUnit=jlUnit(x.unit),norm=jlCorrCountable(x.name,beforeUnit),garlic=norm.name==='Knoblauch'&&norm.unit==='Zehen';
+ x.name=norm.name;x.unit=norm.unit;
+ let c=jlEnsureContrib(x);
+ if(garlic)c.forEach(z=>{z.unit='Zehen'});
+ else if(!x.unit)c.forEach(z=>{if(z.type==='manual'&&jlUnit(z.unit)==='Stk.')z.unit=''});
+ return x;
+}
+const jlCorrBaseSameArticle=jlSameArticle;
+jlSameArticle=function(a,b){
+ const canon=n=>{let k=jlNameKey(n).replace(/\s+/g,'');return (k==='knoblauchzehe'||k==='knoblauchzehen')?'knoblauch':jlNameKey(n)};
+ if(canon(a)===canon(b))return true;
+ return jlCorrBaseSameArticle(a,b);
+};
+const jlCorrBaseRecalc=jlRecalcItem;
+jlRecalcItem=function(x){jlCorrNormalizeItem(x);return jlCorrBaseRecalc(x)};
+const jlCorrBaseAddMerged=addMergedShoppingItem;
+addMergedShoppingItem=function(x){
+ let norm=jlCorrCountable(x?.name,x?.unit),copy={...x,name:norm.name,unit:norm.unit};
+ (shoppingLists[activeShoppingList]||[]).forEach(jlCorrNormalizeItem);
+ return jlCorrBaseAddMerged(copy);
+};
+function jlCorrMergeExistingList(list){
+ if(!Array.isArray(list))return;
+ list.forEach(jlCorrNormalizeItem);
+ for(let i=0;i<list.length;i++){
+   let a=list[i];
+   for(let j=list.length-1;j>i;j--){
+     let b=list[j];
+     if(!!a.done!==!!b.done||!jlSameArticle(a.name,b.name)||jlUnit(a.unit)!==jlUnit(b.unit))continue;
+     let ac=jlEnsureContrib(a),bc=jlEnsureContrib(b);
+     bc.forEach(z=>{
+       let hit=ac.find(q=>q.type===z.type&&String(q.id)===String(z.id)&&jlUnit(q.unit)===jlUnit(z.unit));
+       if(hit)hit.qty=(+hit.qty||0)+(+z.qty||0);else ac.push({...z});
+     });
+     a.contributions=ac;
+     a.sources=[...new Set([...(a.sources||[]),...(b.sources||[])])];
+     a.sourceKeys=[...new Set([...(a.sourceKeys||[]),...(b.sourceKeys||[])])];
+     jlRecalcItem(a);list.splice(j,1);
+   }
+ }
+}
+function jlCorrNormalizeAllShopping(){Object.values(shoppingLists||{}).forEach(jlCorrMergeExistingList)}
+
+adjustManualShop=function(id,d){
+ let list=shoppingLists[activeShoppingList]||[],x=list.find(q=>q.id===id);if(!x)return;
+ jlCorrNormalizeItem(x);
+ let c=jlEnsureContrib(x),target=jlUnit(x.unit),m=c.find(z=>z.type==='manual'&&jlUnit(z.unit)===target);
+ if(!m&&d>0){m={type:'manual',id:'manual',label:'manuell',qty:0,unit:target};c.push(m)}
+ if(!m)return;
+ m.qty=Math.max(0,(+m.qty||0)+d);
+ x.contributions=c.filter(z=>(+z.qty||0)>0);jlRecalcItem(x);
+ if(x.qty<=0.0001)list.splice(list.indexOf(x),1);
+ renderShopping();jlQueue();
+};
+
+startWeekShopping=function(){
+ let stores=Object.keys(shoppingLists).sort(jlAlpha);
+ modalContent.innerHTML=`<h2>Für welche Einkaufsliste?</h2><div class="compactpick">${stores.map(n=>`<button class="action compactaction jl-store-choice" onclick="chooseStoreForWeek('${n.replace(/'/g,"\\'")}')">${jlStoreIdentity(n,true)}</button>`).join('')}</div><button class="action compactaction jl-cancel-action" onclick="modal.classList.remove('show')">Abbrechen</button>`;
+ modal.classList.add('show');
+};
+
+renderShopping=function(){
+ jlCorrNormalizeAllShopping();
+ let sec=document.getElementById('shopping');
+ sec?.classList.toggle('shopping-compact',true);
+ sec?.classList.toggle('shopping-active',!!shoppingStarted);
+ let list=shoppingLists[activeShoppingList]||[],active=list.filter(x=>!x.done),done=list.filter(x=>x.done),names=Object.keys(shoppingLists).sort(jlAlpha);
+ shoppingBody.innerHTML=`${shoppingStarted?jlActiveStoreHeader():''}<div class="shop-top jl-shop-top-pre">
+   ${shoppingStarted?'':`<div class="jl-week-row"><button class="shop-mini" onclick="startWeekShopping()">+ Wochenplan</button></div>`}
+   <div class="jl-store-settings-row jl-pre-store">${jlStoreMark(activeShoppingList)}<select class="shop-list-select" onchange="switchShoppingList(this.value)">${names.map(n=>`<option ${n===activeShoppingList?'selected':''}>${escHtml(n)}</option>`).join('')}</select></div>
+ </div>
+ ${shoppingStarted?'':`<div class="shop-addline"><input id="manualShopItem" class="forminput" placeholder="Artikel hinzufügen"><button class="shop-mini" onclick="addManualShop()">+</button></div>`}
+ ${currentCategoryOrder().map(c=>{let items=active.filter(x=>x.category===c);return items.length?`<div class="shopsection">${escHtml(c)}</div><div class="shop-flat">${items.map(shopItemHtml).join('')}</div>`:''}).join('')}
+ ${!shoppingStarted&&(active.length||done.length)?`<div class="shop-actions">${active.length?`<button class="shop-mini primary" onclick="finalizeShoppingList()">✓ Einkaufsliste abschließen</button>`:''}${done.length?`<button class="shop-mini" onclick="clearBoughtItems()">Gekaufte löschen</button>`:''}</div>`:''}
+ ${done.length?`<div class="shopsection donehead">Abgeschlossen</div><div class="shop-flat doneflat">${done.map(shopItemHtml).join('')}</div>`:''}
+ ${shoppingStarted?`<button class="shop-mini shopend" onclick="endShopping()">Einkauf beenden</button>`:''}`;
+ if(!shoppingStarted)setTimeout(jlBindManualEnter,0);
+};
+</script>
+
 </body></html>
