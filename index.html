@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.19.9</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.20.0</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -326,7 +326,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.19.9</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.20.0</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -1242,7 +1242,7 @@ const jlDirtyImageKeys=new Set();
 let jlAutosaveSuppressedUntil=0;
 function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
 function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
-const JL_APP_VERSION='0.19.9';
+const JL_APP_VERSION='0.20.0';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1297,12 +1297,12 @@ async function jlExportBackup(){
    await jlWrite();
    const stores={};
    for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.19.9',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.20.0',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
    const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
    const d=new Date(),pad=n=>String(n).padStart(2,'0');
    const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
    const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-   showInfoDialog('Backup erstellt',`Das Jennylicious-Backup wurde als <b>${escHtml(name)}</b> exportiert.`)
+   showInfoDialog('Backup erstellt',`Das Jennylicious-Backup wurde erfolgreich exportiert. Datei: ${name}`)
  }catch(e){console.error(e);showInfoDialog('Backup fehlgeschlagen','Das Backup konnte nicht erstellt werden. Deine aktuellen Daten wurden nicht verändert.')}
 }
 function jlChooseRestore(){document.getElementById('jlBackupFile').value='';document.getElementById('jlBackupFile').click()}
@@ -1608,7 +1608,7 @@ document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.add
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js?v=0199',{updateViaCache:'none'})
+    navigator.serviceWorker.register('./service-worker.js?v=0200',{updateViaCache:'none'})
       .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }
@@ -1917,6 +1917,143 @@ const jlV0199RenderShopping=renderShopping;
 renderShopping=function(){let changed=jlEnsureSpiceShoppingState();let out=jlV0199RenderShopping();if(changed)setTimeout(jlQueue,0);return out};
 const jlV0199OpenShoppingSettings=openShoppingSettings;
 openShoppingSettings=function(store){jlEnsureSpiceShoppingState();return jlV0199OpenShoppingSettings(store)};
+</script>
+
+
+<script id="jl-v0200-shopping-normalization">
+/* V0.20.0 – Einkaufsnamen bereinigen, bessere Kategorien, gemischte Einheiten in einer Zeile */
+function jlShoppingBaseName(raw){
+ let s=String(raw||'').trim();
+ if(!s)return s;
+ /* Zubereitungsdetails gehören ins Rezept, nicht auf die Einkaufsliste. */
+ s=s.replace(/\s*\([^)]*\)\s*$/u,'').trim();
+ s=s.replace(/\s*,\s*(?:(?:in|längs|laengs|quer|halbiert|geviertelt|gewürfelt|gewuerfelt|gerieben|gehackt|fein|grob|ungekocht|gekocht|getrocknet|geschält|geschaelt|entkernt|zerkleinert)\b.*|blätter?\s+abgezupft.*)$/iu,'').trim();
+ s=s.replace(/^frisch(?:e|er|es|en)?\s+(?:gehackt(?:e|er|es|en)?\s+)?/iu,'').trim();
+ const k=jlNameKey(s);
+ if(k==='zwiebeln')return 'Zwiebel';
+ if(k==='rote zwiebeln')return 'rote Zwiebel';
+ if(k==='feta käse'||k==='fetakaese')return 'Feta';
+ return s;
+}
+function jlShoppingArticleKey(name){
+ let s=jlShoppingBaseName(name),k=jlNameKey(s);
+ /* Nur sichere Singular-/Alias-Regeln; unterschiedliche Produkte bleiben getrennt. */
+ const aliases={
+   'zwiebeln':'zwiebel',
+   'feta käse':'feta',
+   'fetakaese':'feta'
+ };
+ return aliases[k]||k;
+}
+
+const jlV0200BaseGuessShopCategory=baseGuessShopCategory;
+baseGuessShopCategory=function(name){
+ const raw=jlSpiceKey(name),clean=jlSpiceKey(jlShoppingBaseName(name));
+ if(/(?:^| )(?:feta|cheddar|mozzarella|minimozzarella|mascarpone|ricotta|gouda|emmentaler|camembert|gorgonzola|parmesan)(?: |$)/.test(clean))return 'Kühlung';
+ if(/(?:^| )(?:babyspinat|spinat|minze|chilischote|granatapfelkern|granatapfelkerne)(?: |$)/.test(clean))return 'Obst & Gemüse';
+ if(/(?:^| )(?:risoni|orzo)(?: |$)/.test(clean))return 'Nudeln & Reis';
+ if(/(?:^| )(?:linse|linsen|kichererbse|kichererbsen)(?: |$)/.test(clean))return 'Vorrat';
+ return jlV0200BaseGuessShopCategory(name);
+};
+
+function jlShoppingContributionGroups(x){
+ let groups=new Map();
+ jlEnsureContrib(x).forEach(z=>{
+   let q=+z.qty||0;if(q<=0)return;
+   let u=jlUnit(z.unit);
+   groups.set(u,(groups.get(u)||0)+q);
+ });
+ return [...groups.entries()];
+}
+function jlShoppingQtyText(x){
+ return jlShoppingContributionGroups(x).map(([u,q])=>`${fmtQty(q)}${u?' '+u:''}`).join(' + ');
+}
+
+/* Recalc darf bei einem gemeinsamen Artikel verschiedene Einheiten behalten. x.qty bleibt
+   nur ein interner Existenzwert; angezeigt werden die gruppierten Mengen mit Einheit. */
+jlRecalcItem=function(x){
+ if(!x)return x;
+ if(typeof jlCorrNormalizeItem==='function')jlCorrNormalizeItem(x);
+ const c=jlEnsureContrib(x);
+ x.name=jlShoppingBaseName(x.name);
+ const units=[...new Set(c.filter(z=>(+z.qty||0)>0).map(z=>jlUnit(z.unit)))];
+ x.unit=units.includes('Stk.')?'Stk.':(units[0]||jlUnit(x.unit));
+ x.qty=c.reduce((a,z)=>a+(+z.qty||0),0);
+ x.sources=[...new Set(c.map(z=>z.label).filter(Boolean))];
+ x.sourceKeys=[...new Set(c.filter(z=>z.type==='recipe').map(z=>z.id))];
+ return x;
+};
+
+jlSourceText=function(x){
+ let c=jlEnsureContrib(x),labels=[...new Set(c.map(z=>z.label).filter(Boolean))];
+ if(labels.length<=1)return labels[0]||'';
+ let qt=jlShoppingQtyText(x);
+ return (qt?qt+' · ':'')+labels.join(' + ');
+};
+
+addMergedShoppingItem=function(x){
+ let list=shoppingLists[activeShoppingList]||(shoppingLists[activeShoppingList]=[]);
+ let original=String(x?.name||'').trim(),name=jlShoppingBaseName(original),unit=jlUnit(x?.unit||((x?.sourceType==='manual')?'Stk.':'')),qty=+x?.qty||0;
+ let key=jlShoppingArticleKey(name),same=list.find(y=>!y.done&&jlShoppingArticleKey(y.name)===key);
+ let type=x?.sourceType||(x?.recipe==='manuell'?'manual':(x?.recipe==='Erinnerung'?'reminder':'recipe'));
+ let sid=x?.sourceId||x?.sourceKey||x?.weekKey||(type==='manual'?'manual':type+':'+(x?.recipe||name));
+ let label=x?.sourceLabel||x?.recipe||(type==='manual'?'manuell':type);
+ let override=articleCategoryOverrides[articleCategoryKey(name)]||articleCategoryOverrides[articleCategoryKey(original)];
+ let auto=baseGuessShopCategory(original||name),category=override||(x?.category&&x.category!=='Sonstiges'?x.category:auto);
+ if(!same){
+   same={id:Date.now()+Math.floor(Math.random()*99999),name,qty:0,unit,category,done:false,sources:[],sourceKeys:[],contributions:[]};list.push(same);
+ }else{
+   same.name=jlShoppingBaseName(same.name);
+   let manualOverride=articleCategoryOverrides[articleCategoryKey(same.name)];
+   if(!manualOverride&&(same.category==='Sonstiges'||!same.category))same.category=auto;
+ }
+ let c=jlEnsureContrib(same),existing=c.find(z=>z.type===type&&String(z.id)===String(sid)&&jlUnit(z.unit)===unit);
+ if(existing)existing.qty=(+existing.qty||0)+qty;else c.push({type,id:sid,label,qty,unit});
+ same.contributions=c;jlRecalcItem(same);
+};
+
+function jlV0200NormalizeList(list){
+ if(!Array.isArray(list))return false;let changed=false;
+ list.forEach(x=>{
+   let old=x.name,oldKey=articleCategoryKey(old),clean=jlShoppingBaseName(old),newKey=articleCategoryKey(clean),manual=Object.prototype.hasOwnProperty.call(articleCategoryOverrides,oldKey)||Object.prototype.hasOwnProperty.call(articleCategoryOverrides,newKey);
+   if(clean&&clean!==old){x.name=clean;changed=true;if(Object.prototype.hasOwnProperty.call(articleCategoryOverrides,oldKey)&&!Object.prototype.hasOwnProperty.call(articleCategoryOverrides,newKey))articleCategoryOverrides[newKey]=articleCategoryOverrides[oldKey]}
+   let target=baseGuessShopCategory(old||clean);
+   if(!manual&&target&&target!==x.category&&(x.category==='Sonstiges'||x.category==='Vorrat'||!x.category)){x.category=target;changed=true}
+   jlRecalcItem(x);
+ });
+ for(let i=0;i<list.length;i++){
+   let a=list[i];
+   for(let j=list.length-1;j>i;j--){
+     let b=list[j];
+     if(!!a.done!==!!b.done||jlShoppingArticleKey(a.name)!==jlShoppingArticleKey(b.name))continue;
+     let ac=jlEnsureContrib(a),bc=jlEnsureContrib(b);
+     bc.forEach(z=>{let hit=ac.find(q=>q.type===z.type&&String(q.id)===String(z.id)&&jlUnit(q.unit)===jlUnit(z.unit));if(hit)hit.qty=(+hit.qty||0)+(+z.qty||0);else ac.push({...z})});
+     a.contributions=ac;
+     if((!a.category||a.category==='Sonstiges')&&b.category)a.category=b.category;
+     jlRecalcItem(a);list.splice(j,1);changed=true;
+   }
+ }
+ return changed;
+}
+function jlV0200NormalizeAllShopping(){let changed=false;Object.values(shoppingLists||{}).forEach(l=>{if(jlV0200NormalizeList(l))changed=true});return changed}
+
+shopItemHtml=function(x){
+ jlRecalcItem(x);let mq=jlManualQty(x),qty=jlShoppingQtyText(x),label=(qty?qty+' ':'')+x.name;
+ return `<div class="shoprow ultra ${x.done?'doneitem':''}"><input type="checkbox" ${x.done?'checked':''} onchange="toggleShopItem(${x.id},this.checked)"><span class="grow"><span class="jl-item-mainline">${!shoppingStarted?`<span class="jl-qtyline"><button class="jl-qtybtn" onclick="adjustManualShop(${x.id},-1)">−</button><button class="jl-qtybtn" onclick="adjustManualShop(${x.id},1)">+</button></span>`:''}<b>${escHtml(label)}</b>${!shoppingStarted?`<button class="jl-item-edit" onclick="editShoppingItem(${x.id})" aria-label="Artikel bearbeiten">✎</button>`:''}</span>${(!shoppingStarted&&x.sources?.length)?`<small class="jl-source-detail">${escHtml(jlSourceText(x))}</small>`:''}</span></div>`;
+};
+
+/* Beim Entfernen eines Rezepts bleiben auch einheitenlose Beiträge anderer Quellen erhalten. */
+jlRemoveRecipeContribution=function(listName,sourceId){
+ let list=shoppingLists[listName]||[];
+ for(let i=list.length-1;i>=0;i--){
+   let x=list[i],c=jlEnsureContrib(x),before=c.length;
+   x.contributions=c.filter(z=>!(z.type==='recipe'&&z.id===sourceId));
+   if(x.contributions.length!==before){jlRecalcItem(x);if(!x.contributions.length)list.splice(i,1)}
+ }
+};
+
+const jlV0200RenderShopping=renderShopping;
+renderShopping=function(){let changed=jlV0200NormalizeAllShopping();let out=jlV0200RenderShopping();if(changed)setTimeout(jlQueue,0);return out};
 </script>
 
 </body></html>

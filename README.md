@@ -1,4 +1,4 @@
-## V0.19.9 – Einheitenlose Zutaten & Gewürze
+## V0.20.0 – Einkaufsliste normalisieren & Backup-Dialog
 
 Basis: V0.19.8.corr. Keine Datenbankmigration, kein Reset.
 
@@ -14,3 +14,10 @@ Neu:
 
 Regel-Update:
 - Flexible Mengenangaben wie `Pfeffer nach Belieben` werden im Jennylicious-JSON künftig als `amount: null`, `unit: ""`, `name: "Pfeffer"` exportiert. Der Hinweis zum Abschmecken kann in der Zubereitung erhalten bleiben.
+
+
+### V0.20.0
+- Backup-Erfolgsmeldung ohne HTML/Syntax-Reste.
+- Einkaufsnamen entfernen reine Zubereitungsdetails (Rezept bleibt unverändert).
+- Verbesserte automatische Einkaufskategorien, u. a. Feta/Cheddar, frische Zutaten, Risoni und Linsen.
+- Gleiche Einkaufsartikel können auch bei unterschiedlichen Einheiten in einer Zeile zusammengeführt werden (z. B. 150 g + 1 Stk. Zwiebel).
