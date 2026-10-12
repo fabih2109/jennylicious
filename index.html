@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.21.0</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.21.1</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -336,7 +336,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Wähle nur die Grundfarbe von Jennylicious.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.21.0</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.21.1</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -389,7 +389,7 @@ a {
 </div></section>
 <section id="generic" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><h1 id="genericTitle" class="title"></h1></div><div id="genericBody"></div></section>
 </main>
-<input id="jlBackupFile" type="file" accept=".json,application/json" hidden onchange="jlRestoreBackupFile(event)"><input id="catImageFile" type="file" accept="image/*" hidden onchange="previewCategoryImage(event)"><input id="jennyFile" type="file" hidden onchange="readJennyPackage(event)"><nav class="bottom"><button class="nav sel" data-s="home" onclick="go('home')"><span>⌂</span>Start</button><button class="nav" data-s="search" onclick="go('search')"><span>⌕</span>Suche</button><button class="plus" onclick="openAddMenu()">＋</button><button class="nav" data-s="week" onclick="go('week')"><span class="calicon"><i></i></span>Wochenplan</button><button class="nav" data-s="shopping" onclick="openShopping()"><span>🛒</span>Einkauf</button><button class="nav" data-s="more" onclick="go('more')"><span>☰</span>Mehr</button></nav>
+<input id="jlBackupFile" type="file" accept=".json,.zip,application/json,application/zip" hidden onchange="jlRestoreBackupFile(event)"><input id="catImageFile" type="file" accept="image/*" hidden onchange="previewCategoryImage(event)"><input id="jennyFile" type="file" hidden onchange="readJennyPackage(event)"><nav class="bottom"><button class="nav sel" data-s="home" onclick="go('home')"><span>⌂</span>Start</button><button class="nav" data-s="search" onclick="go('search')"><span>⌕</span>Suche</button><button class="plus" onclick="openAddMenu()">＋</button><button class="nav" data-s="week" onclick="go('week')"><span class="calicon"><i></i></span>Wochenplan</button><button class="nav" data-s="shopping" onclick="openShopping()"><span>🛒</span>Einkauf</button><button class="nav" data-s="more" onclick="go('more')"><span>☰</span>Mehr</button></nav>
 <div id="plusSheet" class="sheetbg" onclick="closeBg(event,this)"><div class="sheet"><h2>Neues Rezept</h2><button class="action" onclick="openManualEditor()">✎ &nbsp; Rezept manuell erstellen</button><button class="action" onclick="plusSheet.classList.remove('show');openJsonImport()">⌘ &nbsp; JSON importieren</button></div></div>
 <div id="modal" class="sheetbg" onclick="closeBg(event,this)"><div class="sheet" id="modalContent"></div></div>
 <script>
@@ -1271,7 +1271,7 @@ const jlDirtyImageKeys=new Set();
 let jlAutosaveSuppressedUntil=0;
 function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
 function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
-const JL_APP_VERSION='0.21.0';
+const JL_APP_VERSION='0.21.1';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1289,6 +1289,7 @@ async function jlBackupEncode(v){
 }
 function jlBackupDecode(v){
  if(Array.isArray(v))return v.map(jlBackupDecode);
+ if(v instanceof Blob)return v;
  if(v&&typeof v==='object'){
    if(v.__jlType==='Blob'&&typeof v.data==='string')return jlBackupFromB64(v.data,v.type);
    let o={};for(const [k,x] of Object.entries(v))o[k]=jlBackupDecode(x);return o
@@ -1305,7 +1306,7 @@ async function jlStoreEntries(store){
  })
 }
 
-const JL_BACKUP_FORMAT_VERSION=1;
+const JL_BACKUP_FORMAT_VERSION=2;
 function jlNormalizeBackup(data){
  if(data?.format!=='JennyliciousBackup'||!Number.isInteger(data?.formatVersion)||!data.stores||typeof data.stores!=='object')throw new Error('invalid-format');
  if(data.formatVersion<1||data.formatVersion>JL_BACKUP_FORMAT_VERSION)throw new Error('unsupported-format-version');
@@ -1321,24 +1322,92 @@ function jlNormalizeBackup(data){
  return {...data,stores};
 }
 
+let jlPendingBackupFile=null;
+function jlIsIOS(){return /iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1)}
+function jlCrcTable(){if(window.__jlCrcTable)return window.__jlCrcTable;const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=(c&1)?(0xEDB88320^(c>>>1)):(c>>>1);t[n]=c>>>0}return window.__jlCrcTable=t}
+function jlCrc32(u){const t=jlCrcTable();let c=0xFFFFFFFF;for(let i=0;i<u.length;i++)c=t[(c^u[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+function jlDosDateTime(d=new Date()){let y=Math.max(1980,d.getFullYear());return {time:((d.getHours()&31)<<11)|((d.getMinutes()&63)<<5)|((Math.floor(d.getSeconds()/2))&31),date:(((y-1980)&127)<<9)|(((d.getMonth()+1)&15)<<5)|(d.getDate()&31)}}
+async function jlZipStore(files){
+ const enc=new TextEncoder(),parts=[],central=[];let offset=0;const dt=jlDosDateTime();
+ for(const f of files){
+   const name=enc.encode(f.name),blob=f.data instanceof Blob?f.data:new Blob([f.data]),size=blob.size;
+   const bytes=new Uint8Array(await blob.arrayBuffer()),crc=jlCrc32(bytes);
+   const lh=new Uint8Array(30+name.length),lv=new DataView(lh.buffer);
+   lv.setUint32(0,0x04034b50,true);lv.setUint16(4,20,true);lv.setUint16(6,0x0800,true);lv.setUint16(8,0,true);lv.setUint16(10,dt.time,true);lv.setUint16(12,dt.date,true);lv.setUint32(14,crc,true);lv.setUint32(18,size,true);lv.setUint32(22,size,true);lv.setUint16(26,name.length,true);lv.setUint16(28,0,true);lh.set(name,30);
+   parts.push(lh,blob);
+   const ch=new Uint8Array(46+name.length),cv=new DataView(ch.buffer);
+   cv.setUint32(0,0x02014b50,true);cv.setUint16(4,20,true);cv.setUint16(6,20,true);cv.setUint16(8,0x0800,true);cv.setUint16(10,0,true);cv.setUint16(12,dt.time,true);cv.setUint16(14,dt.date,true);cv.setUint32(16,crc,true);cv.setUint32(20,size,true);cv.setUint32(24,size,true);cv.setUint16(28,name.length,true);cv.setUint16(30,0,true);cv.setUint16(32,0,true);cv.setUint16(34,0,true);cv.setUint16(36,0,true);cv.setUint32(38,0,true);cv.setUint32(42,offset,true);ch.set(name,46);central.push(ch);
+   offset+=lh.length+size;
+ }
+ const cdOffset=offset,cdSize=central.reduce((a,x)=>a+x.length,0),eocd=new Uint8Array(22),ev=new DataView(eocd.buffer);
+ ev.setUint32(0,0x06054b50,true);ev.setUint16(4,0,true);ev.setUint16(6,0,true);ev.setUint16(8,files.length,true);ev.setUint16(10,files.length,true);ev.setUint32(12,cdSize,true);ev.setUint32(16,cdOffset,true);ev.setUint16(20,0,true);
+ return new Blob([...parts,...central,eocd],{type:'application/zip'})
+}
+async function jlReadZip(file){
+ const ab=await file.arrayBuffer(),u=new Uint8Array(ab),dv=new DataView(ab);let eocd=-1;
+ for(let i=u.length-22;i>=Math.max(0,u.length-65557);i--){if(dv.getUint32(i,true)===0x06054b50){eocd=i;break}}
+ if(eocd<0)throw new Error('ZIP-Struktur nicht gefunden.');
+ const total=dv.getUint16(eocd+10,true),cdOff=dv.getUint32(eocd+16,true),out={};let p=cdOff;
+ for(let n=0;n<total;n++){
+   if(dv.getUint32(p,true)!==0x02014b50)throw new Error('ZIP-Verzeichnis beschädigt.');
+   const method=dv.getUint16(p+10,true),cs=dv.getUint32(p+20,true),ns=dv.getUint16(p+28,true),es=dv.getUint16(p+30,true),cms=dv.getUint16(p+32,true),lo=dv.getUint32(p+42,true);
+   const name=new TextDecoder().decode(u.slice(p+46,p+46+ns)),lns=dv.getUint16(lo+26,true),les=dv.getUint16(lo+28,true),ds=lo+30+lns+les,raw=u.slice(ds,ds+cs);let data;
+   if(method===0)data=raw;
+   else if(method===8){if(typeof DecompressionStream==='undefined')throw new Error('Komprimiertes ZIP wird auf diesem Gerät nicht unterstützt.');data=new Uint8Array(await new Response(new Blob([raw]).stream().pipeThrough(new DecompressionStream('deflate-raw'))).arrayBuffer())}
+   else throw new Error('Nicht unterstützte ZIP-Kompression.');
+   out[name]=data;p+=46+ns+es+cms;
+ }
+ return out
+}
+async function jlBuildBackupZip(){
+ await jlWrite();
+ const stores={};for(const s of JL_STORES)if(s!=='images')stores[s]=await jlBackupEncode(await jlStoreEntries(s));
+ const imageEntries=await jlStoreEntries('images'),imageFiles=[],imageMeta=[];
+ for(let i=0;i<imageEntries.length;i++){
+   const entry=imageEntries[i],value=entry.value||{},blob=value.blob instanceof Blob?value.blob:null,meta={...value};delete meta.blob;
+   if(blob){const ext=(blob.type||'').includes('png')?'png':(blob.type||'').includes('jpeg')?'jpg':'webp',ref=`images/${String(i+1).padStart(4,'0')}.${ext}`;meta.__jlBlobRef=ref;meta.__jlBlobType=blob.type||'application/octet-stream';imageFiles.push({name:ref,data:blob})}
+   imageMeta.push({key:entry.key,value:meta})
+ }
+ stores.images=imageMeta;
+ const backup={format:'JennyliciousBackup',formatVersion:2,appVersion:JL_APP_VERSION,dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
+ return jlZipStore([{name:'backup.json',data:new TextEncoder().encode(JSON.stringify(backup))},...imageFiles])
+}
+function jlDirectDownload(file){const url=URL.createObjectURL(file),a=document.createElement('a');a.href=url;a.download=file.name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),10000)}
+async function jlSavePendingBackup(){
+ const file=jlPendingBackupFile;if(!file)return;
+ try{
+   if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){await navigator.share({files:[file],title:'Jennylicious Backup'});jlPendingBackupFile=null;modal.classList.remove('show');return}
+   jlDirectDownload(file);jlPendingBackupFile=null;showInfoDialog('Backup gespeichert',`Das Jennylicious-Backup wurde als ${file.name} bereitgestellt.`)
+ }catch(e){if(e?.name==='AbortError')return;console.error(e);showInfoDialog('Speichern fehlgeschlagen','Das Backup wurde erstellt, konnte aber nicht an das Betriebssystem übergeben werden. Bitte erneut versuchen.')}
+}
 async function jlExportBackup(){
  try{
-   await jlWrite();
-   const stores={};
-   for(const s of JL_STORES)stores[s]=await jlBackupEncode(await jlStoreEntries(s));
-   const backup={format:'JennyliciousBackup',formatVersion:JL_BACKUP_FORMAT_VERSION,appVersion:'0.21.0',dbVersion:JL_DB_VERSION,createdAt:new Date().toISOString(),stores};
-   const blob=new Blob([JSON.stringify(backup)],{type:'application/json'});
-   const d=new Date(),pad=n=>String(n).padStart(2,'0');
-   const name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.json`;
-   const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-   showInfoDialog('Backup erstellt',`Das Jennylicious-Backup wurde erfolgreich exportiert. Datei: ${name}`)
- }catch(e){console.error(e);showInfoDialog('Backup fehlgeschlagen','Das Backup konnte nicht erstellt werden. Deine aktuellen Daten wurden nicht verändert.')}
+   modalContent.innerHTML=`<h2>Backup wird vorbereitet …</h2><p class="designintro">Rezepte, Bilder, Kategorien und Einstellungen werden zusammengestellt. Bitte die App geöffnet lassen.</p>`;modal.classList.add('show');
+   await new Promise(r=>requestAnimationFrame(()=>setTimeout(r,20)));
+   const blob=await jlBuildBackupZip(),d=new Date(),pad=n=>String(n).padStart(2,'0'),name=`Jennylicious_Backup_${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}_${pad(d.getHours())}-${pad(d.getMinutes())}.zip`,file=new File([blob],name,{type:'application/zip'});
+   if(jlIsIOS()){
+     jlPendingBackupFile=file;const mb=(file.size/1024/1024).toFixed(1);
+     modalContent.innerHTML=`<h2>Backup bereit</h2><p class="designintro">Das Backup wurde speicherschonend erstellt (${escHtml(mb)} MB).</p><button class="action compactaction" style="background:var(--jl-accent);color:#fff;text-align:center" onclick="jlSavePendingBackup()">Backup speichern / teilen</button><button class="action compactaction" onclick="jlPendingBackupFile=null;modal.classList.remove('show')">Abbrechen</button>`;modal.classList.add('show')
+   }else{
+     jlDirectDownload(file);showInfoDialog('Backup erstellt',`Das Jennylicious-Backup wurde erfolgreich exportiert. Datei: ${name}`)
+   }
+ }catch(e){console.error(e);jlPendingBackupFile=null;showInfoDialog('Backup fehlgeschlagen','Das Backup konnte nicht erstellt werden. Deine aktuellen Daten wurden nicht verändert.')}
+}
+async function jlParseBackupFile(file){
+ const head=new Uint8Array(await file.slice(0,4).arrayBuffer());
+ if(head[0]===0x50&&head[1]===0x4b){
+   const files=await jlReadZip(file);if(!files['backup.json'])throw new Error('backup.json fehlt.');
+   const data=JSON.parse(new TextDecoder().decode(files['backup.json']));
+   if(Array.isArray(data?.stores?.images))for(const entry of data.stores.images){const v=entry?.value;if(v?.__jlBlobRef){const raw=files[v.__jlBlobRef];if(!raw)throw new Error('Bilddatei fehlt: '+v.__jlBlobRef);v.blob=new Blob([raw],{type:v.__jlBlobType||'application/octet-stream'});delete v.__jlBlobRef;delete v.__jlBlobType}}
+   return data
+ }
+ return JSON.parse(await file.text())
 }
 function jlChooseRestore(){document.getElementById('jlBackupFile').value='';document.getElementById('jlBackupFile').click()}
 async function jlRestoreBackupFile(ev){
  const file=ev.target.files?.[0];if(!file)return;
  try{
-   const data=JSON.parse(await file.text());
+   const data=await jlParseBackupFile(file);
    const normalized=jlNormalizeBackup(data);
    window.jlPendingRestore=normalized;
    modalContent.innerHTML=`<h2>Backup wiederherstellen?</h2><p class="designintro"><b>${escHtml(file.name)}</b></p><p>Die aktuellen lokalen Jennylicious-Daten auf diesem Gerät werden vollständig durch dieses Backup ersetzt.</p><p class="dialoghint">Backup vom ${escHtml(new Date(data.createdAt).toLocaleString('de-DE'))} · App ${escHtml(data.appVersion||'unbekannt')}</p><button class="action compactaction danger-soft" onclick="jlConfirmRestore()">Ja, Daten ersetzen</button><button class="action compactaction" onclick="window.jlPendingRestore=null;modal.classList.remove('show')">Abbrechen</button>`;
