@@ -1,4 +1,4 @@
-## V0.21.2 – Sortier-Hotfix
+## V0.21.3 – Theme-Hintergründe
 
 - Rezepte, die direkt in einer Hauptkategorie ohne Unterkategorie liegen, werden nun alphabetisch nach Titel sortiert.
 - Keine Änderungen an Backup, Bewertungen, Einkauf, Bildern, Datenbank oder Theme.
@@ -23,3 +23,10 @@ Unverändert:
 - Bildspeicherung und Performance-Optimierungen.
 - Einkaufsliste aus V0.20.0.
 - Wochenplan und optionale Zusatzslots.
+
+### V0.21.3
+- Akzentfarbe und heller App-Hintergrund sind gekoppelt.
+- Lila → Flieder, Grün → Hellgrün, Blau → Hellblau, Rot → Hellrot/Rosé, Gold → warmes Hellgold/Creme.
+- Die PWA-Theme-Farbe folgt ebenfalls der gewählten Akzentfarbe.
+- Sortierfix aus V0.21.2 bleibt enthalten.
+- Keine Datenbankmigration, kein Reset.
