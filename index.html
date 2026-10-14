@@ -416,7 +416,7 @@ function recipeSpecials(r){return Array.isArray(r.specials)?r.specials.filter(Bo
 function recipeHasSub(r,s){return recipeSubs(r).includes(s)}
 function init(){let ms=[...new Set([...R.map(r=>r.main),...Object.keys(customMainSubs)])].sort(jlAlpha);mainGrid.innerHTML=ms.map(m=>{let a=R.filter(r=>r.main===m);let im=customMainImages[m]||MI[m]||'';return tile(m,im,a.length,`openMain('${m}')`)}).join('')}
 function openMain(m){
- setTimeout(()=>addCategoryDeleteControl(m,''),40);curMain=m;let a=R.filter(r=>r.main===m);mainTitle.textContent=m;setCategoryHeaderImage(mainImg,customMainImages[m]||MI[m]||'');let subs=[...new Set([...a.flatMap(recipeSubs),...(customMainSubs[m]||[])])].filter(Boolean).sort(jlAlpha);subGrid.innerHTML=subs.map(sub=>{let x=a.filter(r=>recipeHasSub(r,sub)),key=m+'||'+sub,im=customSubImages[key]||'';return tile(sub,im,x.length,`openSub('${sub}')`)}).join('')||'<div class="note" style="grid-column:1/-1">Keine Unterkategorien angelegt.</div>';let direct=a.filter(r=>recipeSubs(r).length===0);mainDirectRecipes.innerHTML=direct.length?`<div class="jl-direct-title">Direkt in ${escHtml(m)}</div><div class="jl-recipe-grid">${direct.map(row).join('')}</div>`:'';go('category')}
+ setTimeout(()=>addCategoryDeleteControl(m,''),40);curMain=m;let a=R.filter(r=>r.main===m);mainTitle.textContent=m;setCategoryHeaderImage(mainImg,customMainImages[m]||MI[m]||'');let subs=[...new Set([...a.flatMap(recipeSubs),...(customMainSubs[m]||[])])].filter(Boolean).sort(jlAlpha);subGrid.innerHTML=subs.map(sub=>{let x=a.filter(r=>recipeHasSub(r,sub)),key=m+'||'+sub,im=customSubImages[key]||'';return tile(sub,im,x.length,`openSub('${sub}')`)}).join('')||'<div class="note" style="grid-column:1/-1">Keine Unterkategorien angelegt.</div>';let direct=a.filter(r=>recipeSubs(r).length===0).sort((x,y)=>jlAlpha(x.title,y.title));mainDirectRecipes.innerHTML=direct.length?`<div class="jl-direct-title">Direkt in ${escHtml(m)}</div><div class="jl-recipe-grid">${direct.map(row).join('')}</div>`:'';go('category')}
 function openSub(s){
  setTimeout(()=>addCategoryDeleteControl(curMain,s),40);curSub=s;let a=R.filter(r=>r.main===curMain&&recipeHasSub(r,s)),key=curMain+'||'+s;subTitle.textContent=s;parentTitle.textContent=curMain;setCategoryHeaderImage(subImg,customSubImages[key]||'');renderList(a,recipeList);go('recipes')}
 function jlTileTitle(v){return escHtml(v).replace(/(nudel)(auflauf)/gi,'$1&shy;$2').replace(/(familien)(nudel)/gi,'$1&shy;$2').replace(/(champignon)(auflauf)/gi,'$1&shy;$2')}
@@ -1271,7 +1271,7 @@ const jlDirtyImageKeys=new Set();
 let jlAutosaveSuppressedUntil=0;
 function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
 function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
-const JL_APP_VERSION='0.21.1';
+const JL_APP_VERSION='0.21.2';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}

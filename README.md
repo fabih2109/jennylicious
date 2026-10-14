@@ -1,4 +1,8 @@
-## V0.21.1 – Rezeptbewertungen
+## V0.21.2 – Sortier-Hotfix
+
+- Rezepte, die direkt in einer Hauptkategorie ohne Unterkategorie liegen, werden nun alphabetisch nach Titel sortiert.
+- Keine Änderungen an Backup, Bewertungen, Einkauf, Bildern, Datenbank oder Theme.
+
 
 Basis: V0.20.0. Keine Datenbankmigration, kein Reset.
 
