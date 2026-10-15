@@ -1,32 +1,28 @@
-## V0.21.3 – Theme-Hintergründe
+## V0.21.4 – Konfigurierbarer Wochenbeginn
 
-- Rezepte, die direkt in einer Hauptkategorie ohne Unterkategorie liegen, werden nun alphabetisch nach Titel sortiert.
-- Keine Änderungen an Backup, Bewertungen, Einkauf, Bildern, Datenbank oder Theme.
+Basis: V0.21.3. Keine Datenbankmigration, kein Reset.
 
+Neu in V0.21.4:
+- Neue Einstellung **Wochenbeginn** unter Einstellungen.
+- Wählbar: Montag bis Sonntag.
+- Die Auswahl wird in den bestehenden App-Einstellungen lokal gespeichert und beim nächsten App-Start automatisch wiederhergestellt.
+- Beispiel: Bei **Freitag** wird der Wochenplan als Freitag → Samstag → Sonntag → Montag → Dienstag → Mittwoch → Donnerstag dargestellt.
+- Dieselbe Reihenfolge gilt auch für:
+  - Rezept → „Zum Wochenplan hinzufügen“
+  - „Mit anderem Tag tauschen“
+  - Auswahl „Tage & Extras zum Einkauf“
+  - Wochenplan-Badges am Rezept
+- Die internen Wochentags-Slots bleiben unverändert (Montag=0 … Sonntag=6). Bestehende Planungen, `planEntryId`, Resteverwertung und Einkaufsbeiträge werden deshalb nicht migriert oder neu angelegt.
 
-Basis: V0.20.0. Keine Datenbankmigration, kein Reset.
-
-Neu:
-- Optionale Rezeptbewertung von 1 bis 5 Sternen; ohne Bewertung werden keine Sterne angezeigt.
-- In Rezeptkacheln werden nur die tatsächlich vergebenen goldenen Sterne angezeigt (z. B. ★★★ statt ★★★☆☆).
-- Im geöffneten Rezept wird die Bewertung auf dem Rezeptbild angezeigt.
-- Im Rezepteditor kann die Bewertung oben gesetzt, geändert oder vollständig entfernt werden.
-- Nach „Kochen beenden“ wird bei noch unbewerteten Rezepten gefragt, ob das Rezept jetzt geöffnet werden soll, um es anschließend manuell zu bewerten.
-- Mit „Später“ wird genau eine lokale In-App-Erinnerung für den nächsten App-Start gespeichert.
-- Beim nächsten Öffnen erscheint ausschließlich innerhalb von Jennylicious die Frage, ob die fehlende Bewertung nachgeholt werden soll. „Ja“ öffnet das Rezept, „Nein“ verwirft die Erinnerung.
-- Keine Apple-/Android-Push-Nachrichten und keine externe Benachrichtigung.
-- Bereits bewertete Rezepte erzeugen nach erneutem Kochen keine Bewertungsaufforderung.
-- Bewertungsstatus und einmalige Erinnerung werden im bestehenden lokalen Speicher/Backup mitgeführt.
+Enthalten aus V0.21.3:
+- Alphabetische Sortierung von Rezepten, die direkt in einer Hauptkategorie liegen.
+- Gekoppelte Akzent-/Hintergrundfarben für Lila, Grün, Blau, Rot und Gold.
+- iOS-sicherer ZIP-Backup-Export aus V0.21.1.
+- Rezeptbewertungen und einmalige In-App-Bewertungserinnerung.
+- Einkaufsliste, Gewürz-/Einheitenlogik und Performance-/Data-Safety-Optimierungen der vorherigen Versionen.
 
 Unverändert:
-- Data-Safety- und Backup-Logik.
-- Bildspeicherung und Performance-Optimierungen.
-- Einkaufsliste aus V0.20.0.
-- Wochenplan und optionale Zusatzslots.
-
-### V0.21.3
-- Akzentfarbe und heller App-Hintergrund sind gekoppelt.
-- Lila → Flieder, Grün → Hellgrün, Blau → Hellblau, Rot → Hellrot/Rosé, Gold → warmes Hellgold/Creme.
-- Die PWA-Theme-Farbe folgt ebenfalls der gewählten Akzentfarbe.
-- Sortierfix aus V0.21.2 bleibt enthalten.
-- Keine Datenbankmigration, kein Reset.
+- IndexedDB-Version und Store-Struktur.
+- Bildspeicher-/WebP-Logik.
+- Rezeptdaten und Wochenplan-Datenmodell.
+- Keine automatische Löschung oder Rücksetzung lokaler Daten.
