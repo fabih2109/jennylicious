@@ -1,8 +1,8 @@
-## V0.21.5 – Konfigurierbarer Wochenbeginn
+## V0.21.6 – Konfigurierbarer Wochenbeginn
 
 Basis: V0.21.3. Keine Datenbankmigration, kein Reset.
 
-Neu in V0.21.5:
+Neu in V0.21.6:
 - Neue Einstellung **Wochenbeginn** unter Einstellungen.
 - Wählbar: Montag bis Sonntag.
 - Die Auswahl wird in den bestehenden App-Einstellungen lokal gespeichert und beim nächsten App-Start automatisch wiederhergestellt.
@@ -28,9 +28,17 @@ Unverändert:
 - Keine automatische Löschung oder Rücksetzung lokaler Daten.
 
 
-### V0.21.5 – Compact UI & Shopping Fix
+### V0.21.6 – Compact UI & Shopping Fix
 - Startseite: Suchfeld, Introtexte und „Alle Rezepte“ entfernt.
 - Wochenplan: Untertitel und „Was sollen wir essen?“ entfernt.
 - Wochenplan-Rezeptsuche: Trefferliste aktualisiert sich ohne Neuaufbau des Eingabefelds; Tastatur/Fokus bleiben stabil.
 - Einkauf: große Seitenüberschrift entfernt, kompakter Kopf.
 - Einkauf: tatsächlich vorhandene Kategorien werden immer gerendert, sodass z. B. Sahne/Kühlung nicht unsichtbar werden kann.
+
+
+### V0.21.6 – EKL Mengenanzeige
+- Knoblauch mit Einheit Zehen wird als `1 Knoblauchzehe` bzw. `2 Knoblauchzehen` dargestellt.
+- Stückzahlen werden kompakt als `5x Artikel` statt `5 Stk. Artikel` angezeigt.
+- Neuer Kreis pro Einkaufsartikel zwischen Checkbox und −/+: `●` zeigt Menge+Einheit, `○` blendet sie aus.
+- Der Zustand wird pro Einkaufsartikel lokal gespeichert und bleibt nach App-Neustart erhalten.
+- Ausblenden betrifft nur die Darstellung; Mengen, Einheiten, Beiträge und Rechenlogik bleiben intern vollständig erhalten.
