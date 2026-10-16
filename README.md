@@ -1,8 +1,8 @@
-## V0.21.4 – Konfigurierbarer Wochenbeginn
+## V0.21.5 – Konfigurierbarer Wochenbeginn
 
 Basis: V0.21.3. Keine Datenbankmigration, kein Reset.
 
-Neu in V0.21.4:
+Neu in V0.21.5:
 - Neue Einstellung **Wochenbeginn** unter Einstellungen.
 - Wählbar: Montag bis Sonntag.
 - Die Auswahl wird in den bestehenden App-Einstellungen lokal gespeichert und beim nächsten App-Start automatisch wiederhergestellt.
@@ -26,3 +26,11 @@ Unverändert:
 - Bildspeicher-/WebP-Logik.
 - Rezeptdaten und Wochenplan-Datenmodell.
 - Keine automatische Löschung oder Rücksetzung lokaler Daten.
+
+
+### V0.21.5 – Compact UI & Shopping Fix
+- Startseite: Suchfeld, Introtexte und „Alle Rezepte“ entfernt.
+- Wochenplan: Untertitel und „Was sollen wir essen?“ entfernt.
+- Wochenplan-Rezeptsuche: Trefferliste aktualisiert sich ohne Neuaufbau des Eingabefelds; Tastatur/Fokus bleiben stabil.
+- Einkauf: große Seitenüberschrift entfernt, kompakter Kopf.
+- Einkauf: tatsächlich vorhandene Kategorien werden immer gerendert, sodass z. B. Sahne/Kühlung nicht unsichtbar werden kann.
