@@ -1,44 +1,23 @@
-## V0.21.6 – Konfigurierbarer Wochenbeginn
+## V0.21.7 – EKL Toggle Layout, Knoblauchzehen & Rezept-Zurücknavigation
 
-Basis: V0.21.3. Keine Datenbankmigration, kein Reset.
+Basis: V0.21.6. Keine Datenbankmigration und kein Reset.
 
-Neu in V0.21.6:
-- Neue Einstellung **Wochenbeginn** unter Einstellungen.
-- Wählbar: Montag bis Sonntag.
-- Die Auswahl wird in den bestehenden App-Einstellungen lokal gespeichert und beim nächsten App-Start automatisch wiederhergestellt.
-- Beispiel: Bei **Freitag** wird der Wochenplan als Freitag → Samstag → Sonntag → Montag → Dienstag → Mittwoch → Donnerstag dargestellt.
-- Dieselbe Reihenfolge gilt auch für:
-  - Rezept → „Zum Wochenplan hinzufügen“
-  - „Mit anderem Tag tauschen“
-  - Auswahl „Tage & Extras zum Einkauf“
-  - Wochenplan-Badges am Rezept
-- Die internen Wochentags-Slots bleiben unverändert (Montag=0 … Sonntag=6). Bestehende Planungen, `planEntryId`, Resteverwertung und Einkaufsbeiträge werden deshalb nicht migriert oder neu angelegt.
+### Neu / korrigiert
+- Mengen-/Einheiten-Schalter in der normalen Einkaufsliste als echter 28-px-Kreis umgesetzt.
+- Der Kreis hat damit exakt denselben Durchmesser wie die −/+ Buttons und sitzt in derselben Zeile bzw. auf derselben Mittelachse.
+- Einkaufsmodus (`Einkauf starten`): Der Mengen-Schalter wird nicht mehr angezeigt. Dort bleibt nur die kompakte Checkbox-/Artikeldarstellung.
+- Die zuvor festgelegte Sichtbarkeit von Menge+Einheit bleibt im Einkaufsmodus trotzdem wirksam.
+- Knoblauch mit Einheit `Zehe/Zehen` bleibt semantisch als Knoblauchzehe(n) erkennbar:
+  - sichtbar: `1 Knoblauchzehe`, `2 Knoblauchzehen`
+  - Menge ausgeblendet: `Knoblauchzehen`
+- `Knoblauchpulver` bleibt ein eigenständiger Artikel und wird nicht als Knoblauchzehe behandelt.
+- Rezeptdetail-Zurücknavigation repariert:
+  - Rezept mit Unterkategorie → passende Unterkategorie wird neu aufgebaut und geöffnet.
+  - Rezept ohne Unterkategorie → Hauptkategorie wird neu aufgebaut und geöffnet.
+  - Damit entsteht nach dem Speichern eines neuen Rezepts keine leere Zwischenansicht mehr.
 
-Enthalten aus V0.21.3:
-- Alphabetische Sortierung von Rezepten, die direkt in einer Hauptkategorie liegen.
-- Gekoppelte Akzent-/Hintergrundfarben für Lila, Grün, Blau, Rot und Gold.
-- iOS-sicherer ZIP-Backup-Export aus V0.21.1.
-- Rezeptbewertungen und einmalige In-App-Bewertungserinnerung.
-- Einkaufsliste, Gewürz-/Einheitenlogik und Performance-/Data-Safety-Optimierungen der vorherigen Versionen.
-
-Unverändert:
-- IndexedDB-Version und Store-Struktur.
-- Bildspeicher-/WebP-Logik.
-- Rezeptdaten und Wochenplan-Datenmodell.
-- Keine automatische Löschung oder Rücksetzung lokaler Daten.
-
-
-### V0.21.6 – Compact UI & Shopping Fix
-- Startseite: Suchfeld, Introtexte und „Alle Rezepte“ entfernt.
-- Wochenplan: Untertitel und „Was sollen wir essen?“ entfernt.
-- Wochenplan-Rezeptsuche: Trefferliste aktualisiert sich ohne Neuaufbau des Eingabefelds; Tastatur/Fokus bleiben stabil.
-- Einkauf: große Seitenüberschrift entfernt, kompakter Kopf.
-- Einkauf: tatsächlich vorhandene Kategorien werden immer gerendert, sodass z. B. Sahne/Kühlung nicht unsichtbar werden kann.
-
-
-### V0.21.6 – EKL Mengenanzeige
-- Knoblauch mit Einheit Zehen wird als `1 Knoblauchzehe` bzw. `2 Knoblauchzehen` dargestellt.
-- Stückzahlen werden kompakt als `5x Artikel` statt `5 Stk. Artikel` angezeigt.
-- Neuer Kreis pro Einkaufsartikel zwischen Checkbox und −/+: `●` zeigt Menge+Einheit, `○` blendet sie aus.
-- Der Zustand wird pro Einkaufsartikel lokal gespeichert und bleibt nach App-Neustart erhalten.
-- Ausblenden betrifft nur die Darstellung; Mengen, Einheiten, Beiträge und Rechenlogik bleiben intern vollständig erhalten.
+### Weiterhin enthalten
+- V0.21.6 Mengenanzeige pro Einkaufsartikel.
+- V0.21.5 kompakte Hauptansichten und EKL-Kategorie-Fix.
+- V0.21.4 konfigurierbarer Wochenbeginn.
+- iOS-sicheres Backup, Bewertungen, Einkaufsnormalisierung sowie bestehende Bild-/Daten-Safety-Logik.
