@@ -1,4 +1,4 @@
-## V0.21.8 – Kinderbewertung, Suchfilter & EKL-Kategorien
+## V0.21.9 – Dino-Darstellung
 
 Basis: V0.21.7. Keine Datenbankmigration, kein Reset.
 
@@ -21,3 +21,11 @@ Unverändert:
 - Wochenplan- und Einkaufsdatenmodell.
 - Bildspeicher-/WebP-Logik.
 - Keine automatische Löschung oder Rücksetzung lokaler Daten.
+
+
+### V0.21.9
+- Kinderbewertung nutzt echte eingebettete SVG-Brachiosaurier statt CSS-Masken.
+- Dunkel-goldene Dino-Farbe für bessere Erkennbarkeit.
+- Dinos im Rezepteditor zuverlässig sichtbar und klickbar.
+- Gleiche Dino-Symbole auf Rezeptseite, Rezeptkacheln und in Suchfiltern.
+- Dino-Reihe auf der Rezeptseite höher positioniert, damit sie nicht an der Bildkante abgeschnitten wird.
