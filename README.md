@@ -1,3 +1,14 @@
+## V0.21.10 – Blaue Kronen für Kinderbewertung
+
+Basis: V0.21.9. Keine Datenbankmigration, kein Reset.
+
+Neu in V0.21.10:
+- Kinderbewertung verwendet jetzt eine eigene kindgerechte Krone statt Brachiosaurier.
+- Krone in klarem Blau (#1687d9), inaktive Kronen hellblau.
+- Einheitliches Kronen-SVG in Rezeptansicht, Rezeptkacheln, Editor und Suchfiltern.
+- Texte auf „Krone/Kronen“ angepasst.
+- Bestehende kidsRating-Werte bleiben unverändert erhalten.
+
 ## V0.21.9 – Dino-Darstellung
 
 Basis: V0.21.7. Keine Datenbankmigration, kein Reset.
