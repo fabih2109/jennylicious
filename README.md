@@ -1,3 +1,24 @@
+# Jennylicious V0.22.0 – Zutaten pro Zubereitungsschritt
+
+Basis: V0.21.10 (blaue Kronen). Datenmodell bleibt abwärtskompatibel. Keine IndexedDB-Versionserhöhung, kein Reset.
+
+## Neu
+- Unter jeder Schrittüberschrift erscheint eine Zutatenliste für genau diesen Schritt, oberhalb der Zubereitungsanleitung.
+- Beim Ändern der Portionszahl skalieren die Zutatenlisten im Rezeptdetail und im Kochmodus dynamisch.
+- Mengen im Text werden nur dann skaliert, wenn eine exakt passende, erkennbare Mengen-/Einheitenangabe eindeutig einer Zutat dieses Schritts zugeordnet werden kann. Temperaturen, Zeiten und andere Zahlen bleiben unverändert.
+- Bei älteren Rezepten versucht die App, aus dem Zubereitungstext genannte Zutaten vorzuschlagen. Wird eine Zutat in mehreren Schritten genannt, kennzeichnet die App eine unklare Verteilung mit **gesamt**; die tatsächliche Teilmenge sollte im Rezepteditor festgelegt werden.
+- Im Rezepteditor befindet sich unter jedem Zubereitungsschritt die Schaltfläche **Zutaten für diesen Schritt zuordnen**. Dort sind Zutaten und bei Bedarf Teilmengen für die ursprüngliche Portionszahl auswählbar.
+- Diese neuen Zuordnungen werden als optionales `stepIngredients`-Feld direkt mit dem Rezept gespeichert und ebenso durch bestehende Backup-Funktionen gesichert.
+
+## Sicherheit und Einschränkungen
+- Bisherige `steps` bleiben wortgetreu gespeichert; die App verändert nicht stillschweigend Quelltexte. Dynamische Skalierung erfolgt nur bei der Anzeige.
+- Bei unklaren Zutatenaufteilungen ist menschliche Prüfung erforderlich; die App nimmt keine willkürlichen Teilmengen an.
+- Die gespeicherte `stepIngredients`-Liste besteht aus geordneten Listen je Schritt: `{ingredientIndex, share, inferred}`. Die `share` bezieht sich auf die Gesamtmenge der Zutatenliste zur Original-Portionsgröße.
+- Bestehende Datenbanken, Bilder, Einkaufsliste, Wochenplan, Bewertungen und Backup-Logik bleiben unangetastet.
+- Nach dem Upload Test auf Android und iPhone: bestehendes Rezept und neues Rezept; Portionswechsel 2→4; Teilmengen; Rezepteditor-Speichern; App-Neustart.
+
+---
+
 ## V0.21.10 – Blaue Kronen für Kinderbewertung
 
 Basis: V0.21.9. Keine Datenbankmigration, kein Reset.
