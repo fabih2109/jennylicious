@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.22.1</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.22.2</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -373,6 +373,12 @@ a {
 #steps .jl-step-ingredientbox{margin:7px 0 9px;padding:6px 10px}
 #steps .stepbody{padding-left:0}
 .stepedit .jl-link-step-btn{grid-column:2/4;border:1px dashed #bd9fc8;background:#fcf7ff;color:var(--jl-accent);border-radius:10px;padding:8px 10px;text-align:left;font-size:12px;font-weight:750;line-height:1.4}
+
+.jl-review-stepbar{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 10px;font-size:12px;color:#76627e}
+.jl-review-stepbar button{border:1px solid #d9c1df;background:#f8f1f9;color:#693680;border-radius:12px;font-weight:750;padding:8px 12px}
+.jl-review-list{display:grid;gap:8px;margin:14px 0}
+.jl-review-entry{display:grid;gap:3px;border:1px solid #e9d9e9;background:#fffbff;padding:10px;border-radius:10px;font-size:13px}
+.jl-review-entry span{color:#52495a;line-height:1.4}
 .jl-step-editor-hint{font-size:13px;color:#76647e;line-height:1.5}
 .jl-step-editor-items{display:grid;gap:8px;max-height:45vh;overflow-y:auto;margin:12px 0}
 .jl-step-editor-item{border:1px solid #e6dae9;border-radius:12px;background:#fff;padding:10px 12px;display:grid;gap:8px}
@@ -400,7 +406,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div><div class="settingrow"><div><b>Wochenbeginn</b><small>Erster Tag im Wochenplan, z. B. passend zum Einkaufstag</small></div><select id="weekStart" class="smallselect" onchange="setWeekStart(this.value)"><option value="0">Montag</option><option value="1">Dienstag</option><option value="2">Mittwoch</option><option value="3">Donnerstag</option><option value="4">Freitag</option><option value="5">Samstag</option><option value="6">Sonntag</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Akzentfarbe und heller Hintergrund werden automatisch passend kombiniert.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.22.1</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.22.2</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -429,7 +435,7 @@ a {
 <label class="checkline"><input id="editFav" type="checkbox"> Direkt als Favorit markieren</label>
 </div>
 <div class="editsection"><div class="editsectionhead"><h2>Zutaten</h2><button onclick="addIngredientRow()">＋ Zutat</button></div><div id="ingredientEditor"></div></div>
-<div class="editsection"><div class="editsectionhead"><h2>Zubereitung</h2><button onclick="addStepRow()">＋ Schritt</button></div><div id="stepEditor"></div></div>
+<div class="editsection"><div class="editsectionhead"><h2>Zubereitung</h2><button onclick="addStepRow()">＋ Schritt</button></div><div class="jl-review-stepbar"><span>Automatische Zuordnung als Vorschlag – bitte Teilmengen prüfen.</span><button type="button" onclick="jlReviewStepAssignments()">Zuordnung prüfen</button></div><div id="stepEditor"></div></div>
 <div id="editError" class="editerror"></div>
 <button id="editorSaveBtn" class="savebtn" onclick="saveManualRecipe()">✓ Rezept speichern</button><button class="action" onclick="cancelEditor()">Abbrechen</button>
 </section>
@@ -765,6 +771,7 @@ async function confirmReviewedRecipe(){
  let usedIds=[...R.map(r=>Number(r.id)||0),...Object.keys(cookHistory||{}).map(v=>Number(v)||0)];let id=Math.max(0,...usedIds)+1;cookHistory[id]=[];
  customMainSubs[x.main]=customMainSubs[x.main]||[];x.subs.forEach(v=>{if(!customMainSubs[x.main].includes(v))customMainSubs[x.main].push(v)});
  let imgKey=MI[x.main]||'pasta';if(pendingPackageImage){imgKey='import_'+id;IMG[imgKey]=pendingPackageImage}R.push({id,title:x.title,main:x.main,sub:x.sub,subs:x.subs,specials:x.specials,recipeTip:x.recipeTip,mealPrep:x.mealPrep,img:imgKey,mins:x.mins,fav:x.fav,rating:x.rating||0,kidsRating:x.kidsRating||0,serv:x.serv,ingredients:x.ingredients,steps:x.steps,stepIngredients:Array.isArray(x.stepIngredients)?x.stepIngredients.map(z=>Array.isArray(z)?z:[]):undefined,ingredientNames:x.ingredients.map(i=>i[2].toLowerCase())});
+ {const imported=R[R.length-1],manual=(imported.steps||[]).map((_,i)=>jlIsManualStepMap(imported,i));imported.stepIngredients=jlInferAllStepLinks(imported);imported.stepIngredientManual=manual}
  if(pendingPackageImageBlob){try{await jlPut('images','recipe:'+id,{key:'recipe:'+id,blob:pendingPackageImageBlob,updatedAt:new Date().toISOString()})}catch(err){R.pop();e.textContent='Rezeptbild konnte nicht dauerhaft gespeichert werden: '+err.message;e.classList.add('show');return}}
  try{const saved=await jlWrite();if(!saved)throw new Error('recipe-save-blocked')}catch(err){R.pop();delete cookHistory[id];e.textContent='Rezept konnte nicht sicher gespeichert werden. Es wurde nicht als gespeichert bestätigt.';e.classList.add('show');console.error(err);return}
  init();renderWeek();pendingJsonIndex++;
@@ -918,19 +925,19 @@ async function saveManualRecipe(){
  let title=editTitle.value.trim(),main=editMain.value,subs=selectedEditorSubs(),sub=subs[0]||'',specials=editSpecial.value.split(',').map(x=>x.trim()).filter(Boolean),recipeTip=normalizeMultiline(editTip.value),mealPrep=normalizeMultiline(editMealPrep.value),serv=Math.max(1,+editServ.value||4),mins=Math.max(1,+editMins.value||30);
  let ingredients=[...ingredientEditor.querySelectorAll('.ingredientedit')].map(x=>{let raw=x.querySelector('.iqty').value.trim(),num=raw===''?null:Number(raw);return [Number.isFinite(num)?num:null,x.querySelector('.iunit').value,x.querySelector('.iname').value.trim()]}).filter(x=>x[2]);
  let steps=[...stepEditor.querySelectorAll('textarea')].map(x=>normalizeMultiline(x.value)).filter(Boolean);
- let stepIngredients=jlCollectEditorStepIngredientMaps();
+ let stepIngredients=jlCollectEditorStepIngredientMaps(),stepIngredientManual=jlCollectEditorStepManualFlags();
  if(!title||!main||!ingredients.length||!steps.length){editError.textContent='Bitte mindestens Rezeptname, Hauptkategorie, eine Zutat und einen Zubereitungsschritt ausfüllen.';editError.classList.add('show');return}
  jlManualRecipeSaveBusy=true;jlSuppressAutosave(5000);const manualSaveBtn=document.getElementById('editorSaveBtn');if(manualSaveBtn){manualSaveBtn.disabled=true;manualSaveBtn.textContent='⏳ Wird gespeichert …';manualSaveBtn.setAttribute('aria-busy','true')}editError.textContent='⏳ Wird gespeichert … Bitte warten und die App geöffnet lassen.';editError.classList.add('show');await new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve)));
  if(editingRecipeId){
   let r=R.find(x=>x.id===editingRecipeId);if(!r){jlResetManualSaveUi();return;}
-  r.title=title;r.main=main;r.sub=sub;r.subs=subs;r.specials=specials;r.recipeTip=recipeTip;r.mealPrep=mealPrep;r.serv=serv;r.mins=mins;r.fav=editFav.checked;r.rating=editRatingValue;r.kidsRating=editKidsRatingValue;r.ingredients=ingredients;r.steps=steps;r.stepIngredients=stepIngredients;r.ingredientNames=ingredients.map(x=>x[2].toLowerCase());
+  r.title=title;r.main=main;r.sub=sub;r.subs=subs;r.specials=specials;r.recipeTip=recipeTip;r.mealPrep=mealPrep;r.serv=serv;r.mins=mins;r.fav=editFav.checked;r.rating=editRatingValue;r.kidsRating=editKidsRatingValue;r.ingredients=ingredients;r.steps=steps;r.stepIngredients=stepIngredients;r.stepIngredientManual=stepIngredientManual;r.ingredientNames=ingredients.map(x=>x[2].toLowerCase());
   if(editorImageData){let key='custom_'+r.id+'_'+Date.now();IMG[key]=editorImageData;jlMarkImageDirty(key);r.img=key}
   customMainSubs[main]=customMainSubs[main]||[];subs.forEach(x=>{if(!customMainSubs[main].includes(x))customMainSubs[main].push(x)});
   if(editRatingValue>0&&pendingRatingReminder&&String(pendingRatingReminder.recipeId)===String(r.id))pendingRatingReminder=null;
   let id=r.id;try{const saved=await jlWrite();if(!saved)throw new Error('recipe-save-blocked')}catch(err){editError.textContent='Änderungen konnten nicht sicher gespeichert werden. Bitte die App nicht schließen und erneut speichern.';editError.classList.add('show');console.error(err);jlResetManualSaveUi();return}editingRecipeId=null;jlResetManualSaveUi();init();renderWeek();setTheme(appSettings.theme);curMain=main;curSub=sub;openRecipe(id);return
  }
  let id=Math.max(0,...R.map(r=>r.id))+1,fallback=MI[main]||'pasta';
- let r={id,title,main,sub,subs,specials,recipeTip,mealPrep,img:fallback,customImg:editorImageData||'',mins,fav:editFav.checked,rating:editRatingValue,kidsRating:editKidsRatingValue,serv,ingredients,steps,stepIngredients,ingredientNames:ingredients.map(x=>x[2].toLowerCase())};
+ let r={id,title,main,sub,subs,specials,recipeTip,mealPrep,img:fallback,customImg:editorImageData||'',mins,fav:editFav.checked,rating:editRatingValue,kidsRating:editKidsRatingValue,serv,ingredients,steps,stepIngredients,stepIngredientManual,ingredientNames:ingredients.map(x=>x[2].toLowerCase())};
  R.push(r);customMainSubs[main]=customMainSubs[main]||[];subs.forEach(x=>{if(!customMainSubs[main].includes(x))customMainSubs[main].push(x)});
  if(r.customImg){let key='custom_'+id;IMG[key]=r.customImg;jlMarkImageDirty(key);r.img=key}
  try{const saved=await jlWrite();if(!saved)throw new Error('recipe-save-blocked')}catch(err){R.pop();editError.textContent='Rezept konnte nicht sicher gespeichert werden. Es wurde nicht als gespeichert bestätigt.';editError.classList.add('show');console.error(err);jlResetManualSaveUi();return}
@@ -1369,7 +1376,7 @@ const jlDirtyImageKeys=new Set();
 let jlAutosaveSuppressedUntil=0;
 function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
 function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
-const JL_APP_VERSION='0.22.1';
+const JL_APP_VERSION='0.22.2';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1806,7 +1813,7 @@ document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.add
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js?v=0221',{updateViaCache:'none'})
+    navigator.serviceWorker.register('./service-worker.js?v=0222',{updateViaCache:'none'})
       .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }
@@ -2303,7 +2310,7 @@ function jlEditorIngredients(){
  })).filter(x=>x.name);
 }
 function jlCoreName(name,unit=''){
- const str=String(name||'').toLocaleLowerCase('de').replace(/\([^)]*\)/g,' ').replace(/[,;/].*$/,' ').trim();
+ const str=String(name||'').toLocaleLowerCase('de').replace(/\([^)]*\)/g,' ').replace(/[,;/].*$/,' ').replace(/\b\d+(?:[.,]\d+)?\s*%/g,' ').replace(/\b(?:fettarm|fettarme|light|frisch|frische|frischer|frischen)\b/g,' ').trim();
  if(/knoblauch/.test(str)){
   if(/pulver/.test(str))return 'knoblauchpulver';
   if(/zeh/.test(str)||/zeh/i.test(unit))return 'knoblauchzeh';
@@ -2317,22 +2324,71 @@ function jlMentionsIngredient(step,name,unit){
  const txt=String(step||'').toLocaleLowerCase('de');
  const core=jlCoreName(name,unit);
  if(!core)return false;
- if(core==='knoblauchzeh')return /knoblauchzeh|zehen?\s+knoblauch/.test(txt);
+ if(core==='knoblauchzeh')return /knoblauchzeh|zehen?\s+knoblauch|knoblauch(?!pulver)/.test(txt);
  if(core==='knoblauch')return /knoblauch(?!pulver|zeh)/.test(txt);
  if(core==='knoblauchpulver')return /knoblauchpulver/.test(txt);
  return txt.includes(core);
 }
-function jlInferStepLinks(r,stepIndex){
- const text=String(r?.steps?.[stepIndex]||'');
- return (r?.ingredients||[]).flatMap((ing,index)=>ing&&ing[2]&&jlMentionsIngredient(text,ing[2],ing[1])?[{ingredientIndex:index,share:1,inferred:true}]:[]);
+function jlFindStepExplicitQty(text,ing){
+ const unit=String(ing?.[1]||'').trim(),core=jlCoreName(ing?.[2],unit),name=String(ing?.[2]||'').trim();
+ if(!core)return null;
+ const num='(\\d+(?:[.,]\\d+)?)';
+ let variants=[];
+ if(core==='knoblauchzeh')variants=[num+'\\s*(?:Knoblauchzehen?|Zehen?\\s+Knoblauch)'];
+ else if(unit){
+   let u=/^stk\.?$/i.test(unit)?'Stk\\.?':jlEscapeRegex(unit);
+   variants=[num+'\\s*'+u+'\\s+[^.!?\\n]{0,24}?'+jlEscapeRegex(core)];
+ }else if(core.length>=4&&name.split(/\s+/).length===1){
+   variants=[num+'\\s+'+jlEscapeRegex(core)+'[\\p{L}]*'];
+ }
+ for(const pat of variants){
+  const re=new RegExp('(^|[^\\p{L}\\d])'+pat,'giu'),hits=[...String(text).matchAll(re)];
+  if(hits.length===1){const n=Number(hits[0][2].replace(',','.'));if(Number.isFinite(n)&&n>0)return n}
+ }
+ return null;
 }
+function jlIsManualStepMap(r,i){
+ const explicit=r?.stepIngredientManual?.[i];
+ if(explicit===true)return true;
+ if(explicit===false)return false;
+ const row=r?.stepIngredients?.[i];
+ return Array.isArray(row)&&(!row.length||row.some(l=>l?.inferred===false));
+}
+function jlInferAllStepLinks(r){
+ const steps=r?.steps||[],ings=r?.ingredients||[],stored=r?.stepIngredients||[];
+ const output=steps.map((_,i)=>jlIsManualStepMap(r,i)?jlSafeLinks(stored[i]||[],r):null);
+ const locked=steps.map((_,i)=>jlIsManualStepMap(r,i));
+ const manuallyUsed=new Set(output.filter(Array.isArray).flatMap(row=>row.map(l=>l.ingredientIndex)));
+ ings.forEach((ing,index)=>{
+  if(!ing?.[2]||manuallyUsed.has(index))return;
+  const found=[];
+  steps.forEach((txt,i)=>{if(!locked[i]&&jlMentionsIngredient(txt,ing[2],ing[1]))found.push(i)});
+  if(!found.length)return;
+  const base=ing[0]===null||ing[0]===undefined||ing[0]===''?null:Number(ing[0]);
+  const quantities=found.map(i=>jlFindStepExplicitQty(steps[i],ing));
+  const reliable=Number.isFinite(base)&&base>0&&quantities.every(q=>q!==null)&&quantities.reduce((a,b)=>a+b,0)<=base*1.001;
+  if(reliable){
+   found.forEach((i,k)=>{if(!output[i])output[i]=[];output[i].push({ingredientIndex:index,share:quantities[k]/base,inferred:true})});
+  }else{
+   // A later mention often refers to an already prepared ingredient (e.g. cooked noodles).
+   // Do not add the full amount again. An uncertain true split is reviewed in the editor.
+   let first=found[0];
+   if(!output[first])output[first]=[];
+   const qty=quantities[0],share=Number.isFinite(base)&&base>0&&qty!==null&&qty<=base?qty/base:1;
+   output[first].push({ingredientIndex:index,share,inferred:true});
+  }
+ });
+ return output.map(row=>row||[]);
+}
+function jlInferStepLinks(r,stepIndex){return jlInferAllStepLinks(r)[stepIndex]||[]}
 function jlSafeLinks(links,r){
  if(!Array.isArray(links))return [];
  return links.filter(l=>Number.isInteger(Number(l?.ingredientIndex))&&Number(l.ingredientIndex)>=0&&Number(l.ingredientIndex)<(r?.ingredients?.length||0)).map(l=>({ingredientIndex:Number(l.ingredientIndex),share:Number.isFinite(Number(l.share))&&Number(l.share)>0?Number(l.share):1,inferred:!!l.inferred}));
 }
 function jlLinksForStep(r,i){
  const mapped=r?.stepIngredients?.[i];
- return Array.isArray(mapped)?jlSafeLinks(mapped,r):jlInferStepLinks(r,i);
+ if(jlIsManualStepMap(r,i))return jlSafeLinks(mapped||[],r);
+ return jlInferStepLinks(r,i);
 }
 function jlFormatNumber(q){let n=Math.round(Number(q)*1000)/1000;return Number.isInteger(n)?String(n):String(n).replace('.',',')}
 function jlStepIngredientName(ing,qty){
@@ -2342,22 +2398,21 @@ function jlStepIngredientName(ing,qty){
 }
 function jlCountOccurrences(r,index){let count=0;for(let i=0;i<(r.steps||[]).length;i++)if(jlLinksForStep(r,i).some(l=>l.ingredientIndex===index))count++;return count}
 function jlStepIngredientDisplay(r,i,ratio){
- const links=jlLinksForStep(r,i),rows=[];let hasShared=false;
+ const links=jlLinksForStep(r,i),rows=[];
  for(const l of links){
   const ing=r.ingredients[l.ingredientIndex];if(!ing||!ing[2])continue;
-  const shared=l.inferred&&jlCountOccurrences(r,l.ingredientIndex)>1;
-  if(shared)hasShared=true;
+
   const base=ing[0]===null||ing[0]===undefined||ing[0]===''?null:Number(ing[0]);
   const qty=base!==null&&Number.isFinite(base)?base*l.share*ratio:null;
   const unit=String(ing[1]||'').trim();
   const garlic=/^zehe(n)?\.?$/i.test(unit)&&/^knoblauch$/i.test(String(ing[2]).trim());
   const title=jlStepIngredientName(ing,qty);
   const unitDisplay=garlic?'':unit==='Stk.'?'×':unit;
-  const quantityDisplay=shared?'':qty===null?'':`${jlFormatNumber(qty)}${unitDisplay==='×'?'×':unitDisplay?' '+unitDisplay:''}`;
-  rows.push(`<div class="jl-step-ingredient"><strong>${escHtml(quantityDisplay)}</strong><span>${escHtml(title)}</span>${shared?'<small>gesamt</small>':''}</div>`);
+  const quantityDisplay=qty===null?'':`${jlFormatNumber(qty)}${unitDisplay==='×'?'×':unitDisplay?' '+unitDisplay:''}`;
+  rows.push(`<div class="jl-step-ingredient"><strong>${escHtml(quantityDisplay)}</strong><span>${escHtml(title)}</span></div>`);
  }
  if(!rows.length)return '';
- return `<div class="jl-step-ingredientbox" aria-label="Zutaten für diesen Zubereitungsschritt">${rows.join('')}${hasShared?'<small class="jl-step-shared-note">„gesamt“: Zutat wird in mehreren Schritten verwendet. Teilmengen im Rezepteditor zuordnen.</small>':''}</div>`;
+ return `<div class="jl-step-ingredientbox" aria-label="Zutaten für diesen Zubereitungsschritt">${rows.join('')}</div>`;
 }
 function jlEscapeRegex(s){return String(s).replace(/[.*+?^${}()|[\]\\]/g,'\\$&')}
 function jlScaleStepText(r,i,ratio){
@@ -2385,10 +2440,10 @@ function jlScaleStepText(r,i,ratio){
  }
  return raw;
 }
-function jlStepHtml(r,i,ratio=1){
+function jlStepHtml(r,i,ratio=1,includeIngredients=false){
  const text=jlScaleStepText(r,i,ratio),raw=normalizeMultiline(text),pos=raw.indexOf('\n');
  const title=pos>=0?raw.slice(0,pos).trim():raw.trim(),body=pos>=0?raw.slice(pos+1):'';
- const ingredients=jlStepIngredientDisplay(r,i,ratio);
+ const ingredients=includeIngredients?jlStepIngredientDisplay(r,i,ratio):'';
  return `${body?`<b class="steptitle">${escHtml(title)}:</b>`:''}${ingredients}<span class="stepbody">${escHtml(body||title)}</span>`;
 }
 const jlOldRenderIng=renderIng;
@@ -2401,7 +2456,7 @@ renderCookSteps=function(){
  const factor=servings/(Number(cur.serv)||1);
  cookSteps.innerHTML=cur.steps.map((st,i)=>{
   const cl=cookDone[i]?'done':i===next?'current':'future';
-  return `<button class="cookstep ${cl}" onclick="toggleCookStep(${i})"><span class="num">${cookDone[i]?'✓':i+1}</span><div class="jl-cookstep-content">${jlStepHtml(cur,i,factor)}</div></button>`;
+  return `<button class="cookstep ${cl}" onclick="toggleCookStep(${i})"><span class="num">${cookDone[i]?'✓':i+1}</span><div class="jl-cookstep-content">${jlStepHtml(cur,i,factor,true)}</div></button>`;
  }).join('');
 };
 const jlOldChangeCookServ=changeCookServ;
@@ -2409,13 +2464,13 @@ changeCookServ=function(d){jlOldChangeCookServ(d);renderCookSteps()};
 
 /* Step editor assignments use stable ingredient-row IDs, not fragile row indexes. */
 const jlOldAddStepRow=addStepRow;
-let jlEditingStepAssignments=[];
+let jlEditingStepAssignments=[],jlEditingStepManualFlags=[];
 addStepRow=function(txt=''){
  jlOldAddStepRow(txt);
  const step=stepEditor.lastElementChild;if(!step)return;
  const oldIndex=[...stepEditor.children].indexOf(step),old=jlEditingStepAssignments?.[oldIndex];
  const refs=jlEditorIngredients();
- step._jlLinks=Array.isArray(old)?old.map(l=>({key:refs[Number(l.ingredientIndex)]?.key,share:l.share,inferred:!!l.inferred})).filter(l=>l.key):null;
+ step._jlLinks=jlEditingStepManualFlags[oldIndex]&&Array.isArray(old)?old.map(l=>({key:refs[Number(l.ingredientIndex)]?.key,share:l.share,inferred:!!l.inferred})).filter(l=>l.key):null;
  const btn=document.createElement('button');btn.type='button';btn.className='jl-link-step-btn';btn.textContent='＋ Zutaten für diesen Schritt zuordnen';
  btn.onclick=()=>jlOpenStepIngredientEditor(step);
  step.appendChild(btn);jlRefreshStepAssignButton(step);
@@ -2428,15 +2483,41 @@ function jlRefreshStepAssignButton(step){
 const jlOldOpenRecipeEditor=openRecipeEditor;
 openRecipeEditor=function(id){
  const r=R.find(x=>x.id===id);
- jlEditingStepAssignments=(r?.stepIngredients||[]).map(a=>Array.isArray(a)?a:null);
+ jlEditingStepManualFlags=r?(r.steps||[]).map((_,i)=>jlIsManualStepMap(r,i)):[];
+ jlEditingStepAssignments=r?jlInferAllStepLinks(r):[];
  jlOldOpenRecipeEditor(id);
- jlEditingStepAssignments=[];
+ jlEditingStepAssignments=[];jlEditingStepManualFlags=[];
 };
 const jlOldResetEditor=resetEditor;
-resetEditor=function(){jlEditingStepAssignments=[];jlOldResetEditor()};
+resetEditor=function(){jlEditingStepAssignments=[];jlEditingStepManualFlags=[];jlOldResetEditor()};
+function jlEditorInferredMaps(){
+ const refs=jlEditorIngredients(),texts=[...stepEditor.querySelectorAll('.stepedit')].map(s=>normalizeMultiline(s.querySelector('textarea')?.value||''));
+ const r={ingredients:refs.map(x=>[x.qty===''?null:Number(x.qty),x.unit,x.name]),steps:texts};
+ return jlInferAllStepLinks(r);
+}
 function jlStepEditorAutoLinks(step){
- const refs=jlEditorIngredients();const text=step.querySelector('textarea')?.value||'';
- return refs.filter(x=>jlMentionsIngredient(text,x.name,x.unit)).map(x=>({key:x.key,share:1,inferred:true}));
+ const refs=jlEditorIngredients(),stepIndex=[...stepEditor.querySelectorAll('.stepedit')].indexOf(step);
+ return (jlEditorInferredMaps()[stepIndex]||[]).map(l=>({key:refs[l.ingredientIndex]?.key,share:l.share,inferred:true})).filter(l=>l.key);
+}
+function jlReviewStepAssignments(){
+ const refs=jlEditorIngredients(),all=jlEditorInferredMaps(),stepRows=[...stepEditor.querySelectorAll('.stepedit')],appearances=new Map();
+ stepRows.forEach((s,i)=>{
+  const links=s._jlLinks===null?all[i]?.map(l=>({key:refs[l.ingredientIndex]?.key,share:l.share,inferred:true})):s._jlLinks||[];
+  for(const l of links||[]){if(!l?.key)continue;appearances.set(l.key,(appearances.get(l.key)||0)+1)}
+ });
+ const lines=stepRows.map((s,i)=>{
+  const guessed=all[i]?.map(l=>({key:refs[l.ingredientIndex]?.key,share:l.share,inferred:true}))||[];
+  const links=s._jlLinks===null?guessed:s._jlLinks||[];
+  const names=links.map(l=>{const ref=refs.find(x=>x.key===l.key);if(!ref)return '';let num=ref.qty===''?'':jlFormatNumber(Number(ref.qty)*l.share)+' '+ref.unit;return escHtml((num+' '+ref.name).trim())}).filter(Boolean);
+  return `<div class="jl-review-entry"><b>Schritt ${i+1}</b><span>${names.join(', ')||'Keine Zutat erkannt – bitte prüfen'}</span></div>`;
+ });
+ const uncertain=refs.filter(ref=>{
+  const hits=stepRows.filter(s=>jlMentionsIngredient(s.querySelector('textarea')?.value,ref.name,ref.unit)).length;
+  return hits>1;
+ });
+ modalContent.classList.remove('compact');
+ modalContent.innerHTML=`<h2>Zutatenzuordnung prüfen</h2><p class="jl-step-editor-hint">Nur Vorschläge. Mehrfach erwähnte Zutaten werden nicht automatisch mehrfach als Gesamtmenge angesetzt. Prüfe echte Teilmengen über „Zutaten für diesen Schritt zuordnen“.</p><div class="jl-review-list">${lines.join('')}</div>${uncertain.length?`<p class="jl-step-editor-hint"><b>Mehrfach erwähnt:</b> ${uncertain.map(x=>escHtml(x.name)).join(', ')}. Prüfe, ob es sich um Wiederverwendung oder getrennte Teilmengen handelt.</p>`:''}<button class="action" onclick="modal.classList.remove('show')">Zurück zum Rezepteditor</button>`;
+ modal.classList.add('show');
 }
 let jlStepEditorTarget=null;
 function jlOpenStepIngredientEditor(step){
@@ -2480,6 +2561,9 @@ function jlCollectEditorStepIngredientMaps(){
   const links=step._jlLinks===null?jlStepEditorAutoLinks(step):step._jlLinks||[];
   return links.filter(l=>toIndex.has(l.key)).map(l=>({ingredientIndex:toIndex.get(l.key),share:Number(l.share)||1,inferred:!!l.inferred}));
  });
+}
+function jlCollectEditorStepManualFlags(){
+ return [...stepEditor.querySelectorAll('.stepedit')].filter(step=>normalizeMultiline(step.querySelector('textarea')?.value||'')).map(step=>step._jlLinks!==null);
 }
 
 </script>
