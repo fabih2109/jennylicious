@@ -1,3 +1,19 @@
+# Jennylicious V0.22.1 – Kompakte Zutaten pro Zubereitungsschritt
+
+Basis: V0.22.0. Reines GUI-Update, ohne Änderung am Rezept-Datenmodell, an gespeicherten Mengen oder an der Skalierungslogik.
+
+- Gelb hinterlegte Zutatenfelder bleiben in Rezeptdetail und Kochmodus erhalten.
+- Wiederholte Kopfzeile „ZUTATEN FÜR DIESEN SCHRITT · X PORTIONEN“ entfernt.
+- Kleinere Schrift, geringere Zeilenabstände und kompaktere Innen-/Außenabstände.
+- Bei mehreren genutzten Schritten bleibt die notwendige Warnung zu unklar verteilten Mengen („gesamt“) erhalten.
+- Mengen pro Portion, automatische Zutatenzuordnung, Editor und bestehende Texte bleiben unverändert.
+- Die Bereinigung alter Zubereitungstexte per Backup/JSON ist ausdrücklich **nicht** Bestandteil dieser Version.
+- Keine Datenbankmigration, kein Reset und keine Änderungen an Bildern, Backup oder Einkaufslisten.
+
+---
+
+## Vorherige Version 0.22.0
+
 # Jennylicious V0.22.0 – Zutaten pro Zubereitungsschritt
 
 Basis: V0.21.10 (blaue Kronen). Datenmodell bleibt abwärtskompatibel. Keine IndexedDB-Versionserhöhung, kein Reset.
