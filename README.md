@@ -1,3 +1,17 @@
+# Jennylicious V0.22.4 – Einheitliche Fußzeile bei Rezeptkacheln
+
+Basis: V0.22.3, ohne Datenmigration.
+
+- Rezepttitel bleiben über dem unteren Informationsbereich der Kacheln.
+- Rezeptdauer steht immer links unten auf gleicher Grundlinie.
+- Vorhandene Sterne und Kinder-Kronen stehen immer rechts unten in gleicher Reihenfolge und bleiben unabhängig von der Titellänge verankert.
+- Auch Rezepte ohne Bewertungen reservieren dieselbe Höhe für die Fußzeile.
+- Blaue Kronen und goldene Sterne behalten ihre bisherige Symbolgröße.
+- Kochmodus: Zutatenkästen innerhalb der Zubereitungsschritte bleiben wie in V0.22.3 ausgeblendet; Zuordnungsdaten und Mengenlogik bleiben unverändert.
+- IndexedDB, Rezeptbilder, Backup/Restore und Wochenplan sind unverändert.
+
+---
+
 # Jennylicious V0.22.3 – Kartenbewertungen & Kochmodus-Anzeige
 
 Basis: V0.22.2. Alle bisherigen Funktionen bleiben erhalten.
