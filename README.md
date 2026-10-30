@@ -1,3 +1,27 @@
+# Jennylicious V0.22.3 – Kartenbewertungen & Kochmodus-Anzeige
+
+Basis: V0.22.2. Alle bisherigen Funktionen bleiben erhalten.
+
+## Änderungen
+- Auf Rezeptkacheln teilen sich Titel, Minutenangabe und Bewertungen jetzt einen vertikalen Layoutbereich; die Bewertungen liegen nicht mehr als Überlagerung über dem Rezepttitel.
+- Blaue Kronen in Kacheln, Rezeptdetail und Editor sind optisch an die jeweiligen Sterne angepasst. Favoriten-Herz und Sterne-/Kronenbewertungen bleiben ansonsten unverändert.
+- Zutaten-Kästchen pro Zubereitungsschritt im Kochmodus sind **ausschließlich per CSS ausgeblendet**. Die Zuordnungen, Teilmengen, Portionenberechnung und Editor-Funktionen bleiben im Datenmodell erhalten.
+- Keine Änderung an Rezepten, Bildern, Einkaufslisten, IndexedDB, Backupformat oder Caches außer der Versionskennung.
+
+## Prüfpunkte nach dem GitHub-Upload
+1. Kategorie mit langem Titel (z. B. „Der perfekte Pfannkuchen“) und 5 Sternen + 5 Kronen: Titel und Bewertungen dürfen sich nicht überlagern.
+2. Rezept ohne Bewertung und mit nur einer Bewertungsart prüfen.
+3. Rezept mit Bewertungen in Detailansicht und Editor prüfen.
+4. Kochmodus: keine Schritt-Zutatenkästen; Zubereitungstext und Gesamtzutatenliste bleiben erhalten.
+5. Rezepteditor: Zutatenzuordnungen weiterhin editierbar, ohne Datenverlust.
+
+## Technische Prüfung
+- Kein IndexedDB-Upgrade und keine Datenmigration.
+- Keine Änderung des Verhaltens beim Speichern, Laden und Importieren.
+
+---
+
+## Bisheriger Stand (V0.22.2)
 # Jennylicious V0.22.2 – Schritt-Zutaten nur beim Kochen
 
 Ausgangsbasis: V0.22.1, alle bisherigen Funktionen enthalten.
