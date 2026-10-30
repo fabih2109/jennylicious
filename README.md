@@ -1,3 +1,17 @@
+# Jennylicious V0.22.5 – Bewertungen links oben
+
+Basis: V0.22.4. Nur Darstellung von Rezeptkacheln geändert.
+
+- Goldene Sterne **links oben im Rezeptbild**, blaue Kronen **direkt darunter**, in unveränderter Größe.
+- Titel und Kochzeit links unten **direkt untereinander**, unabhängig von den Bewertungen.
+- Längere Rezeptnamen werden auf maximal vier Zeilen begrenzt, damit sie auf kleinen Displays nicht bis zu den Bewertungen reichen. Der vollständige Titel bleibt in Rezeptansicht und Daten unverändert.
+- Leichte Kontrastverstärkung auf Bildern für Lesbarkeit von Bewertungen und Titel.
+- Favoriten-Herz bleibt rechts oben.
+- Kochmodus: Schritt-Zutatenkästen bleiben wie zuvor ausgeblendet; die Berechnung und Zuordnungen bleiben erhalten.
+- Keine Änderung an IndexedDB, Rezepten, Backup/Restore, Bilddaten, Wochenplan oder Einkaufslisten.
+
+---
+
 # Jennylicious V0.22.4 – Einheitliche Fußzeile bei Rezeptkacheln
 
 Basis: V0.22.3, ohne Datenmigration.
