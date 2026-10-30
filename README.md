@@ -1,3 +1,17 @@
+# Jennylicious V0.22.6 – Responsive Bewertungsfußzeile
+
+Basis: V0.22.5, ausschließlich Darstellung von Rezeptkacheln geändert.
+
+- Titel steht unten links über einer festen Infozeile; keine Überlagerung mit Bewertungen.
+- Breitere Handys (ab 390 CSS-Pixel Viewport): Kochzeit links, bis zu 5 blaue Kronen mittig, bis zu 5 goldene Sterne rechts in einer Zeile.
+- Schmalere Handys (unter 390 CSS-Pixel): Kochzeit links; Bewertungen rechts übereinander, Sterne über Kronen.
+- Auch Kochzeiten mit vierstelliger Minutenzahl (z. B. 1224 Min) berücksichtigt.
+- Wenn keine Bewertung existiert, keine Sterne/Kronen als Platzhalter.
+- Favoritenherz bleibt rechts oben; Schatten nur im unteren Kachelbereich.
+- Keine Änderung von Rezeptdaten, Bewertungen, Bilderverwaltung, Backup, IndexedDB, Zutaten- oder Kochmoduslogik.
+- Die Kochmodus-Schrittzutaten bleiben wie in V0.22.5 per CSS ausgeblendet.
+- Kein Datenbank-Reset.
+
 # Jennylicious V0.22.5 – Bewertungen links oben
 
 Basis: V0.22.4. Nur Darstellung von Rezeptkacheln geändert.
