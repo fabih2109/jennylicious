@@ -1,3 +1,22 @@
+# Jennylicious V0.22.8 – Fix fehlender Rezeptbilder in Kategorien
+
+Basis: V0.22.7. **Gezielter Rendering-Hotfix ohne Datenmigration.**
+
+## Ursache (konkret nachvollziehbar)
+
+In V0.22.7 erhielt `row(r, deferImage=false)` einen zweiten Parameter zum verzögerten Laden der Suchbilder. Bestehende Kategorien-Renderer verwendeten weiterhin `array.map(row)`. JavaScript übergibt dabei automatisch den Listenindex als zweites Argument: Index 0 wurde als `false` behandelt (Bild sichtbar), Index 1, 2, 3 ... als `true` (nur `data-jl-search-img`, **kein `src`**). Der Bildbeobachter wird aber nur innerhalb der Suche gestartet. Daher blieben in Haupt-/Unterkategorien sowie weiteren normalen Listen die Bilder ab der zweiten Kachel leer. **Die Bilder im IndexedDB-Speicher wurden dadurch nicht gelöscht.**
+
+## Fixes
+
+1. Normale Rezeptlisten rufen jetzt `row(r,false)` explizit ohne Listenindex auf.
+2. Die Kachel-Funktion schaltet verzögertes Laden nur noch bei `deferImage === true` ein, nicht bei einer beliebigen positiven Zahl.
+3. Nur die Rezeptsuche ruft weiterhin `row(r,true)` auf und behält die paginierte, speicherschonende Bild-Ladelogik aus V0.22.7.
+4. Service-Worker-Cache und sichtbare Versionsnummer auf **V0.22.8** erhöht.
+
+Keine Änderungen an Rezeptdaten, IndexedDB-Schema, gespeicherten Bildern, Backup/Restore, Einkaufslisten, Wochenplan oder Bewertungen. Kein Reset und keine Neuinstallation erforderlich. Nach dem GitHub-Upload die App normal neu öffnen, damit aktualisierter HTML-/Service-Worker-Cache geladen wird.
+
+---
+
 # Jennylicious V0.22.7 – Suchperformance / iPhone-Stabilität
 
 Basis: V0.22.6 (Adaptive Bewertungsfußzeile). Der Code für Rezeptdaten, Backup, Bilder in IndexedDB, Wochenplan und Einkaufsliste wurde nicht verändert.
