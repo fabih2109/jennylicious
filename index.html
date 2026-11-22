@@ -1,4 +1,4 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.22.6</title><meta name="theme-color" content="#71389b">
+<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Jennylicious V0.22.7</title><meta name="theme-color" content="#71389b">
 <meta name="application-name" content="Jennylicious">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -212,6 +212,11 @@ body{background:linear-gradient(180deg,var(--jl-bg1),var(--jl-bg2))!important}
 .jl-recipe-caption strong{font-size:12px;line-height:1.22;overflow-wrap:normal;word-break:normal;hyphens:manual;-webkit-hyphens:manual}
 .jl-recipe-caption small{font-size:10px;color:#fff;opacity:1;text-shadow:0 1px 4px #000,0 0 8px #000}
 .screen .jl-recipe-grid{width:calc(100% + 20px);margin-left:-10px;gap:8px!important}
+/* V0.22.7: Small, incremental search result pages */
+.jl-search-more{grid-column:1/-1;width:100%;margin:8px 0 18px}
+.jl-search-more button{width:100%;border:1px solid var(--jl-accent,#71389b);background:#fff9fc;color:var(--jl-accent,#71389b);padding:13px 10px;border-radius:15px;font-size:14px;font-weight:750;cursor:pointer}
+.jl-search-more button:active{transform:scale(.99)}
+#searchList .jl-recipe-card img[data-jl-search-img],#ingredientResults img[data-jl-search-img]{background:linear-gradient(135deg,#f8f2f7,#e9e3ed)}
 </style><style>
 .cleanmore .menurow{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;gap:10px;width:100%;text-align:left}
 .cleanmore .menuicon{width:30px;display:grid;place-items:center;font-size:21px;line-height:1;font-weight:500}
@@ -418,7 +423,7 @@ a {
 .jl-recipe-card .jl-recipe-shade{background:linear-gradient(to bottom,rgba(19,11,21,.31) 0%,transparent 26%,transparent 38%,rgba(20,12,24,.19) 58%,rgba(16,9,19,.78) 100%)}
 </style>
 <style id="jl-v0226-responsive-card-footer">
-/* V0.22.6: Recipe title is separated from a pinned information footer.
+/* V0.22.7: Recipe title is separated from a pinned information footer.
    Wide cards show time / kids crowns / adult stars in one row. Narrow
    cards show time left and ratings stacked on the right. */
 .jl-recipe-card .jl-recipe-caption{
@@ -499,7 +504,7 @@ a {
 </section>
 <section id="settings" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>JENNYLICIOUS</small><h1 class="title">Einstellungen</h1></div></div><div class="settingscard"><div class="settingrow"><div><b>Standard-Portionen</b><small>Vorgabe beim Anlegen neuer Rezepte</small></div><select id="defaultServings" class="smallselect" onchange="setDefaultServings(this.value)"><option>1</option><option>2</option><option selected>4</option><option>6</option><option>8</option></select></div><div class="settingrow"><div><b>Startansicht</b><small>Welche Seite beim Start geöffnet wird (dauerhaft ab PWA)</small></div><select id="startView" class="smallselect" onchange="appSettings.startView=this.value"><option value="home">Start</option><option value="week">Wochenplan</option></select></div><div class="settingrow"><div><b>Wochenbeginn</b><small>Erster Tag im Wochenplan, z. B. passend zum Einkaufstag</small></div><select id="weekStart" class="smallselect" onchange="setWeekStart(this.value)"><option value="0">Montag</option><option value="1">Dienstag</option><option value="2">Mittwoch</option><option value="3">Donnerstag</option><option value="4">Freitag</option><option value="5">Samstag</option><option value="6">Sonntag</option></select></div></div><div class="settingscard mutedsettings"><h3>Später mit der PWA</h3><p>Persistente Rezeptdaten & Bilder · Backup wiederherstellen · Datenexport · optional Bildschirm im Kochmodus wach halten.</p></div></section>
 <section id="design" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ERSCHEINUNGSBILD</small><h1 class="title">Design</h1></div></div><div class="settingscard"><h3>Akzentfarbe</h3><p class="designintro">Layout und Schrift bleiben gleich. Akzentfarbe und heller Hintergrund werden automatisch passend kombiniert.</p><div class="swatches"><button class="swatch purple" onclick="setTheme('purple')"><i></i><span>Lila</span></button><button class="swatch green" onclick="setTheme('green')"><i></i><span>Grün</span></button><button class="swatch blue" onclick="setTheme('blue')"><i></i><span>Blau</span></button><button class="swatch red" onclick="setTheme('red')"><i></i><span>Rot</span></button><button class="swatch gold" onclick="setTheme('gold')"><i></i><span>Gold</span></button></div></div></section>
-<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.22.6</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
+<section id="about" class="screen"><div class="head"><button class="back" onclick="go('more')">‹</button><div><small>ÜBER DIE APP</small><h1 class="title">Über Jennylicious</h1></div></div><div class="aboutcard"><div class="aboutheart">♥</div><h2>Jennylicious</h2><div class="abouttag">FAMILIENREZEPTE MIT HERZ</div><div class="versionpill">Version 0.22.7</div><p>Unsere private Rezeptsammlung für Lieblingsrezepte, Wochenplanung und gemeinsames Kochen.</p></div></section>
 <style>.jl-multisubs{display:flex;flex-wrap:wrap;gap:7px;margin:5px 0 8px}.jl-subcheck{display:inline-flex;align-items:center;gap:7px;background:#f5edf7;border:1px solid #ddc9e7;border-radius:14px;padding:9px 11px;font-size:13px;cursor:pointer}.jl-subcheck input{width:18px;height:18px;min-width:18px;margin:0;accent-color:var(--jl-accent);cursor:pointer}.jl-help{display:block;margin:5px 2px 10px;color:var(--mut)}.jl-specials{margin-top:7px;display:flex;gap:5px;flex-wrap:wrap}.jl-direct-title{font:800 17px Georgia,serif;margin:15px 0 8px}</style>
 <section id="editor" class="screen">
 <div class="head"><button class="back" onclick="cancelEditor()">‹</button><div><small id="editorEyebrow">NEUES REZEPT</small><h1 id="editorHeading" class="title">Manuell hinzufügen</h1></div></div>
@@ -578,7 +583,7 @@ let planMeta=[null,null,null,null,null,null,null];
 let planExtras=[];
 const MI={};
 function closeBg(e,x){if(e.target===x)x.classList.remove('show')}
-function go(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('sel',n.dataset.s===id));if(id==='week')renderWeek();if(id==='search')renderSearch();scrollTo(0,0)}
+function go(id){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('on'));document.getElementById(id).classList.add('on');document.querySelectorAll('.nav').forEach(n=>n.classList.toggle('sel',n.dataset.s===id));if(id==='week')renderWeek();if(id==='search'){if(searchMode==='ingredient')renderIngredientSearch();else renderSearch()}scrollTo(0,0)}
 function tile(n,img,c,fn){let src=I(img);return `<button class="tile" onclick="${fn}">${src?`<img src="${src}">`:`<div class="catempty">♡</div>`}<span class="badge">${c}</span><b>${n}</b></button>`}
 function setCategoryHeaderImage(el,key){let src=I(key);if(src){el.src=src;el.style.display='';el.classList.remove('isempty')}else{el.removeAttribute('src');el.style.display='none';el.classList.add('isempty')}}
 function jlAlpha(a,b){return String(a??'').localeCompare(String(b??''),'de',{sensitivity:'base',numeric:true})}
@@ -596,12 +601,12 @@ function jlKidsRatingValue(r){let n=Math.round(Number(r&&typeof r==='object'?r.k
 function jlRatingStars(r){let n=jlRatingValue(r);return n?'★'.repeat(n):''}
 function jlCrownSvg(){return `<svg class="jl-crown-svg" viewBox="0 0 100 72" aria-hidden="true" focusable="false"><circle cx="13" cy="20" r="6" fill="currentColor"/><circle cx="50" cy="8" r="7" fill="currentColor"/><circle cx="87" cy="20" r="6" fill="currentColor"/><path fill="currentColor" d="M12 25c-1-4 4-7 7-4l18 14L46 15c2-5 8-5 10 0l9 20 17-14c4-3 9 1 7 5l-8 29H20L12 25Z"/><path fill="currentColor" d="M20 53h61v10c0 4-3 7-7 7H27c-4 0-7-3-7-7V53Z"/><circle cx="35" cy="49" r="3.5" fill="#fff" opacity=".75"/><circle cx="50" cy="49" r="3.5" fill="#fff" opacity=".75"/><circle cx="65" cy="49" r="3.5" fill="#fff" opacity=".75"/></svg>`}
 function jlCrownIcons(n){n=Math.max(0,Math.min(5,Math.round(Number(n)||0)));return jlCrownSvg().repeat(n)}
-function row(r){let src=I(r.img),rating=jlRatingValue(r),kids=jlKidsRatingValue(r),stars=jlRatingStars(r);return `<article class="jl-recipe-card"><button type="button" class="jl-recipe-open" onclick="openRecipe(${r.id})" aria-label="${escAttr(r.title)} öffnen">${src?`<img loading="lazy" src="${src}" alt="">`:`<span class="jl-recipe-placeholder">♡</span>`}<span class="jl-recipe-shade"></span><span class="jl-recipe-caption" lang="de"><strong>${jlTileTitle(r.title)}</strong><span class="jl-recipe-foot"><small class="jl-recipe-minutes">${r.mins} Min</small>${rating||kids?`<span class="jl-recipe-ratingstack">${rating?`<span class="jl-recipe-rating" aria-label="${rating} von 5 Sternen">${stars}</span>`:''}${kids?`<span class="jl-recipe-kids-rating" aria-label="${kids} von 5 Kronen">${jlCrownIcons(kids)}</span>`:''}</span>`:''}</span></span></button><button type="button" class="jl-recipe-fav" onclick="toggleFav(event,${r.id})" aria-label="Favorit umschalten">${r.fav?'♥':'♡'}</button></article>`}
+function row(r,deferImage=false){let src=I(r.img),rating=jlRatingValue(r),kids=jlKidsRatingValue(r),stars=jlRatingStars(r);return `<article class="jl-recipe-card"><button type="button" class="jl-recipe-open" onclick="openRecipe(${r.id})" aria-label="${escAttr(r.title)} öffnen">${src?`<img loading="lazy" decoding="async" ${deferImage?`data-jl-search-img="${escAttr(r.id)}"`:`src="${src}"`} alt="">`:`<span class="jl-recipe-placeholder">♡</span>`}<span class="jl-recipe-shade"></span><span class="jl-recipe-caption" lang="de"><strong>${jlTileTitle(r.title)}</strong><span class="jl-recipe-foot"><small class="jl-recipe-minutes">${r.mins} Min</small>${rating||kids?`<span class="jl-recipe-ratingstack">${rating?`<span class="jl-recipe-rating" aria-label="${rating} von 5 Sternen">${stars}</span>`:''}${kids?`<span class="jl-recipe-kids-rating" aria-label="${kids} von 5 Kronen">${jlCrownIcons(kids)}</span>`:''}</span>`:''}</span></span></button><button type="button" class="jl-recipe-fav" onclick="toggleFav(event,${r.id})" aria-label="Favorit umschalten">${r.fav?'♥':'♡'}</button></article>`}
 
 function updateDetailFav(){if(!cur||!document.getElementById('detailFav'))return;detailFav.textContent=cur.fav?'♥':'♡';detailFav.classList.toggle('on',cur.fav)}
 function updateDetailRating(){let el=document.getElementById('detailRating'),kel=document.getElementById('detailKidsRating');if(!el||!cur)return;let n=jlRatingValue(cur),k=jlKidsRatingValue(cur);el.textContent=n?'★'.repeat(n):'';el.style.display=n?'block':'none';el.setAttribute('aria-label',n?`${n} von 5 Sternen`:'');if(kel){kel.innerHTML=k?jlCrownIcons(k):'';kel.style.display=k?'flex':'none';kel.setAttribute('aria-label',k?`${k} von 5 Kronen`:'')}}
 function toggleFav(e,id){if(e){e.preventDefault();e.stopPropagation()}let r=R.find(x=>x.id===id);if(!r)return;r.fav=!r.fav;if(cur&&cur.id===id)updateDetailFav();refreshVisibleLists()}
-function refreshVisibleLists(){if(document.getElementById('search')?.classList.contains('on'))renderSearch();if(document.getElementById('recipes')?.classList.contains('on'))renderList(R.filter(r=>r.main===curMain&&recipeHasSub(r,curSub)),recipeList);if(document.getElementById('generic')?.classList.contains('on')&&genericTitle.textContent==='Favoriten')renderList(R.filter(r=>r.fav),genericBody)}
+function refreshVisibleLists(){if(document.getElementById('search')?.classList.contains('on')){if(searchMode==='ingredient')renderIngredientSearch();else renderSearch();}if(document.getElementById('recipes')?.classList.contains('on'))renderList(R.filter(r=>r.main===curMain&&recipeHasSub(r,curSub)),recipeList);if(document.getElementById('generic')?.classList.contains('on')&&genericTitle.textContent==='Favoriten')renderList(R.filter(r=>r.fav),genericBody)}
 
 function renderList(a,e){a=[...a].sort((x,y)=>jlAlpha(x.title,y.title));e.classList.add('jl-recipe-grid');e.innerHTML=a.map(row).join('')||'<div class="note jl-recipe-empty">Keine Rezepte vorhanden.</div>'}
 function backFromRecipe(){
@@ -637,12 +642,55 @@ function renderCookHistory(){
 function ingredientQtyText(i,f=1){let q=i[0],u=String(i[1]||'').trim();if(q!==null&&q!==undefined&&Number.isFinite(Number(q))&&Number(q)>0)return `${Math.round(Number(q)*f*10)/10}${u?' '+u:''}`;if(/^(n\.?\s*b\.?|nach\s+belieben)$/i.test(u))return 'nach Belieben';return u}
 function renderIng(){serv.textContent=servings;let f=servings/cur.serv;ings.innerHTML=cur.ingredients.map(i=>{let q=ingredientQtyText(i,f);return `<li>${q?`<b>${escHtml(q)}</b> &nbsp;`:''}${escHtml(i[2])}</li>`}).join('')}
 function scale(d){servings=Math.max(1,servings+d);renderIng()}
+// v0.22.7: Search result paging and on-demand images avoid building/decoding every recipe photo at once.
+const JL_SEARCH_PAGE_SIZE=12;
 let recipeSearchQuery='',searchRatingFilter=0,searchKidsRatingFilter=0;
+let jlRecipeSearchMatches=[],jlRecipeSearchShown=0,jlRecipeSearchImageObserver=null;
+let jlIngredientSearchMatches=[],jlIngredientSearchShown=0,jlIngredientSearchImageObserver=null;
+function jlSearchLoadImage(el){
+ const id=el.getAttribute('data-jl-search-img');if(!id)return;
+ el.removeAttribute('data-jl-search-img');
+ const r=R.find(x=>String(x.id)===id),src=r&&I(r.img);
+ if(src)el.src=src;
+}
+function jlWatchSearchImages(container,type){
+ const observer=type==='ingredients'?jlIngredientSearchImageObserver:jlRecipeSearchImageObserver;
+ const images=container.querySelectorAll('img[data-jl-search-img]');
+ if(observer){images.forEach(im=>observer.observe(im));return}
+ // Older browser fallback: only images in the current page of 12 are requested.
+ images.forEach(jlSearchLoadImage);
+}
+function jlStartSearchImageObserver(type){
+ const old=type==='ingredients'?jlIngredientSearchImageObserver:jlRecipeSearchImageObserver;
+ if(old)old.disconnect();
+ let next=null;
+ if(typeof IntersectionObserver==='function'){
+   next=new IntersectionObserver(entries=>entries.forEach(entry=>{
+     if(entry.isIntersecting){jlSearchLoadImage(entry.target);next.unobserve(entry.target)}
+   }),{rootMargin:'160px 0px'});
+ }
+ if(type==='ingredients')jlIngredientSearchImageObserver=next;
+ else jlRecipeSearchImageObserver=next;
+}
 function recipePassesSearchRatings(r){let sr=jlRatingValue(r),kr=jlKidsRatingValue(r);if(searchRatingFilter===4&&sr<4)return false;if(searchRatingFilter===5&&sr!==5)return false;if(searchKidsRatingFilter===4&&kr<4)return false;if(searchKidsRatingFilter===5&&kr!==5)return false;return true}
 function updateSearchFilterButtons(){document.querySelectorAll('.search-rating-filter').forEach(b=>{let kind=b.dataset.kind,v=Number(b.dataset.value),active=kind==='stars'?searchRatingFilter===v:searchKidsRatingFilter===v;b.classList.toggle('active',active)})}
 function setSearchRatingFilter(kind,value){value=Number(value);if(kind==='stars')searchRatingFilter=searchRatingFilter===value?0:value;else searchKidsRatingFilter=searchKidsRatingFilter===value?0:value;updateSearchFilterButtons();if(searchMode==='ingredient')renderIngredientSearch();else renderSearch()}
 function commitRecipeSearch(){recipeSearchQuery=(document.getElementById('q')?.value||'').trim().toLowerCase();renderSearch()}
-function renderSearch(){let query=recipeSearchQuery,out=R.filter(recipePassesSearchRatings);if(query)out=out.filter(r=>(r.title+' '+r.main+' '+recipeSubs(r).join(' ')+' '+recipeSpecials(r).join(' ')+' '+(r.recipeTip||'')+' '+(r.mealPrep||'')+' '+r.ingredientNames.join(' ')).toLowerCase().includes(query));renderList(out,searchList);updateSearchFilterButtons()}
+function jlShowNextRecipeSearchPage(){
+ const total=jlRecipeSearchMatches.length,from=jlRecipeSearchShown,to=Math.min(from+JL_SEARCH_PAGE_SIZE,total);
+ searchList.querySelector('.jl-search-more')?.remove();
+ const batch=jlRecipeSearchMatches.slice(from,to);
+ if(batch.length){searchList.insertAdjacentHTML('beforeend',batch.map(r=>row(r,true)).join(''));jlRecipeSearchShown=to;jlWatchSearchImages(searchList,'recipes')}
+ if(to<total)searchList.insertAdjacentHTML('beforeend',`<div class="jl-search-more"><button type="button" onclick="jlShowNextRecipeSearchPage()">Weitere ${Math.min(JL_SEARCH_PAGE_SIZE,total-to)} Rezepte anzeigen · ${to} von ${total}</button></div>`);
+}
+function renderSearch(){
+ let query=recipeSearchQuery,out=R.filter(recipePassesSearchRatings);
+ if(query)out=out.filter(r=>(r.title+' '+r.main+' '+recipeSubs(r).join(' ')+' '+recipeSpecials(r).join(' ')+' '+(r.recipeTip||'')+' '+(r.mealPrep||'')+' '+(r.ingredientNames||[]).join(' ')).toLowerCase().includes(query));
+ jlRecipeSearchMatches=out.sort((a,b)=>jlAlpha(a.title,b.title));jlRecipeSearchShown=0;
+ jlStartSearchImageObserver('recipes');searchList.classList.add('jl-recipe-grid');
+ searchList.innerHTML=out.length?'':'<div class="note jl-recipe-empty">Keine Rezepte vorhanden.</div>';
+ jlShowNextRecipeSearchPage();updateSearchFilterButtons();
+}
 let searchMode='recipe',wantedIngredients=[];
 function setSearchMode(m){searchMode=m;tabRecipe.classList.toggle('active',m==='recipe');tabIngredient.classList.toggle('active',m==='ingredient');recipeSearchBox.style.display=m==='recipe'?'block':'none';ingredientSearchBox.style.display=m==='ingredient'?'block':'none';updateSearchFilterButtons();if(m==='ingredient')renderIngredientSearch();else renderSearch()}
 function normIng(x){return x.trim().toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')}
@@ -650,12 +698,25 @@ function displayIng(x){return x.charAt(0).toUpperCase()+x.slice(1)}
 function addIngredient(){let raw=ingredientInput.value.trim();if(!raw)return;let n=normIng(raw);if(!wantedIngredients.some(x=>normIng(x)===n))wantedIngredients.push(raw.toLowerCase());ingredientInput.value='';renderIngredientSearch()}
 function removeIngredient(i){wantedIngredients.splice(i,1);renderIngredientSearch()}
 function ingMatches(recipeIng,wanted){let a=normIng(recipeIng),b=normIng(wanted);return a===b||a.includes(b)||b.includes(a)}
+function jlIngredientResultHtml(x){
+ let missing=wantedIngredients.filter(w=>!x.matched.includes(w)),extra=x.r.ingredientNames.filter(z=>!wantedIngredients.some(w=>ingMatches(z,w))).slice(0,4),full=x.score===wantedIngredients.length;
+ return `<div class="matchcard"><button class="matchmain" onclick="openRecipe(${x.r.id})"><img loading="lazy" decoding="async" data-jl-search-img="${escAttr(x.r.id)}" alt=""><div><b>${escHtml(x.r.title)}</b><small>${x.r.mins} Min · ${escHtml(x.r.main)}</small><span class="matchscore ${full?'full':'partial'}">${x.score} von ${wantedIngredients.length} Zutaten passen</span></div><span>›</span></button><div class="matching"><span class="yes">✓ ${x.matched.map(z=>escHtml(displayIng(z))).join(' · ')}</span>${missing.length?`<br><span class="need">Gesucht, aber nicht enthalten: ${missing.map(z=>escHtml(displayIng(z))).join(', ')}</span>`:''}${extra.length?`<br><span class="need">Außerdem: ${extra.map(z=>escHtml(displayIng(z))).join(' · ')}</span>`:''}</div></div>`;
+}
+function jlShowNextIngredientSearchPage(){
+ const total=jlIngredientSearchMatches.length,from=jlIngredientSearchShown,to=Math.min(from+JL_SEARCH_PAGE_SIZE,total);
+ ingredientResults.querySelector('.jl-search-more')?.remove();
+ const batch=jlIngredientSearchMatches.slice(from,to);
+ if(batch.length){ingredientResults.insertAdjacentHTML('beforeend',batch.map(jlIngredientResultHtml).join(''));jlIngredientSearchShown=to;jlWatchSearchImages(ingredientResults,'ingredients')}
+ if(to<total)ingredientResults.insertAdjacentHTML('beforeend',`<div class="jl-search-more"><button type="button" onclick="jlShowNextIngredientSearchPage()">Weitere ${Math.min(JL_SEARCH_PAGE_SIZE,total-to)} Rezepte anzeigen · ${to} von ${total}</button></div>`);
+}
 function renderIngredientSearch(){
- ingredientTags.innerHTML=wantedIngredients.map((x,i)=>`<button class="itag" onclick="removeIngredient(${i})">${displayIng(x)} <span>×</span></button>`).join('');
+ ingredientTags.innerHTML=wantedIngredients.map((x,i)=>`<button class="itag" onclick="removeIngredient(${i})">${escHtml(displayIng(x))} <span>×</span></button>`).join('');
+ jlStartSearchImageObserver('ingredients');jlIngredientSearchMatches=[];jlIngredientSearchShown=0;
  if(!wantedIngredients.length){ingredientHint.textContent='Beispiel: Paprika + Zucchini';ingredientResults.innerHTML='<div class="note">Füge oben mindestens eine Zutat hinzu.</div>';return}
- let scored=R.filter(recipePassesSearchRatings).map(r=>{let matched=wantedIngredients.filter(w=>r.ingredientNames.some(x=>ingMatches(x,w)));return {r,matched,score:matched.length}}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score||b.score/wantedIngredients.length-a.score/wantedIngredients.length||a.r.title.localeCompare(b.r.title));
+ let scored=R.filter(recipePassesSearchRatings).map(r=>{let matched=wantedIngredients.filter(w=>(r.ingredientNames||[]).some(x=>ingMatches(x,w)));return {r,matched,score:matched.length}}).filter(x=>x.score>0).sort((a,b)=>b.score-a.score||b.score/wantedIngredients.length-a.score/wantedIngredients.length||jlAlpha(a.r.title,b.r.title));
  ingredientHint.textContent=scored.length?`${scored.length} passende Rezepte gefunden · beste Übereinstimmung zuerst`:'Keine passenden Rezepte gefunden.';
- ingredientResults.innerHTML=scored.map(x=>{let missing=wantedIngredients.filter(w=>!x.matched.includes(w));let extra=x.r.ingredientNames.filter(z=>!wantedIngredients.some(w=>ingMatches(z,w))).slice(0,4);let full=x.score===wantedIngredients.length;return `<div class="matchcard"><button class="matchmain" onclick="openRecipe(${x.r.id})"><img src="${I(x.r.img)}"><div><b>${x.r.title}</b><small>${x.r.mins} Min · ${x.r.main}</small><span class="matchscore ${full?'full':'partial'}">${x.score} von ${wantedIngredients.length} Zutaten passen</span></div><span>›</span></button><div class="matching"><span class="yes">✓ ${x.matched.map(displayIng).join(' · ')}</span>${missing.length?`<br><span class="need">Gesucht, aber nicht enthalten: ${missing.map(displayIng).join(', ')}</span>`:''}${extra.length?`<br><span class="need">Außerdem: ${extra.map(displayIng).join(', ')}</span>`:''}</div></div>`}).join('');
+ jlIngredientSearchMatches=scored;ingredientResults.innerHTML='';
+ jlShowNextIngredientSearchPage();
 }
 function renderWeek(){weekList.innerHTML=DAYS.map((d,i)=>{let r=R.find(x=>x.id===plan[i]);return `<div class="day"><div class="dayname">${d.slice(0,2)}</div>${r?`<img src="${I(r.img)}" onclick="openRecipe(${r.id})"><div onclick="openRecipe(${r.id})"><b>${r.title}</b><br><small>${r.mins} Min · Antippen zum Öffnen</small></div><button class="dots" onclick="dayMenu(${i})">⋮</button>`:`<div class="emptyimg">＋</div><div onclick="chooseForDay(${i})"><b style="color:#876f91">Noch kein Rezept geplant</b><br><small>＋ Rezept auswählen</small></div><button class="dots" onclick="chooseForDay(${i})">＋</button>`}</div>`}).join('')}
 function openWeekAssign(){modalContent.classList.add('compact');let h=`<h2>Rezept zum Wochenplan</h2><div class="selectday">`;DAYS.forEach((d,i)=>{let r=R.find(x=>x.id===plan[i]);h+=r?`<button class="assignrow" onclick="assignCurrent(${i})"><img class="assignthumb" src="${I(r.img)}"><div class="daycopy"><b>${d}</b><span>${r.title}</span></div><span class="daystatus">↻</span></button>`:`<button class="assignrow isfree" onclick="assignCurrent(${i})"><div class="assignempty">＋</div><div class="daycopy"><b>${d}</b><span class="free">Noch frei</span><span class="assignhint">Rezept hier einplanen</span></div><span class="daystatus">＋</span></button>`});modalContent.innerHTML=h+'</div><button class="action" onclick="modal.classList.remove(\'show\')">Abbrechen</button>';modal.classList.add('show')}
@@ -1469,7 +1530,7 @@ const jlDirtyImageKeys=new Set();
 let jlAutosaveSuppressedUntil=0;
 function jlMarkImageDirty(key){if(key)jlDirtyImageKeys.add(String(key))}
 function jlSuppressAutosave(ms=2500){jlAutosaveSuppressedUntil=Math.max(jlAutosaveSuppressedUntil,Date.now()+ms);clearTimeout(jlSaveTimer);jlSaveTimer=null}
-const JL_APP_VERSION='0.22.6';
+const JL_APP_VERSION='0.22.7';
 function jlOpen(){return new Promise((resolve,reject)=>{if(jlDB)return resolve(jlDB);const q=indexedDB.open(JL_DB_NAME,JL_DB_VERSION);q.onupgradeneeded=()=>{const db=q.result;JL_STORES.forEach(n=>{if(!db.objectStoreNames.contains(n))db.createObjectStore(n)})};q.onsuccess=()=>{jlDB=q.result;resolve(jlDB)};q.onerror=()=>reject(q.error)})}
 function jlReq(q){return new Promise((resolve,reject)=>{q.onsuccess=()=>resolve(q.result);q.onerror=()=>reject(q.error)})}
 async function jlGet(s,k){const db=await jlOpen();return jlReq(db.transaction(s,'readonly').objectStore(s).get(k))}
@@ -1906,7 +1967,7 @@ document.addEventListener('click',()=>setTimeout(jlQueue,300),true);document.add
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./service-worker.js?v=0226',{updateViaCache:'none'})
+    navigator.serviceWorker.register('./service-worker.js?v=0227',{updateViaCache:'none'})
       .catch(err => console.warn('Jennylicious Service Worker:', err));
   });
 }

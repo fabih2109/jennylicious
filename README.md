@@ -1,3 +1,32 @@
+# Jennylicious V0.22.7 – Suchperformance / iPhone-Stabilität
+
+Basis: V0.22.6 (Adaptive Bewertungsfußzeile). Der Code für Rezeptdaten, Backup, Bilder in IndexedDB, Wochenplan und Einkaufsliste wurde nicht verändert.
+
+## Ursache
+
+- Die Rezeptsuche hat bisher schon beim Öffnen **alle Rezepte auf einmal** als Bildkacheln erzeugt.
+- Dabei wurden die oft großen Bild-Daten-URLs unmittelbar in die `innerHTML`-Zeichenkette kopiert, jedes Mal bei erneutem Aufruf. Das verursacht viel Arbeit und zusätzlichen Speicherbedarf, insbesondere auf iOS WebKit.
+- Die Suche nach Zutaten erzeugte ebenfalls unbeschränkt viele Trefferkarten mit eingebetteten Bildern.
+- Bei jedem Wechsel zur Suche wurde die Rezeptliste neu gerendert – auch wenn gerade der Zutaten-Tab geöffnet war.
+
+## Gezielte Korrekturen
+
+1. Beide Suchmodi zeigen zunächst maximal **12 Ergebnisse**. Weitere Treffer werden über **„Weitere 12 Rezepte anzeigen“** geladen; bestehende Filter bleiben aktiv.
+2. Suchbilder werden **nicht mehr als Base64-Werte in HTML-Zeichenketten geschrieben**. Sie werden erst über die DOM-Bildknoten geladen.
+3. Über `IntersectionObserver` werden Bilder nur geladen, wenn sie nahe dem sichtbaren Bereich liegen. Bei fehlender Browser-Unterstützung werden nur die höchstens 12 Bilder der jeweiligen Seite geladen.
+4. Beim Wechsel zu „Suche“ wird nur der **aktuell gewählte Suchmodus** aktualisiert.
+5. Rezeptsuche bleibt wie zuvor **bestätigungsbasiert** (Enter oder Suchknopf), nicht live während der Eingabe.
+6. Zusatzfilter für Sterne und blaue Kronen sowie die Ergebnisreihenfolge bleiben erhalten.
+
+## Datensicherheit und Tests
+
+- **Keine** Änderung an Datenbankschema, Bildpersistenz, Backup/Restore, Rezepten oder Bewertungswerten.
+- JavaScript und Service Worker mit Node geprüft.
+- Browsertest mit 150 Beispielrezepten: Öffnen der Suche, Eingabe/Enter, 12er-Nachladen, Zutaten-Tab, Zutaten-Nachladen und Sternefilter erfolgreich; keine JavaScript-Laufzeitfehler. Die lokale Testumgebung stellte keinen echten PWA-Datenspeicher bereit – **kein vollständiger iOS-Gerätetest**.
+- Vor dem Upload für Sicherheit einen bestehenden Backup-Stand aufbewahren. **Nicht** iOS-App-Daten löschen oder die PWA deinstallieren, um einen Crash zu beheben.
+
+---
+
 # Jennylicious V0.22.6 – Responsive Bewertungsfußzeile
 
 Basis: V0.22.5, ausschließlich Darstellung von Rezeptkacheln geändert.
